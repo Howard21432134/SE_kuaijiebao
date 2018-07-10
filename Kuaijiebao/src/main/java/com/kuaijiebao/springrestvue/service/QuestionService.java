@@ -24,6 +24,8 @@ public class QuestionService {
 
     public Question findOneById(Long id) { return questionRepository.findOneById(id); }
 
+    public Question addQuestion(Question question){return questionRepository.save(question);}
+
     public List<Question> findVolumesByKeyword(String keyword) {
         return questionRepository.findAll(Specifications
                 .where(questionSpecifications.titleContains(keyword))

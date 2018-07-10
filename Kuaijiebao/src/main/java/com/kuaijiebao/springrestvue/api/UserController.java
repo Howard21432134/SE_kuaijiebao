@@ -1,12 +1,18 @@
 package com.kuaijiebao.springrestvue.api;
 
+import com.kuaijiebao.springrestvue.domain.BankCard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
 import com.kuaijiebao.springrestvue.domain.User;
+import com.kuaijiebao.springrestvue.domain.Account;
+import com.kuaijiebao.springrestvue.domain.BankCard;
 import com.kuaijiebao.springrestvue.service.UserService;
+import com.kuaijiebao.springrestvue.service.AccountService;
+import com.kuaijiebao.springrestvue.service.BankCardService;
 
 @CrossOrigin
 @RestController
@@ -15,6 +21,13 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    AccountService accountService;
+
+    @Autowired
+    BankCardService bankCardService;
+
 
     @GetMapping
     public List<User> getAll() {
@@ -32,6 +45,42 @@ public class UserController {
         user.setId(userId);
         return userService.update(user);
     }
+
+
+    @GetMapping(path = "/getPassword/{id}")
+    public Account getUserPasswordByUserId(@PathVariable Long id) {
+        return accountService.findOneAccountById(id);
+    }
+
+
+    //
+    //can ONLY change the password field
+    @PutMapping(path = "/updatePassword/{userId}")
+    public Account putCartItem(@PathVariable Long userId, @RequestBody Account account) {
+        Account newAccount=accountService.findOneAccountById(userId);
+        newAccount.setPassword(account.getPassword());
+        return accountService.update(newAccount);
+    }
+
+
+    @GetMapping(path = "/getBankCard/{id}")
+    public List<BankCard> getUserBankCardsByUserId(@PathVariable Long id) {
+        return bankCardService.findOnesByUserId(id);
+    }
+
+    @PostMapping(path ="/addBankCard/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public BankCard postUserNewCard(@PathVariable Long id,
+                                @RequestBody BankCard bankCard) {
+        return bankCardService.addCard(bankCard);
+    }
+
+    @DeleteMapping(path ="/removeBankCard/{id}")
+    void deleteUserCard(@RequestParam("id") Long id,
+                                     @RequestBody BankCard bankCard) {
+       bankCardService.deleteByCardNum(bankCard.getCardNum());
+    }
+
 
     /*
     @GetMapping("/validateUser")

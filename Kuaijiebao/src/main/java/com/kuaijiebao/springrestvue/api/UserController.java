@@ -76,7 +76,7 @@ public class UserController {
     }
 
     @DeleteMapping(path ="/removeBankCard/{id}")
-    void deleteUserCard(@RequestParam("id") Long id,
+    void deleteUserCard(@PathVariable Long id,
                                      @RequestBody BankCard bankCard) {
        bankCardService.deleteByCardNum(bankCard.getCardNum());
     }

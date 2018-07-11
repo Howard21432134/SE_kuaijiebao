@@ -16,10 +16,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "account")
 public class Account {
-    private String username;
     @Id
     @Column(name="user_id")
     private Long id;
+    private String username;
     private String password;
 
 }

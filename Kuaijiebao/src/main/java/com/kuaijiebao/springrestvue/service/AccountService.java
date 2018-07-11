@@ -18,7 +18,13 @@ public class AccountService {
     public List<Account> findAll() {
         return accountRepository.findAll();
     }
-    public Account findOneAccountById(Long id) { return accountRepository.findOneById(id); }
+    public Account findOneById(Long id) { return accountRepository.findOneById(id); }
+    public Account findOneByUsernameAndPassword(String username, String password) {
+        return accountRepository.findOneByUsernameAndPassword(username,password);
+    }
+    public Account create(Account account) {
+        return accountRepository.save(account);
+    }
     public Account update(Account account) {
         return accountRepository.save(account);
     }

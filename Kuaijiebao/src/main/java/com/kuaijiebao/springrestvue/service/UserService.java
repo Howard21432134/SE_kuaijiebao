@@ -18,13 +18,15 @@ public class UserService {
 
     public User findOneByUserId(Long id) { return userRepository.findOneById(id); }
 
+    public User create(User user) {
+        return userRepository.save(user);
+    }
+
     public User update(User user) {
         return userRepository.save(user);
     }
 
     //public User findOneByEmail(String email) { return userRepository.findOneByEmail(email); }
-
-    //public User create(User user) { return userRepository.save(user); }
 
     //public void delete(Long id) {
     //    userRepository.deleteById(id);

@@ -2,7 +2,9 @@
 /* DBMS name:      MySQL 5.0                                    */
 /* Created on:     2018/7/6 14:47:26                            */
 /*==============================================================*/
-
+drop database kuaijiebao;
+create database kuaijiebao;
+use kuaijiebao;
 
 drop table if exists account;
 
@@ -51,7 +53,7 @@ create table bankcard
 /*==============================================================*/
 create table credit_record
 (
-   credit_record_id     char(10) not null,
+   credit_record_id     bigint(10) not null AUTO_INCREMENT,
    user_id              bigint(10),
    time                 datetime not null,
    old_sum              float not null,
@@ -64,9 +66,9 @@ create table credit_record
 /*==============================================================*/
 create table debt
 (
-   debt_id              char(10) not null,
+   debt_id              bigint(10) not null AUTO_INCREMENT,
    user_id               bigint(10),
-   owner_id             char(10),
+   owner_id             bigint(10),
    sum                  int not null,
    expect_discharge_time date not null,
    content              text not null,
@@ -85,7 +87,7 @@ create table debt
 /*==============================================================*/
 create table financial_product
 (
-   product_id           char(10) not null,
+   product_id           bigint(10) not null AUTO_INCREMENT,
    sum                  int not null,
    product_name         char(15) not null,
    price                float not null,
@@ -98,7 +100,7 @@ create table financial_product
 /*==============================================================*/
 create table financial_product_deal
 (
-   product_id           char(10) not null,
+   product_id           bigint(10) not null,
    user_id               bigint(10) not null,
    num                  int not null,
    primary key (product_id, user_id)
@@ -109,12 +111,12 @@ create table financial_product_deal
 /*==============================================================*/
 create table financial_product_deal_record
 (
-   product_id           char(10) not null,
+   product_id           bigint(10) not null,
    user_id               bigint(10) not null,
    num                  int not null,
    time                 datetime not null,
    price                float not null,
-   type                 bool not null,
+   type                 int not null,  #1 buy 2sell 3cancel
    primary key (product_id, user_id)
 );
 
@@ -123,10 +125,10 @@ create table financial_product_deal_record
 /*==============================================================*/
 create table question
 (
+   question_id          bigint(10) not null AUTO_INCREMENT,
    title                text not null,
    answer               text not null,
    content              text not null,
-   question_id          char(10) not null,
    primary key (question_id)
 );
 
@@ -135,8 +137,8 @@ create table question
 /*==============================================================*/
 create table question_type
 (
-   question_id          char(10) not null,
-   type_id              char(10) not null,
+   question_id          bigint(10) not null,
+   type_id              bigint(10) not null,
    primary key (question_id, type_id)
 );
 
@@ -145,7 +147,7 @@ create table question_type
 /*==============================================================*/
 create table type
 (
-   type_id              char(10) not null,
+   type_id              bigint(10) not null AUTO_INCREMENT,
    type_name            char(10) not null,
    primary key (type_id)
 );
@@ -155,7 +157,7 @@ create table type
 /*==============================================================*/
 create table user
 (
-   user_id              bigint(10) NOT NULL AUTO_INCREMENT,
+   user_id              bigint(10) NOT NULL  AUTO_INCREMENT,
    nick_name            char(15) not null,
    name                 char(7) not null,
    identity             char(18) not null,

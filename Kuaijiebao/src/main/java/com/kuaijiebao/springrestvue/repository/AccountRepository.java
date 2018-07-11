@@ -12,4 +12,5 @@ import com.kuaijiebao.springrestvue.domain.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
     public Account findOneById(Long id);
+    public Account findOneByUsernameAndPassword(String username, String Password);
 }

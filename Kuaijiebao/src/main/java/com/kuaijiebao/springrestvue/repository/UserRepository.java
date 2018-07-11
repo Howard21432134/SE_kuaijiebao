@@ -12,8 +12,9 @@ import com.kuaijiebao.springrestvue.domain.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     public User findOneById(Long id);
-    @Query("select u from User u where u.phone=?1")
-    public User findOneByPhoneUsingQuery(String phone);
+    public User findOneByName(String name);
+    //@Query("select u from User u where u.phone=?1")
+    //public User findOneByPhoneUsingQuery(String phone);
     public void deleteById(Long id);
 
 }

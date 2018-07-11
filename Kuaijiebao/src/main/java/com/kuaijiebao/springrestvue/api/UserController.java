@@ -49,7 +49,7 @@ public class UserController {
 
     @GetMapping(path = "/getPassword/{id}")
     public Account getUserPasswordByUserId(@PathVariable Long id) {
-        return accountService.findOneAccountById(id);
+        return accountService.findOneById(id);
     }
 
 
@@ -57,7 +57,7 @@ public class UserController {
     //can ONLY change the password field
     @PutMapping(path = "/updatePassword/{userId}")
     public Account putCartItem(@PathVariable Long userId, @RequestBody Account account) {
-        Account newAccount=accountService.findOneAccountById(userId);
+        Account newAccount=accountService.findOneById(userId);
         newAccount.setPassword(account.getPassword());
         return accountService.update(newAccount);
     }
@@ -79,6 +79,12 @@ public class UserController {
     void deleteUserCard(@PathVariable Long id,
                                      @RequestBody BankCard bankCard) {
        bankCardService.deleteByCardNum(bankCard.getCardNum());
+    }
+
+    @PostMapping("/createUser")
+    @ResponseStatus(HttpStatus.CREATED)
+    public User postNewUser(@RequestBody User user) {
+        return userService.create(user);
     }
 
 

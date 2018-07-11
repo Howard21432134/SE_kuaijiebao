@@ -84,3 +84,18 @@ learning maven
 https://www.google.com.tw/search?q=maven+book+pdf&oq=maven+book+pdf&aqs=chrome..69i57j69i60l2j0l3.7492j0j7&sourceid=chrome&ie=UTF-8
 https://books.sonatype.com/mvnref-book/pdf/mvnref-pdf.pdf
 https://books.sonatype.com/mcookbook/pdf/mcookbook-pdf.pdf
+
+trigger
+http://akuwano.hatenablog.jp/entry/20140203/1391402712
+
+chatbot
+https://qiita.com/cm11_ike/items/521a53b5254b624ff066
+https://github.com/magnus-bergman/watson-chatbot-test-app
+chatbot API
+https://www.ibm.com/watson/developercloud/assistant/api/v1/java.html?java#message
+
+spring testing
+https://spring.io/guides/gs/spring-boot/
+typical domain repository service controller Testing
+http://www.baeldung.com/spring-boot-testing
+https://github.com/eugenp/tutorials/tree/master/spring-boot

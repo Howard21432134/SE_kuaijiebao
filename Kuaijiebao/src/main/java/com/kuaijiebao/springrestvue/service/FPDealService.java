@@ -12,15 +12,17 @@ import com.kuaijiebao.springrestvue.repository.FPRepository;
 import com.kuaijiebao.springrestvue.repository.FPDRRepository;
 
 @Service
-public class FPDRService {
+public class FPDealService {
+
     @Autowired
-    FPDRRepository fpdrRepository;
+    FPDealRepository fpDealRepository;
 
-    public void AddFPDRActivity(FPDR fpdr){ fpdrRepository.save(fpdr);}
+    public List<FPDeal> ShowFPDealActivity(Long id){ return fpDealRepository.findAllByUserId(id);}
 
-    public List<FPDR> ShowFPDRByUserActivity(Long id){ return fpdrRepository.findAllByUserId(id);}
+    public FPDeal FPDealActivity(Long id){ return fpDealRepository.findOneById(id);}
 
-    public List<FPDR> ShowFPDRByProductActivity(Long id){ return fpdrRepository.findAllByProductId(id);}
+    public void AddFPDealActivity(FPDeal fp){ fpDealRepository.save(fp);}
 
-    public FPDR FPDRDetailActivity(Long id){ return fpdrRepository.findOneById(id);}
+    public void DeleteFPDealActivity(FPDeal fp){ fpDealRepository.delete(fp);}
+
 }

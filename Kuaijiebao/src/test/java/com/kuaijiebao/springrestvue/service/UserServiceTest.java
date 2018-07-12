@@ -2,6 +2,7 @@ package com.kuaijiebao.springrestvue.service;
 
 import static org.junit.Assert.*;
 
+import com.kuaijiebao.springrestvue.domain.BankCard;
 import com.kuaijiebao.springrestvue.domain.User;
 import com.kuaijiebao.springrestvue.repository.UserRepository;
 
@@ -73,6 +74,7 @@ public class UserServiceTest {
         Mockito.when(userRepository.findOneById(john.getId())).thenReturn(john);
         Mockito.when(userRepository.findAll()).thenReturn(allUsers);
         Mockito.when(userRepository.findOneById(-99L)).thenReturn(null);
+        Mockito.when(userRepository.save(john)).thenReturn(john);
     }
 
     @Test
@@ -92,13 +94,52 @@ public class UserServiceTest {
     }
 
     @Test
-    public void given3Employees_whenGetAll_thenReturn3Records() {
+    public void given3Users_whenGetAll_thenReturn3Records() {
 
         List<User> allEmployees = userService.findAll();
         //verifyFindAllEmployeesIsCalledOnce();
         assertThat(allEmployees).hasSize(3).extracting(User::getId).contains(11L, 12L, 13L);
     }
 
+    @Test
+    public void GivenVaildUser_whenCreate_thenReturnRecord() {
+        User john = new User("john","john",
+                "MG234143","student",0,
+                "SJTU", "Hello","11122223333",
+                "john@qq.com");
+        john.setId(11L);
+        User fromDb=userService.create(john);
+        assertThat(fromDb.getName()).isEqualTo(john.getName());
+    }
+
+    @Test
+    public void GivenVaildUser_whenDeleteById_thenSuccess() {
+        User john = new User("john","john",
+                "MG234143","student",0,
+                "SJTU", "Hello","11122223333",
+                "john@qq.com");
+        john.setId(11L);
+        userService.deleteById(11L);
+    }
+
+    @Test
+    public void GivenVaildUser_whenUpdate_thenReturnRecord() {
+        User john = new User("john","john",
+                "MG234143","student",0,
+                "SJTU", "Hello","11122223333",
+                "john@qq.com");
+        john.setId(11L);
+        Mockito.when(userRepository.save(john)).thenReturn(john);
+        userRepository.save(john);
+        User johnEdited = new User("johnny","john",
+                "MG234143","student",0,
+                "SJTU", "Hello","11122223333",
+                "john@qq.com");
+        johnEdited.setId(11L);
+        Mockito.when(userRepository.save(johnEdited)).thenReturn(johnEdited);
+        User fromDb=userService.update(johnEdited);
+        assertThat(fromDb.getNickname()).isEqualTo(johnEdited.getNickname());
+    }
 
 
 }

@@ -16,5 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     //@Query("select u from User u where u.phone=?1")
     //public User findOneByPhoneUsingQuery(String phone);
     public void deleteById(Long id);
+    public User save(User user);
 
 }

@@ -2,6 +2,7 @@ package com.kuaijiebao.springrestvue.repository;
 
 import static org.junit.Assert.*;
 
+import com.kuaijiebao.springrestvue.domain.Account;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +27,15 @@ public class UserRepositoryTest {
     private UserRepository userRepository;
 
     @Test
-    public void whenFindById_thenReturnUser() {
+    public void whenFindOneById_thenReturnUser() {
         User satoshi = new User("sato","satoshi","sophomore",
                 "student",0,"SJTU", "Hello",
                 "11122223333", "example@qq.com");
         entityManager.persistAndFlush(satoshi);
 
-        User fromDb = userRepository.findOneById(satoshi.getId());
+        User found = userRepository.findOneById(satoshi.getId());
 
-        assertThat(fromDb.getName()).isEqualTo(satoshi.getName());
+        assertThat(found.getName()).isEqualTo(satoshi.getName());
     }
 
     @Test
@@ -60,37 +61,28 @@ public class UserRepositoryTest {
         User fromDb = userRepository.findOneByName("doesNotExist");
         assertThat(fromDb).isNull();
     }
+
+    @Test
+    public void givenValidUser_whenSave_thenReturnUser() {
+
+        User satoshi = new User("sato","satoshi","sophomore",
+                "student",0,"SJTU", "Hello",
+                "11122223333", "example@qq.com");
+
+        User fromDb = userRepository.save(satoshi);
+        assertThat(fromDb.getName()).isEqualTo(satoshi.getName());
+    }
 /*
     @Test
-    public void whenFindById_thenReturnEmployee() {
-        Employee emp = new Employee("test");
-        entityManager.persistAndFlush(emp);
+    public void givenValidUser_whenDeleteById_thenReturnNull() {
+        User satoshi = new User("sato","satoshi","sophomore",
+                "student",0,"SJTU", "Hello",
+                "11122223333", "example@qq.com");
+        entityManager.persistAndFlush(satoshi);
 
-        Employee fromDb = employeeRepository.findById(emp.getId()).orElse(null);
-        assertThat(fromDb.getName()).isEqualTo(emp.getName());
-    }
-
-    @Test
-    public void whenInvalidId_thenReturnNull() {
-        Employee fromDb = employeeRepository.findById(-11l).orElse(null);
+        userRepository.deleteById(11L);
+        User fromDb = userRepository.findOneById(11L);
         assertThat(fromDb).isNull();
     }
-
-    @Test
-    public void givenSetOfEmployees_whenFindAll_thenReturnAllEmployees() {
-        Employee alex = new Employee("alex");
-        Employee ron = new Employee("ron");
-        Employee bob = new Employee("bob");
-
-        entityManager.persist(alex);
-        entityManager.persist(bob);
-        entityManager.persist(ron);
-        entityManager.flush();
-
-        List<Employee> allEmployees = employeeRepository.findAll();
-
-        assertThat(allEmployees).hasSize(3).extracting(Employee::getName).containsOnly(alex.getName(), ron.getName(), bob.getName());
-
-    }
-    */
+*/
 }

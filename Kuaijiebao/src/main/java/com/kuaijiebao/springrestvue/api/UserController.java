@@ -35,21 +35,21 @@ public class UserController {
         return user;
     }
 
-    @GetMapping(path = "/getUser/{id}")
-    public User getUserByUserId(@PathVariable Long id) {
-        return userService.findOneByUserId(id);
+    @GetMapping(path = "/getUser/{userId}")
+    public User getUserByUserId(@PathVariable Long userId) {
+        return userService.findOneByUserId(userId);
     }
 
     @PutMapping(path = "/updateUser/{userId}")
-    public User putCartItem(@PathVariable Long userId, @RequestBody User user) {
+    public User putUser(@PathVariable Long userId, @RequestBody User user) {
         user.setId(userId);
         return userService.update(user);
     }
 
 
-    @GetMapping(path = "/getPassword/{id}")
-    public Account getUserPasswordByUserId(@PathVariable Long id) {
-        return accountService.findOneById(id);
+    @GetMapping(path = "/getPassword/{userId}")
+    public Account getUserPasswordByUserId(@PathVariable Long userId) {
+        return accountService.findOneById(userId);
     }
 
 
@@ -83,8 +83,10 @@ public class UserController {
 
     @PostMapping("/createUser")
     @ResponseStatus(HttpStatus.CREATED)
-    public User postNewUser(@RequestBody User user) {
-        return userService.create(user);
+    public User postNewUser(@RequestBody User user, @RequestBody Account account) {
+        User newUser=userService.create(user);
+        accountService.create(new Account(newUser.getId(),account.getUsername(),account.getPassword()));
+        return newUser;
     }
 
 

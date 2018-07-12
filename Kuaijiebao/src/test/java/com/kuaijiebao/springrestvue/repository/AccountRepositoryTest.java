@@ -2,9 +2,10 @@ package com.kuaijiebao.springrestvue.repository;
 
 import static org.junit.Assert.*;
 
-import static org.junit.Assert.*;
 
+import com.kuaijiebao.springrestvue.domain.BankCard;
 import com.kuaijiebao.springrestvue.domain.User;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +35,6 @@ public class AccountRepositoryTest {
 
     @Autowired
     private AccountRepository accountRepository;
-
 
     @Test
     public void whenFindById_thenReturnAccount() {
@@ -121,5 +121,24 @@ public class AccountRepositoryTest {
         Account fromDb = accountRepository.findOneByUsernameAndPassword("doesNotExist","doesNotExist");
         assertThat(fromDb).isNull();
     }
+
+    @Test
+    public void givenValidAccount_whenSave_thenReturnBankCard() {
+        Account myAccount=new Account(11L,"sato","password");
+        Account fromDb = accountRepository.save(myAccount);
+        assertThat(fromDb.getUsername()).isEqualTo(myAccount.getUsername());
+    }
+
+    @Test
+    public void givenBankCard_whenDeleteWithId_thenReturnNull() {
+        Account myAccount=new Account(11L,"sato","password");
+        entityManager.persistAndFlush(myAccount);
+
+        accountRepository.deleteById(11L);
+        Account fromDb = accountRepository.findOneById(11L);
+        assertThat(fromDb).isNull();
+    }
+
+
 
 }

@@ -2,6 +2,7 @@ package com.kuaijiebao.springrestvue.service;
 
 import static org.junit.Assert.*;
 
+import com.kuaijiebao.springrestvue.domain.BankCard;
 import com.kuaijiebao.springrestvue.domain.User;
 import com.kuaijiebao.springrestvue.repository.UserRepository;
 import com.kuaijiebao.springrestvue.domain.Account;
@@ -101,6 +102,8 @@ public class AccountServiceTest {
 
         Mockito.when(accountRepository.findAll()).thenReturn(allAccounts);
 
+        Mockito.when(accountRepository.save(johnAccount)).thenReturn(johnAccount);
+
     }
 
     @Test
@@ -132,6 +135,19 @@ public class AccountServiceTest {
         List<Account> allAccounts = accountService.findAll();
         //verifyFindAllEmployeesIsCalledOnce();
         assertThat(allAccounts).hasSize(3).extracting(Account::getId).contains(11L, 12L, 13L);
+    }
+
+    @Test
+    public void GivenVaildAccount_whenCreate_thenReturnRecord() {
+        Account johnAccount=new Account(11L,"john","passwordjohn");
+        Account fromDb=accountService.create(johnAccount);
+        assertThat(fromDb.getUsername()).isEqualTo(johnAccount.getUsername());
+    }
+
+    @Test
+    public void GivenVaildAccount_whenDelete_thenSuccess() {
+        Account johnAccount=new Account(11L,"john","passwordjohn");
+        accountService.delete(11L);
     }
 
 }

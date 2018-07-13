@@ -40,7 +40,7 @@ public class UserRepositoryTest {
 
     @Test
     public void whenInvalidId_thenReturnNull() {
-        User fromDb = userRepository.findOneById(-11l);
+        User fromDb = userRepository.findOneById(-99L);
         assertThat(fromDb).isNull();
     }
 
@@ -72,17 +72,16 @@ public class UserRepositoryTest {
         User fromDb = userRepository.save(satoshi);
         assertThat(fromDb.getName()).isEqualTo(satoshi.getName());
     }
-/*
+
     @Test
     public void givenValidUser_whenDeleteById_thenReturnNull() {
         User satoshi = new User("sato","satoshi","sophomore",
                 "student",0,"SJTU", "Hello",
                 "11122223333", "example@qq.com");
         entityManager.persistAndFlush(satoshi);
-
-        userRepository.deleteById(11L);
-        User fromDb = userRepository.findOneById(11L);
+        userRepository.deleteById(satoshi.getId());
+        User fromDb = userRepository.findOneById(satoshi.getId());
         assertThat(fromDb).isNull();
     }
-*/
+
 }

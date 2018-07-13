@@ -18,7 +18,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/BEmanage")
+@RequestMapping("/api/BEManage")
 public class BEManageController {
 
     @Autowired
@@ -33,8 +33,16 @@ public class BEManageController {
     @Autowired
     QuestionService questionService;
 
+    @PostMapping("/users/createUser")
+    @ResponseStatus(HttpStatus.CREATED)
+    public User postNewUser(@RequestBody User user, @RequestBody Account account) {
+        User newUser=userService.create(user);
+        accountService.create(new Account(newUser.getId(),account.getUsername(),account.getPassword()));
+        return newUser;
+    }
 
-    @GetMapping(path = "/getAllUser")
+
+    @GetMapping(path = "/users/getAllUsers")
     public List<User> getAllUser() {
         List<User> user = userService.findAll();
         return user;
@@ -46,31 +54,37 @@ public class BEManageController {
         userService.deleteById(id);
     }
 
-    @GetMapping(path = "/getAllQuestion")
-    public List<Question> getAllQuestion() {
-        List<Question> question = questionService.findAll();
-        return question;
-    }
-
-    @DeleteMapping(path ="/deleteQuestion/{id}")
-    public void deleteQuestion(@PathVariable Long id) {
-        questionService.delete(id);
-    }
-
-    @PostMapping(path ="/addQuestion")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Question postNewQuestion(@RequestBody Question question) {
-        return questionService.addQuestion(question);
-    }
-
-
-    @PostMapping("/validateUser")
+    @PostMapping("/users/validateUser")
     public Account validateUser(@RequestBody Account account) {
         Account found=accountService.findOneByUsernameAndPassword(account.getUsername(),account.getPassword());
         if(found!=null)
             return found;
         return null;
     }
+
+
+
+    @GetMapping(path = "/counsel/getAllQuestions")
+    public List<Question> getAllQuestion() {
+        List<Question> question = questionService.findAll();
+        return question;
+    }
+
+    @PostMapping(path ="/counsel/addQuestion")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Question postNewQuestion(@RequestBody Question question) {
+        return questionService.addQuestion(question);
+    }
+
+
+    @DeleteMapping(path ="/counsel/deleteQuestion/{id}")
+    public void deleteQuestion(@PathVariable Long id) {
+        questionService.delete(id);
+    }
+
+
+
+
 
 
 }

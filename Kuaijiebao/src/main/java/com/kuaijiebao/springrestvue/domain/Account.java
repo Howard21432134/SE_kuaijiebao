@@ -18,6 +18,7 @@ import javax.persistence.*;
 public class Account {
     @Id
     @Column(name="user_id")
+    //@JoinColumn(name = "user_id")
     private Long id;
     private String username;
     private String password;

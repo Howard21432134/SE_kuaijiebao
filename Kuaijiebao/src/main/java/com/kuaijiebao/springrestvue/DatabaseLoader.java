@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.boot.CommandLineRunner;
 
 import com.kuaijiebao.springrestvue.repository.UserRepository;
+import com.kuaijiebao.springrestvue.domain.User;
 
 @Component
 public class DatabaseLoader implements CommandLineRunner {

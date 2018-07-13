@@ -39,4 +39,5 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
+    public void delete(Long id){questionRepository.deleteById(id);}
 }

@@ -103,13 +103,51 @@ public class UserControllerTest {
 
     @Test
     public void GivenValidUser_whenPutUser_thenUpdateUser() throws IOException, Exception {
-        createTestUser("john","john",
-                "MG234143","student",0,
-                "SJTU", "Hello","11122223333",
-                "john@qq.com");
-        List<User> found = repository.findAll();
-        assertThat(found).extracting(User::getName).containsOnly("john");
+        User bob = new User("bob","bob",
+                "kl48394593","pilot",0,
+                "hongkong", "Hello","11122223333",
+                "bob@qq.com");
+        bob.setId(11L);
+        mvc.perform(put("/api/user/updateUser/11").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(bob)))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.name", is(bob.getName())));
+
     }
+/*
+    @Test
+    public void GivenValidUser_whenPutUserNewEmail_thenUpdateUser() throws IOException, Exception {
+        User bob = new User("bob","bob",
+                "kl48394593","pilot",0,
+                "hongkong", "Hello","11122223333",
+                "bob@qq.com");
+        bob.setId(11L);
+        mvc.perform(put("/api/user/addEmail/11").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(bob)))
+                .andDo(print())
+                .andExpect(status().isOk());
+                //.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                //.andExpect(jsonPath("$.email", is(bob.getEmail())));
+
+    }
+
+    @Test
+    public void GivenValidUser_whenPutUserNewPhone_thenUpdateUser() throws IOException, Exception {
+        User bob = new User("bob","bob",
+                "kl48394593","pilot",0,
+                "hongkong", "Hello","13635459980",
+                "bob@qq.com");
+        bob.setId(11L);
+        mvc.perform(put("/api/user/addPhone/11").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(bob)))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.phone", is(bob.getPhone())));
+
+
+    }
+
+*/
 
 
 

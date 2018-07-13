@@ -99,3 +99,5 @@ https://spring.io/guides/gs/spring-boot/
 typical domain repository service controller Testing
 http://www.baeldung.com/spring-boot-testing
 https://github.com/eugenp/tutorials/tree/master/spring-boot
+@OneToOne cascade = {CascadeType.REMOVE}
+https://builder.japan.zdnet.com/sp_oracle/35067018/2/

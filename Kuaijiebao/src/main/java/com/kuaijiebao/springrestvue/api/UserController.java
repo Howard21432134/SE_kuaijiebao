@@ -56,7 +56,7 @@ public class UserController {
     //
     //can ONLY change the password field
     @PutMapping(path = "/updatePassword/{userId}")
-    public Account putCartItem(@PathVariable Long userId, @RequestBody Account account) {
+    public Account putPassword(@PathVariable Long userId, @RequestBody Account account) {
         Account newAccount=accountService.findOneById(userId);
         newAccount.setPassword(account.getPassword());
         return accountService.update(newAccount);
@@ -72,7 +72,9 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public BankCard postUserNewCard(@PathVariable Long id,
                                 @RequestBody BankCard bankCard) {
-        return bankCardService.addCard(bankCard);
+        BankCard newCard=bankCard;
+        newCard.setId(id);
+        return bankCardService.addCard(newCard);
     }
 
     @DeleteMapping(path ="/removeBankCard/{id}")
@@ -89,17 +91,44 @@ public class UserController {
         return newUser;
     }
 
-
-    /*
-    @GetMapping("/validateUser")
-    public User validateUser(@RequestParam String email, @RequestParam String password) {
-        User user=userService.findOneByEmail(email);
-        System.out.println(user.getPassword());
-        if(user.getPassword().equals(password))
-            return user;
-        return null;
+    @PutMapping(path ="/addEmail/{id}")
+    public User putUserNewEmail(@PathVariable Long id,
+                                    @RequestBody User user) {
+        User newUser=userService.findOneByUserId(id);
+        newUser.setId(id);
+        newUser.setEmail(user.getEmail());
+        return userService.update(newUser);
     }
-*/
+
+    @PutMapping(path ="/addPhone/{id}")
+    public User putUserNewPhone(@PathVariable Long id,
+                                 @RequestBody User user) {
+        User newUser=userService.findOneByUserId(id);
+        newUser.setId(id);
+        newUser.setPhone(user.getPhone());
+        return userService.update(newUser);
+    }
+
+    @GetMapping(path ="/removeEmail/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public User deleteUserEmail(@PathVariable Long id) {
+        User newUser=userService.findOneByUserId(id);
+        newUser.setId(id);
+        newUser.setEmail("");
+        return userService.update(newUser);
+    }
+
+    @GetMapping(path ="/removePhone/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public User deleteUserPhone(@PathVariable Long id) {
+        User newUser=userService.findOneByUserId(id);
+        newUser.setId(id);
+        newUser.setPhone("");
+        return userService.update(newUser);
+    }
+
+
+
 
 /*
     // curl http://localhost:8080/api/user/validateUser -i -XPOST -H "Content-Type: application/json" -d "{\"email\":\"user@qq.com\",\"password\":\"user\"}"

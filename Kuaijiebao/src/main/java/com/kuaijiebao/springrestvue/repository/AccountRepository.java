@@ -20,12 +20,12 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     //
     //added for LOGIN sub module
     //
-    Optional<Account> findByEmail(String email);
-    Optional<Account> findByUsernameOrEmail(String username, String email);
+    //Optional<Account> findByEmail(String email);
+    //Optional<Account> findByUsernameOrEmail(String username, String email);
     List<Account> findByIdIn(List<Long> userIds);
     Optional<Account> findByUsername(String username);
     Boolean existsByUsername(String username);
-    Boolean existsByEmail(String email);
+    //Boolean existsByEmail(String email);
     //
     //
     //

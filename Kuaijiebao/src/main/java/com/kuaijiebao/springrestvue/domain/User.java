@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.UsesSunHttpServer;
 
 import javax.persistence.*;
 
@@ -19,18 +20,43 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    //@GeneratedValue(strategy=GenerationType.IDENTITY)//For Long
+    @GeneratedValue(strategy=GenerationType.IDENTITY)//For Long
     @Column(name="user_id")
     private Long id;
-    @Column(name="nick_name")
+
     private String nickname;
-    private String name;
     private String identity;
+
+    private String name;
     private String job;
     private Integer income;
     private String address;
     private String introduction;
     private String phone;
     private String email;
+
+
+    //
+    //For signUp
+    public User(String nickname, String identity){
+
+        this.nickname = nickname;
+        this.identity = identity;
+    }
+
+    public User(String nickname, String identity, String name,
+                String job, Integer income, String address,
+                String introduction, String phone, String email){
+
+        this.nickname = nickname;
+        this.identity = identity;
+        this.name = name;
+        this.job = job;
+        this.income = income;
+        this.address = address;
+        this.introduction = introduction;
+        this.phone=phone;
+        this.email = email;
+    }
 
 }

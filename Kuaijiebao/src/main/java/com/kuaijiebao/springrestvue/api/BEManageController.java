@@ -32,7 +32,7 @@ public class BEManageController {
 
     @Autowired
     QuestionService questionService;
-
+/*
     @PostMapping("/users/createUser")
     @ResponseStatus(HttpStatus.CREATED)
     public User postNewUser(@RequestBody User user, @RequestBody Account account) {
@@ -40,7 +40,7 @@ public class BEManageController {
         accountService.create(new Account(newUser.getId(),account.getUsername(),account.getPassword()));
         return newUser;
     }
-
+*/
 
     @GetMapping(path = "/users/getAllUsers")
     public List<User> getAllUser() {

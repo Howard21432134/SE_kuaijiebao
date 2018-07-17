@@ -19,7 +19,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)//For Long
+    //@GeneratedValue(strategy=GenerationType.IDENTITY)//For Long
     @Column(name="user_id")
     private Long id;
     @Column(name="nick_name")
@@ -33,20 +33,4 @@ public class User {
     private String phone;
     private String email;
 
-
-    public User(String nickname, String name, String identity,
-                String job, Integer income, String address, String introduction,
-                String phone, String email){
-
-
-        this.nickname = nickname;
-        this.name = name;
-        this.identity = identity;
-        this.job = job;
-        this.income = income;
-        this.address = address;
-        this.introduction = introduction;
-        this.phone = phone;
-        this.email = email;
-    }
 }

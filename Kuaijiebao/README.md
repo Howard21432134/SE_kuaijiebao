@@ -1,3 +1,4 @@
+spring-react
 https://www.djamware.com/post/5ab6397c80aca714d19d5b9c/building-spring-boot-mongodb-and-reactjs-crud-web-application
 
 https://material-ui.com/
@@ -101,3 +102,29 @@ http://www.baeldung.com/spring-boot-testing
 https://github.com/eugenp/tutorials/tree/master/spring-boot
 @OneToOne cascade = {CascadeType.REMOVE}
 https://builder.japan.zdnet.com/sp_oracle/35067018/2/
+
+spring security
+https://github.com/callicoder/spring-security-react-ant-design-polls-app
+http://m12i.hatenablog.com/entry/2013/03/28/004152
+https://www.callicoder.com/spring-boot-spring-security-jwt-mysql-react-app-part-4/
+https://qiita.com/alpha_pz/items/dcdbde94f52843f305ab
+https://qiita.com/HHFactory/items/0fcdb0dd2543d46a78fd
+https://qiita.com/aikumi/items/256b7892effd5c92a39f
+https://qiita.com/HHFactory/items/0fcdb0dd2543d46a78fd#%E8%AA%8D%E8%A8%BC%E5%87%A6%E7%90%86%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%B5%E3%82%A4%E3%83%89
+
+outh2
+http://altfatterz.blogspot.com/2014/02/two-factor-authentication-with-spring.html
+
+H2
+http://yosshio0426.hatenadiary.com/entry/2014/06/09/001949
+
+send email
+http://blog.apitore.com/2017/05/26/sendgrid-java/
+http://teachingprogramming.net/archives/720
+user ninshou
+http://teachingprogramming.net/archives/718
+https://github.com/teachingprogramming/lecture2018java2/blob/master/src/main/java/d00000/webapp/AuthController.java
+
+spring cloud
+https://www.packtpub.com/application-development/spring-microservices-spring-boot
+should download to!!

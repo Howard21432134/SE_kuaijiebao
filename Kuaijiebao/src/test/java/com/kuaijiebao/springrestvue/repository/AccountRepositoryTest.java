@@ -54,7 +54,7 @@ public class AccountRepositoryTest {
     @Test
     public void whenInvalidId_thenReturnNull() {
 
-        Account fromDb = accountRepository.findById(-11l).orElse(null);
+        Account fromDb = accountRepository.findOneById(-11l);
         assertThat(fromDb).isNull();
     }
 
@@ -123,14 +123,14 @@ public class AccountRepositoryTest {
     }
 
     @Test
-    public void givenValidAccount_whenSave_thenReturnBankCard() {
+    public void givenValidAccount_whenSave_thenReturnAccount() {
         Account myAccount=new Account(11L,"sato","password");
         Account fromDb = accountRepository.save(myAccount);
         assertThat(fromDb.getUsername()).isEqualTo(myAccount.getUsername());
     }
 
     @Test
-    public void givenBankCard_whenDeleteWithId_thenReturnNull() {
+    public void givenAccount_whenDeleteWithId_thenReturnNull() {
         Account myAccount=new Account(11L,"sato","password");
         entityManager.persistAndFlush(myAccount);
 

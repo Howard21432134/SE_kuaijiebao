@@ -91,7 +91,7 @@ public class BankCardServiceTest {
 
     @Test
     public void GivenVaildBankCard_whenDeleteByCardNum_thenSuccess() {
-        BankCard alexs=new BankCard("5555666677778888",12L);
+        //BankCard alexs=new BankCard("5555666677778888",12L);
         bankCardService.deleteByCardNum("5555666677778888");
     }
 

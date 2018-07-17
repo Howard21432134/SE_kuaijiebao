@@ -16,7 +16,7 @@ public class FPDRService {
     @Autowired
     FPDRRepository fpdrRepository;
 
-    public void AddFPDRActivity(FPDR fpdr){ fpdrRepository.save(fpdr);}
+    public FPDR AddFPDRActivity(FPDR fpdr){ return fpdrRepository.save(fpdr);}
 
     public List<FPDR> ShowFPDRByUserActivity(Long id){ return fpdrRepository.findAllByUserId(id);}
 

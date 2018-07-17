@@ -33,6 +33,23 @@ public class Debt {
     private Float rate;
     private int state;
 
+    public Debt(Long user_id,Long owner_id,Long sum,Date expect_discharge_time,String content,
+                Boolean whether_succeed,Date succeed_time,Boolean whether_discharge,Date discharge_time,
+                Boolean type,Float rate,int state){
+        this.user_id = user_id;
+        this.owner_id = owner_id;
+        this.sum = sum;
+        this.expect_discharge_time = expect_discharge_time;
+        this.content = content;
+        this.whether_succeed = whether_succeed;
+        this.succeed_time = succeed_time;
+        this.whether_discharge = whether_discharge;
+        this.discharge_time = discharge_time;
+        this.type = type;
+        this.rate = rate;
+        this.state = state;
+    }
+
     /*
     public Debt(){}
 

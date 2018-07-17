@@ -17,6 +17,6 @@ public class FPService {
 
     public FP FPDetailActivity(Long id){ return fpRepository.findOneById(id);}
 
-    public void AddFPActivity(FP fp){ fpRepository.save(fp);}
+    public FP AddFPActivity(FP fp){ return fpRepository.save(fp);}
 
 }

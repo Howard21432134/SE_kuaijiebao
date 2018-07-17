@@ -22,7 +22,8 @@ public class DebtController {
     @Autowired
     DebtService debtService;
 
-    @GetMapping(path="/AddDebtActivity/User={id}&Sum={sum}&EDTime={EDTime}&Content={Content}")
+
+    @PostMapping(path="/AddDebtActivity/User={id}&Sum={sum}&EDTime={EDTime}&Content={Content}")
     public void AddDebtActivity(@PathVariable Long id,@PathVariable Long sum,@PathVariable Date EDTime,@PathVariable String Content){
         Debt debt = new Debt();
         debt.setUser_id(id);

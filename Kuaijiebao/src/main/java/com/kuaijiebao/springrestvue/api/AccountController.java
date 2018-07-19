@@ -31,18 +31,18 @@ public class AccountController {
         return accounts;
     }
 
-
+/*
     @GetMapping(path = "/validateUser")
-    public Account putCartItem(@RequestBody Account account) {
+    public Account validateUser(@RequestBody Account account) {
 
         return accountService.findOneByUsernameAndPassword(account.getUsername(),
                 account.getPassword());
     }
-
+*/
     //
     //can ONLY change the password field
     @PutMapping(path = "/updatePassword/{userId}")
-    public Account putCartItem(@PathVariable Long userId, @RequestBody Account account) {
+    public Account putUserPassword(@PathVariable Long userId, @RequestBody Account account) {
         Account newAccount=accountService.findOneById(userId);
         newAccount.setPassword(account.getPassword());
         return accountService.update(newAccount);

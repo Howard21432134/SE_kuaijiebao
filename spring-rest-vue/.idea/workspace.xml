@@ -12,34 +12,92 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/domain/User.java">
+      <file leaf-file-name="AccountRepositoryTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/repository/AccountRepositoryTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2">
-              <caret line="40" column="29" selection-start-line="40" selection-start-column="29" selection-end-line="40" selection-end-column="29" />
+            <state relative-caret-position="463">
+              <caret line="77" column="2" selection-start-line="77" selection-start-column="2" selection-end-line="77" selection-end-column="2" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QuestionControllerTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api/QuestionControllerTest.java">
+      <file leaf-file-name="AccountServiceTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/service/AccountServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="84" column="63" selection-start-line="84" selection-start-column="63" selection-end-line="84" selection-end-column="63" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2610#2611#0" expanded="true" />
-                <element signature="e#2656#2657#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1785">
+              <caret line="146" column="2" selection-start-line="146" selection-start-column="2" selection-end-line="146" selection-end-column="2" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QuestionController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/api/QuestionController.java">
+      <file leaf-file-name="Debt.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/domain/Debt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="29" column="62" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
+            <state relative-caret-position="30">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FPDR.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/domain/FPDR.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1105">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BankCardServiceTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/service/BankCardServiceTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-177">
+              <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserServiceTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/service/UserServiceTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="335">
+              <caret line="113" column="2" selection-start-line="113" selection-start-column="2" selection-end-line="113" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/service/UserService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/api/UserController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-506">
+              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/api/AuthController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-615">
+              <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/repository/UserRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -74,6 +132,13 @@
         <option value="$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api/BEManageControllerTest.java" />
         <option value="$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/api/QuestionController.java" />
         <option value="$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api/QuestionControllerTest.java" />
+        <option value="$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api/AccountControllerTest.java" />
+        <option value="$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api/UserControllerTest.java" />
+        <option value="$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/repository/AccountRepositoryTest.java" />
+        <option value="$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/api/AccountController.java" />
+        <option value="$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/service/AccountServiceTest.java" />
+        <option value="$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/service/UserService.java" />
+        <option value="$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/service/UserServiceTest.java" />
       </list>
     </option>
   </component>
@@ -154,6 +219,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="springrestvue" type="462c0819:PsiDirectoryNode" />
+              <item name="repository" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-rest-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Kuaijiebao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="springrestvue" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -186,6 +260,24 @@
               <item name="springrestvue" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="spring-rest-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Kuaijiebao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="springrestvue" type="462c0819:PsiDirectoryNode" />
+              <item name="repository" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-rest-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Kuaijiebao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="springrestvue" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -194,6 +286,10 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
@@ -210,6 +306,7 @@
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api" />
+      <recent name="$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -224,22 +321,22 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.QuestionControllerTest.givenKeyword_whenGetSearchKeywordQuestions_thenStatus200AndContainsKeyword">
+  <component name="RunManager" selected="JUnit.com.kuaijiebao.springrestvue in spring-rest-react">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
-    <configuration name="BEManageControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AccountServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-rest-react" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.kuaijiebao.springrestvue.api.*" />
+          <option name="PATTERN" value="com.kuaijiebao.springrestvue.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.kuaijiebao.springrestvue.api" />
-      <option name="MAIN_CLASS_NAME" value="com.kuaijiebao.springrestvue.api.BEManageControllerTest" />
+      <option name="PACKAGE_NAME" value="com.kuaijiebao.springrestvue.service" />
+      <option name="MAIN_CLASS_NAME" value="com.kuaijiebao.springrestvue.service.AccountServiceTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -251,19 +348,19 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="QuestionControllerTest.givenKeyword_whenGetSearchKeywordQuestions_thenStatus200AndContainsKeyword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserServiceTest.GivenVaildUser_whenCreate_thenReturnRecord" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-rest-react" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.kuaijiebao.springrestvue.api.*" />
+          <option name="PATTERN" value="com.kuaijiebao.springrestvue.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.kuaijiebao.springrestvue.api" />
-      <option name="MAIN_CLASS_NAME" value="com.kuaijiebao.springrestvue.api.QuestionControllerTest" />
-      <option name="METHOD_NAME" value="givenKeyword_whenGetSearchKeywordQuestions_thenStatus200AndContainsKeyword" />
+      <option name="PACKAGE_NAME" value="com.kuaijiebao.springrestvue.service" />
+      <option name="MAIN_CLASS_NAME" value="com.kuaijiebao.springrestvue.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="GivenVaildUser_whenCreate_thenReturnRecord" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -274,65 +371,19 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="QuestionControllerTest.givenQuestions_whenGetAllQuestions_thenStatus200" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserServiceTest.whenValidId_thenUserShouldBeFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-rest-react" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.kuaijiebao.springrestvue.api.*" />
+          <option name="PATTERN" value="com.kuaijiebao.springrestvue.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.kuaijiebao.springrestvue.api" />
-      <option name="MAIN_CLASS_NAME" value="com.kuaijiebao.springrestvue.api.QuestionControllerTest" />
-      <option name="METHOD_NAME" value="givenQuestions_whenGetAllQuestions_thenStatus200" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="QuestionControllerTest.givenSearchKeyword_whenGetSearchKeywordQuestions_thenStatus200" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="spring-rest-react" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.kuaijiebao.springrestvue.api.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.kuaijiebao.springrestvue.api" />
-      <option name="MAIN_CLASS_NAME" value="com.kuaijiebao.springrestvue.api.QuestionControllerTest" />
-      <option name="METHOD_NAME" value="givenSearchKeyword_whenGetSearchKeywordQuestions_thenStatus200" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="QuestionControllerTest.givenSearchKeyword_whenGetSearchKeywordQuestions_thenStatus200AndContainsKeyword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="spring-rest-react" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.kuaijiebao.springrestvue.api.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.kuaijiebao.springrestvue.api" />
-      <option name="MAIN_CLASS_NAME" value="com.kuaijiebao.springrestvue.api.QuestionControllerTest" />
-      <option name="METHOD_NAME" value="givenSearchKeyword_whenGetSearchKeywordQuestions_thenStatus200AndContainsKeyword" />
+      <option name="PACKAGE_NAME" value="com.kuaijiebao.springrestvue.service" />
+      <option name="MAIN_CLASS_NAME" value="com.kuaijiebao.springrestvue.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="whenValidId_thenUserShouldBeFound" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -350,6 +401,52 @@
       <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="com.kuaijiebao.springrestvue in spring-rest-react" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-rest-react" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.kuaijiebao.springrestvue.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.kuaijiebao.springrestvue" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="com.kuaijiebao.springrestvue.service in spring-rest-react" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-rest-react" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.kuaijiebao.springrestvue.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.kuaijiebao.springrestvue.service" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -387,19 +484,19 @@
     </configuration>
     <list>
       <item itemvalue="Spring Boot.SpringRestReactApplication" />
-      <item itemvalue="JUnit.BEManageControllerTest" />
-      <item itemvalue="JUnit.QuestionControllerTest.givenQuestions_whenGetAllQuestions_thenStatus200" />
-      <item itemvalue="JUnit.QuestionControllerTest.givenSearchKeyword_whenGetSearchKeywordQuestions_thenStatus200" />
-      <item itemvalue="JUnit.QuestionControllerTest.givenSearchKeyword_whenGetSearchKeywordQuestions_thenStatus200AndContainsKeyword" />
-      <item itemvalue="JUnit.QuestionControllerTest.givenKeyword_whenGetSearchKeywordQuestions_thenStatus200AndContainsKeyword" />
+      <item itemvalue="JUnit.com.kuaijiebao.springrestvue.service in spring-rest-react" />
+      <item itemvalue="JUnit.UserServiceTest.whenValidId_thenUserShouldBeFound" />
+      <item itemvalue="JUnit.AccountServiceTest" />
+      <item itemvalue="JUnit.com.kuaijiebao.springrestvue in spring-rest-react" />
+      <item itemvalue="JUnit.UserServiceTest.GivenVaildUser_whenCreate_thenReturnRecord" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.QuestionControllerTest.givenKeyword_whenGetSearchKeywordQuestions_thenStatus200AndContainsKeyword" />
-        <item itemvalue="JUnit.QuestionControllerTest.givenSearchKeyword_whenGetSearchKeywordQuestions_thenStatus200AndContainsKeyword" />
-        <item itemvalue="JUnit.QuestionControllerTest.givenSearchKeyword_whenGetSearchKeywordQuestions_thenStatus200" />
-        <item itemvalue="JUnit.BEManageControllerTest" />
-        <item itemvalue="JUnit.QuestionControllerTest.givenQuestions_whenGetAllQuestions_thenStatus200" />
+        <item itemvalue="JUnit.com.kuaijiebao.springrestvue in spring-rest-react" />
+        <item itemvalue="JUnit.UserServiceTest.GivenVaildUser_whenCreate_thenReturnRecord" />
+        <item itemvalue="JUnit.AccountServiceTest" />
+        <item itemvalue="JUnit.UserServiceTest.whenValidId_thenUserShouldBeFound" />
+        <item itemvalue="JUnit.com.kuaijiebao.springrestvue.service in spring-rest-react" />
       </list>
     </recent_temporary>
   </component>
@@ -413,44 +510,44 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1531979400126</updated>
-      <workItem from="1531979407616" duration="4388000" />
+      <workItem from="1531979407616" duration="6694000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="BEManageControllerTest_whenValidInput_thenCreateQuestion - 2018.07.19 at 14h 44m 27s.xml">
-      <configuration name="BEManageControllerTest.whenValidInput_thenCreateQuestion" configurationId="JUnit" />
+    <history-entry file="UserControllerTest - 2018.07.19 at 15h 13m 15s.xml">
+      <configuration name="UserControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BEManageControllerTest_givenFP_whenDeleteFP_thenStatus200 - 2018.07.19 at 14h 46m 04s.xml">
-      <configuration name="BEManageControllerTest.givenFP_whenDeleteFP_thenStatus200" configurationId="JUnit" />
+    <history-entry file="UserControllerTest_GivenValidPassword_whenPutPassword_thenUpdatePassword - 2018.07.19 at 15h 14m 11s.xml">
+      <configuration name="UserControllerTest.GivenValidPassword_whenPutPassword_thenUpdatePassword" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BEManageControllerTest - 2018.07.19 at 14h 48m 02s.xml">
-      <configuration name="BEManageControllerTest" configurationId="JUnit" />
+    <history-entry file="com_kuaijiebao_springrestvue_repository_in_spring-rest-react - 2018.07.19 at 15h 14m 46s.xml">
+      <configuration name="com.kuaijiebao.springrestvue.repository in spring-rest-react" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BEManageControllerTest_whenValidInput_thenAddFP - 2018.07.19 at 14h 52m 19s.xml">
-      <configuration name="BEManageControllerTest.whenValidInput_thenAddFP" configurationId="JUnit" />
+    <history-entry file="com_kuaijiebao_springrestvue_service_in_spring-rest-react - 2018.07.19 at 15h 15m 50s.xml">
+      <configuration name="com.kuaijiebao.springrestvue.service in spring-rest-react" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BEManageControllerTest_givenDebt_whenDeleteDebt_thenStatus200 - 2018.07.19 at 14h 53m 16s.xml">
-      <configuration name="BEManageControllerTest.givenDebt_whenDeleteDebt_thenStatus200" configurationId="JUnit" />
+    <history-entry file="UserServiceTest_whenValidId_thenUserShouldBeFound - 2018.07.19 at 15h 19m 56s.xml">
+      <configuration name="UserServiceTest.whenValidId_thenUserShouldBeFound" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionControllerTest_givenQuestions_whenGetAllQuestions_thenStatus200 - 2018.07.19 at 14h 55m 18s.xml">
-      <configuration name="QuestionControllerTest.givenQuestions_whenGetAllQuestions_thenStatus200" configurationId="JUnit" />
+    <history-entry file="AccountServiceTest - 2018.07.19 at 15h 20m 57s.xml">
+      <configuration name="AccountServiceTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionControllerTest_givenQuestions_whenGetAllQuestions_thenStatus200 - 2018.07.19 at 14h 56m 39s.xml">
-      <configuration name="QuestionControllerTest.givenQuestions_whenGetAllQuestions_thenStatus200" configurationId="JUnit" />
+    <history-entry file="AccountServiceTest - 2018.07.19 at 15h 22m 01s.xml">
+      <configuration name="AccountServiceTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BEManageControllerTest - 2018.07.19 at 14h 57m 36s.xml">
-      <configuration name="BEManageControllerTest" configurationId="JUnit" />
+    <history-entry file="com_kuaijiebao_springrestvue_in_spring-rest-react - 2018.07.19 at 15h 23m 27s.xml">
+      <configuration name="com.kuaijiebao.springrestvue in spring-rest-react" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionControllerTest_givenSearchKeyword_whenGetSearchKeywordQuestions_thenStatus200 - 2018.07.19 at 15h 00m 58s.xml">
-      <configuration name="QuestionControllerTest.givenSearchKeyword_whenGetSearchKeywordQuestions_thenStatus200" configurationId="JUnit" />
+    <history-entry file="UserServiceTest_GivenVaildUser_whenCreate_thenReturnRecord - 2018.07.19 at 15h 37m 42s.xml">
+      <configuration name="UserServiceTest.GivenVaildUser_whenCreate_thenReturnRecord" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionControllerTest_givenSearchKeyword_whenGetSearchKeywordQuestions_thenStatus200AndContainsKeyword - 2018.07.19 at 15h 02m 51s.xml">
-      <configuration name="QuestionControllerTest.givenSearchKeyword_whenGetSearchKeywordQuestions_thenStatus200AndContainsKeyword" configurationId="JUnit" />
+    <history-entry file="UserServiceTest_GivenVaildUser_whenCreate_thenReturnRecord - 2018.07.19 at 16h 00m 22s.xml">
+      <configuration name="UserServiceTest.GivenVaildUser_whenCreate_thenReturnRecord" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4388000" />
+    <option name="totallyTimeSpent" value="6694000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="25" y="22" width="1234" height="778" extended-state="0" />
@@ -477,7 +574,7 @@
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Spring" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34815437" />
       <window_info anchor="right" id="Bean Validation" />
       <window_info id="Web" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" />
@@ -498,17 +595,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/domain/Account.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-31">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/service/FPDRService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -537,13 +627,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/domain/Debt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-29">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api/StatisticsControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
@@ -554,32 +637,35 @@
     <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api/JsonUtil.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api/BEManageControllerTest.java">
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/api/QuestionController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="218">
+          <caret line="29" column="62" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/api/BEManageController.java">
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/domain/Account.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
+        <state relative-caret-position="-168">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/repository/UserRepositoryTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-517">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api/QuestionControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="795">
+          <caret line="84" column="63" selection-start-line="84" selection-start-column="63" selection-end-line="84" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1341#1342#0" expanded="true" />
-            <element signature="e#1383#1384#0" expanded="true" />
-            <element signature="e#2137#2138#0" expanded="true" />
-            <element signature="e#2173#2174#0" expanded="true" />
-            <element signature="e#2292#2293#0" expanded="true" />
-            <element signature="e#2341#2342#0" expanded="true" />
-            <element signature="e#2389#2390#0" expanded="true" />
-            <element signature="e#2436#2437#0" expanded="true" />
-            <element signature="e#2583#2584#0" expanded="true" />
-            <element signature="e#2612#2613#0" expanded="true" />
+            <element signature="e#2610#2611#0" expanded="true" />
+            <element signature="e#2656#2657#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -591,22 +677,125 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/api/QuestionController.java">
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api/BEManageControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="29" column="62" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
+        <state relative-caret-position="720">
+          <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api/QuestionControllerTest.java">
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api/UserControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="84" column="63" selection-start-line="84" selection-start-column="63" selection-end-line="84" selection-end-column="63" />
+        <state relative-caret-position="201">
+          <caret line="226" column="71" selection-start-line="226" selection-start-column="71" selection-end-line="226" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/api/AccountControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="68" column="26" lean-forward="true" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/repository/AccountRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="33" column="26" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/repository/AccountRepositoryTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="77" column="2" selection-start-line="77" selection-start-column="2" selection-end-line="77" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/service/BankCardServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-177">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/service/AccountServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1785">
+          <caret line="146" column="2" selection-start-line="146" selection-start-column="2" selection-end-line="146" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/domain/Debt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/domain/FPDR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1105">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/api/BEManageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2610#2611#0" expanded="true" />
-            <element signature="e#2656#2657#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/api/AccountController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="44" column="34" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
+          <folding>
+            <element signature="e#1583#1584#0" expanded="true" />
+            <element signature="e#1636#1637#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/api/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-506">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/repository/UserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/api/AuthController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-615">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/main/java/com/kuaijiebao/springrestvue/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Kuaijiebao/src/test/java/com/kuaijiebao/springrestvue/service/UserServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="113" column="2" selection-start-line="113" selection-start-column="2" selection-end-line="113" selection-end-column="2" />
         </state>
       </provider>
     </entry>

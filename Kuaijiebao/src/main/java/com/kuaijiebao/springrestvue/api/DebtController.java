@@ -22,42 +22,28 @@ public class DebtController {
     @Autowired
     DebtService debtService;
 
-    @GetMapping(path="/AddDebtActivity/User={id}&Sum={sum}&EDTime={EDTime}&Content={Content}")
-    public void AddDebtActivity(@PathVariable Long id,@PathVariable Long sum,@PathVariable Date EDTime,@PathVariable String Content){
-        Debt debt = new Debt();
-        debt.setUser_id(id);
-        debt.setSum(sum);
-        debt.setExpect_discharge_time(EDTime);
-        debt.setContent(Content);
-        debt.setType(true);
-        debt.setState(1);
-        debt.setWhether_discharge(false);
-        debt.setWhether_succeed(false);
+
+    @PostMapping(path="/AddDebtActivity")
+    public void AddDebtActivity(@RequestBody Debt debt){
         debtService.AddDebtActivity(debt);
     }
 
-    @GetMapping(path="/ShowDebtActivity/User={id}")
-    public List<Debt> ShowDebtbyUserActivity(@PathVariable Long id){
-        return debtService.ShowDebtbyUserActivity(id);
+    @GetMapping(path="/ShowDebtByUserActivity")
+    public List<Debt> ShowDebtByUserActivity(@RequestBody User user){
+        return debtService.ShowDebtbyUserActivity(user.getId());
     }
 
-    @GetMapping(path="DebtDetailActivity/Debt={id}")
+    @GetMapping(path="/DebtDetailActivity/{id}")
     public Debt DebtDetailActivity(@PathVariable Long id){
         return debtService.DebtDetailActivity(id);
     }
 
-    @PutMapping(path="/EditDebtActivity/Debt={id}&Sum={sum}&EDTime={EDTime}&Content={Content}")
-    public Boolean EditDebtActivity(@PathVariable Long id,@PathVariable Long sum,@PathVariable Date EDTime,@PathVariable String Content){
-        Debt debt = debtService.DebtDetailActivity(id);
-        if(debt.getState()>1){ return false;}
-        debt.setDischarge_time(EDTime);
-        debt.setSum(sum);
-        debt.setContent(Content);
+    @PutMapping(path="/EditDebtActivity")
+    public void EditDebtActivity(@RequestBody Debt debt){
         debtService.AddDebtActivity(debt);
-        return true;
     }
 
-    @DeleteMapping(path="/DeleteDebtActivity/Debt={id}")
+    @DeleteMapping(path="/DeleteDebtActivity/{id}")
     public Boolean DeleteDebtActivity(@PathVariable Long id){ return debtService.DeleteDebtActivity(id);}
 
     @PutMapping(path="/DischargeDebtActivity/Debt={id}&Time={time}")
@@ -65,19 +51,19 @@ public class DebtController {
         return debtService.DischargeDebtActivity(id,time);
     }
 
-    @GetMapping(path="/ShowDebtActivity/Owner={id}")
-    public List<Debt> ShowDebtybyOwnerActivity(Long id){ return debtService.ShowDebtbyOwnerActivity(id);}
+    @GetMapping(path="/ShowDebtByOwnerActivity/{id}")
+    public List<Debt> ShowDebtByOwnerActivity(@PathVariable  Long id){ return debtService.ShowDebtbyOwnerActivity(id);}
 
     @GetMapping(path="/ShowDebtUnsucceedActivity")
     public List<Debt> ShowDebtUnsucceedActivity(){ return debtService.ShowDebtUnsucceedActivity();}
 
-    @PutMapping(path="/EditDebtActivity/debt={Debt_id}&Owner={id}&RTime={time}&Rate={rate}")
-    public Boolean ReceiveDebtActivity(@PathVariable Long Debt_id,@PathVariable Long id,@PathVariable Date time,@PathVariable Float rate){
-        Debt debt = debtService.DebtDetailActivity(Debt_id);
+    @PutMapping(path="/EditDebtActivity/debt={DebtId}&Owner={id}&RTime={time}&Rate={rate}")
+    public Boolean ReceiveDebtActivity(@PathVariable Long DebtId,@PathVariable Long id,@PathVariable Date time,@PathVariable Float rate){
+        Debt debt = debtService.DebtDetailActivity(DebtId);
         if(debt.getType()==false){ return false;}
-        debt.setWhether_succeed(true);
-        debt.setSucceed_time(time);
-        debt.setOwner_id(id);
+        debt.setWhetherSucceed(true);
+        debt.setSucceedTime(time);
+        debt.setOwnerId(id);
         debt.setType(false);
         debt.setState(2);
         debt.setRate(rate);
@@ -88,18 +74,18 @@ public class DebtController {
     @GetMapping(path="/ShowDebtOnsaleActivity")
     public List<Debt>ShowDebtOnsaleActivity(){ return debtService.ShoDebtOnsaleActivity();}
 
-    @PutMapping(path="/EditDebtActivity/Debt={Debt_id}&Owner={id}")
-    public Boolean BuyDebtActivity(@PathVariable Long Debt_id,@PathVariable Long id){
-        Debt debt=debtService.DebtDetailActivity(Debt_id);
+    @PutMapping(path="/EditDebtActivity/Debt={DebtId}&Owner={id}")
+    public Boolean BuyDebtActivity(@PathVariable Long DebtId,@PathVariable Long id){
+        Debt debt=debtService.DebtDetailActivity(DebtId);
         if(debt.getType()==false){ return false;}
-        debt.setOwner_id(id);
+        debt.setOwnerId(id);
         debtService.AddDebtActivity(debt);
         return true;
     }
 
-    @PutMapping(path="/EditDebtActivity/Debt={Debt_id}&Type=true")
-    public Boolean SaleDebtActivity(@PathVariable Long Debt_id){
-        Debt debt=debtService.DebtDetailActivity(Debt_id);
+    @PutMapping(path="/EditDebtActivity/Debt={DebtId}&Type=true")
+    public Boolean SaleDebtActivity(@PathVariable Long DebtId){
+        Debt debt=debtService.DebtDetailActivity(DebtId);
         if(debt.getType()!=false||debt.getState()!=2){ return false;}
         debt.setType(true);
         debtService.AddDebtActivity(debt);

@@ -213,5 +213,5 @@ alter table question_type add constraint FK_question_type2 foreign key (type_id)
       references type (type_id) on delete restrict on update restrict;
 
 
-alter table financial_product_deal_record add constraint FK_question_type3 foreign key (deal_id)
-      references  financial_product_deal (deal_id) on delete restrict on update restrict;
+#alter table financial_product_deal_record add constraint FK_question_type3 foreign key (deal_id)
+ #     references  financial_product_deal (deal_id) on delete restrict on update restrict;

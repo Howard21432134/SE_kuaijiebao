@@ -78,8 +78,8 @@ public class StatisticsControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(2))))
-                .andExpect(jsonPath("$[0].user_id", is(1)))
-                .andExpect(jsonPath("$[1].user_id", is(1)));
+                .andExpect(jsonPath("$[0].userId", is(1)))
+                .andExpect(jsonPath("$[1].userId", is(1)));
     }
 
     @Test

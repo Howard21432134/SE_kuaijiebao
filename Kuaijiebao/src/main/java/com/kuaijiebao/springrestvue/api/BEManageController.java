@@ -32,15 +32,6 @@ public class BEManageController {
 
     @Autowired
     QuestionService questionService;
-/*
-    @PostMapping("/users/createUser")
-    @ResponseStatus(HttpStatus.CREATED)
-    public User postNewUser(@RequestBody User user, @RequestBody Account account) {
-        User newUser=userService.create(user);
-        accountService.create(new Account(newUser.getId(),account.getUsername(),account.getPassword()));
-        return newUser;
-    }
-*/
 
     @GetMapping(path = "/users/getAllUsers")
     public List<User> getAllUser() {
@@ -53,16 +44,6 @@ public class BEManageController {
         accountService.delete(id);
         userService.deleteById(id);
     }
-
-    @PostMapping("/users/validateUser")
-    public Account validateUser(@RequestBody Account account) {
-        Account found=accountService.findOneByUsernameAndPassword(account.getUsername(),account.getPassword());
-        if(found!=null)
-            return found;
-        return null;
-    }
-
-
 
     @GetMapping(path = "/counsel/getAllQuestions")
     public List<Question> getAllQuestion() {

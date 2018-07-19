@@ -130,13 +130,15 @@ create table financial_product_deal
 /*==============================================================*/
 create table financial_product_deal_record
 (
+   dealrecord_id           bigint(10) not null AUTO_INCREMENT,
    product_id           bigint(10) not null,
    user_id               bigint(10) not null,
+   deal_id				  bigint(10)not null,
    num                  int not null,
    time                 datetime not null,
    price                float not null,
    type                 int not null,  #1 buy 2sell 3cancel
-   primary key (product_id, user_id)
+   primary key (dealrecord_id)
 );
 
 /*==============================================================*/

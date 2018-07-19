@@ -1,5 +1,5 @@
 package com.kuaijiebao.springrestvue.service;
-
+;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,6 +16,12 @@ public class DebtService {
     public void AddDebtActivity(Debt debt){ debtRepository.save(debt);}
 
     public List<Debt> ShowDebtbyUserActivity(Long id){ return debtRepository.findAllByUser(id);}
+
+    public List<Debt> showDebtByUserBetween(Long id, Date since, Date until){
+        if(since==null)since=new Date(1000000);
+        if(until==null)until=new Date();
+        return debtRepository.findByTimeAtBetweenOrderByTimeAndIdIs(id, since, until);
+    }
 
     public Debt DebtDetailActivity(Long id){ return debtRepository.findOneById(id);}
 

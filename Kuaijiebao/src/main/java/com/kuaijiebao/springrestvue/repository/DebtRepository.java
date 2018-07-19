@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kuaijiebao.springrestvue.domain.Debt;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -21,4 +22,9 @@ public interface DebtRepository extends JpaRepository<Debt, Long>{
     public List<Debt> findAllUnsucceed();
     @Query("select debt from Debt debt where debt.type=true and debt.state=2")
     public List<Debt> findAllOnsale();
+
+    @Query("select debt from Debt debt where debt.user_id=?1 AND debt.succeed_time BETWEEN ?2 And ?3 Order By debt.succeed_time")
+    public List<Debt> findByTimeAtBetweenOrderByTimeAndIdIs(Long id, Date since, Date until);
+
+
 }

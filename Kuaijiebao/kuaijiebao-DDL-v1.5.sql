@@ -22,11 +22,29 @@ drop table if exists financial_product_deal_record;
 
 drop table if exists question;
 
+drop table if exists personal_credit;
+
 drop table if exists question_type;
+
+drop table if exists user_pending_validation;
 
 drop table if exists type;
 
 drop table if exists user;
+
+/*==============================================================*/
+/* Table: user_pending_validation                                  */
+/*==============================================================*/
+create table user_pending_validation
+(
+   pending_id                   bigint(10) not null AUTO_INCREMENT,
+   username             char(15) not null,#needed when signup
+   code              char(10),#needed when signup
+   elem char(20), #BANK_CARD PHONE_NUMBER EMAIL_ADDRESS
+   item					char(30),
+   primary key(pending_id)
+
+);
 
 /*==============================================================*/
 /* Table: account                                               */
@@ -57,6 +75,14 @@ create table user
    primary key (user_id)
 );
 
+create table personal_credit
+(	
+   pc_id bigint(10) NOT NULL  AUTO_INCREMENT,
+   user_id              bigint(10),
+   credit_limit			float,
+   primary key(pc_id)
+);
+
 /*==============================================================*/
 /* Table: bankcard                                              */
 /*==============================================================*/
@@ -77,6 +103,7 @@ create table credit_record
    time                 datetime not null,
    old_sum              float not null,
    new_sum              float not null,
+   type 						bool not null,
    primary key (credit_record_id)
 );
 
@@ -119,7 +146,7 @@ create table financial_product
 /*==============================================================*/
 create table financial_product_deal
 (
-	deal_id        bigint(10) not null,
+	deal_id        bigint(10) not null AUTO_INCREMENT,
    product_id           bigint(10) not null,
    user_id               bigint(10) not null,
    num                  int not null,

@@ -1,18 +1,26 @@
 package com.kuaijiebao.springrestvue.api;
 
-import com.kuaijiebao.springrestvue.domain.BankCard;
+import com.kuaijiebao.springrestvue.domain.*;
+import com.kuaijiebao.springrestvue.payload.ApiResponse;
+import com.kuaijiebao.springrestvue.repository.AccountRepository;
+import com.kuaijiebao.springrestvue.repository.UserPendingValidationRepository;
+import com.kuaijiebao.springrestvue.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
+import java.net.URI;
 import java.util.List;
 
-import com.kuaijiebao.springrestvue.domain.User;
-import com.kuaijiebao.springrestvue.domain.Account;
 import com.kuaijiebao.springrestvue.domain.BankCard;
 import com.kuaijiebao.springrestvue.service.UserService;
 import com.kuaijiebao.springrestvue.service.AccountService;
 import com.kuaijiebao.springrestvue.service.BankCardService;
+import com.kuaijiebao.springrestvue.service.MailAuthService;
+import com.kuaijiebao.springrestvue.payload.ValidationRequest;
+import com.kuaijiebao.springrestvue.payload.ValidationCode;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @CrossOrigin
 @RestController
@@ -27,6 +35,20 @@ public class UserController {
 
     @Autowired
     BankCardService bankCardService;
+
+    @Autowired
+    MailAuthService mailAuthService;
+
+    @Autowired
+    UserPendingValidationRepository userPendingValidationRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    AccountRepository accountRepository;
+
+
 
 
     @GetMapping(path = "/getUser/{userId}")
@@ -46,8 +68,85 @@ public class UserController {
         User newUser=userService.findOneByUserId(userId);
         newUser.setId(userId);
         newUser.setEmail(user.getEmail());
+
+        mailAuthService.SendValidationMail("satoaikawa@sjtu.edu.cn","Validation Mail", "Code: 123456789");
+
         return userService.update(newUser);
     }
+
+    @PostMapping(path ="/registerInfo")
+    public ResponseEntity<?> registerUserInfoModification(@RequestBody ValidationRequest request) {
+
+        boolean accountExists=accountRepository.existsByUsername(request.getUsername());
+        if(accountExists==false){
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentContextPath().path("/user/registerInfo")
+                    .buildAndExpand().toUri();
+            return ResponseEntity.created(location).body(new ApiResponse(false, "\"User with username "+request.getUsername()+"does not exist."));
+        }
+        UserPendingValidation user=userPendingValidationRepository.findByUsername(request.getUsername());
+        if(user==null){
+            UserPendingValidation newUser=new UserPendingValidation(request.getUsername(),
+                    "ImCode", request.getElem(),request.getItem());
+            userPendingValidationRepository.save(newUser);//POST
+        }else{
+            UserPendingValidation newUser=new UserPendingValidation(request.getUsername(),
+                    "ImCode", request.getElem(),request.getItem());
+            userPendingValidationRepository.save(newUser);//PUT
+        }
+        //
+        //IMPORTANT
+        //
+        //mailAuthService.SendValidationMail("satoaikawa@sjtu.edu.cn","Validation Mail", "Code: 123456789");
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/user/registerInfo")
+                .buildAndExpand().toUri();
+
+        return ResponseEntity.created(location).body(new ApiResponse(false, "\"User Info registered successfully."));
+    }
+    @PostMapping(path ="/validateInfo")
+    public ResponseEntity<?> validateUserInfoModification(@RequestBody ValidationCode code) {
+        boolean existUser=userPendingValidationRepository.existsByUsernameAndCode(code.getUsername(),code.getCode());
+
+        if(existUser){
+
+            Account account=accountRepository.findByUsername(code.getUsername()).orElse(null);
+            User user=userRepository.findOneById(account.getUserId());
+
+            UserPendingValidation userInfo=userPendingValidationRepository.findByUsername(code.getUsername());
+            if("EMAIL_ADDRESS".equals(userInfo.getElem())){
+                user.setId(user.getId());
+                user.setEmail(userInfo.getItem());
+            }else if("BANK_CARD".equals(userInfo.getElem())){
+                //stub bankcard
+            }else if("PHONE_NUMBER".equals(userInfo.getElem())){
+                user.setId(user.getId());
+                user.setPhone(userInfo.getItem());
+            }else{
+                URI location = ServletUriComponentsBuilder
+                        .fromCurrentContextPath().path("/user/validateInfo/{username}")
+                        .buildAndExpand(userInfo.getUsername()).toUri();
+
+                return ResponseEntity.created(location).body(new ApiResponse(false, "\"User Info modification failed."));
+            }
+            userRepository.save(user);
+            userPendingValidationRepository.deleteByUsername(code.getUsername());
+
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentContextPath().path("/user/validateInfo/{username}")
+                    .buildAndExpand(userInfo.getUsername()).toUri();
+
+            return ResponseEntity.created(location).body(new ApiResponse(true, "User Info modified successfully."));
+        }else{
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentContextPath().path("/user/validateInfo")
+                    .buildAndExpand().toUri();
+
+            return ResponseEntity.created(location).body(new ApiResponse(false, "\"User Info modification failed."));
+        }
+
+    }
+
 
     @PutMapping(path ="/addPhone/{userId}")
     public User putUserNewPhone(@PathVariable Long userId,

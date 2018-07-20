@@ -18,3 +18,6 @@
 #INSERT INTO kuaijiebao. financial_product_deal_record(dealrecord_id,product_id,user_id,deal_id,num,time,price,type) VALUES (1,1,1,1,1,"2018/7/7",200,1);
 #select * from kuaijiebao.financial_product_deal_record;
 #delete from kuaijiebao. financial_product_deal_record where product_id=1;
+
+select * from user_pending_validation;
+#delete from kuaijiebao. user_pending_validation where pending_id=3;

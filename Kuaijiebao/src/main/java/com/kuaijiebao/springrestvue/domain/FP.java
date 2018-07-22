@@ -24,11 +24,12 @@ public class FP {
     private Float price;
     private String productor;
 
-    public FP(Long sum,String name,Float price,String productor){
-        this.sum=sum;
-        this.name=name;
-        this.price=price;
-        this.productor=productor;
+    public FP(Long sum, String name, Float price, String productor){
+
+        this.sum = sum;
+        this.name = name;
+        this.price = price;
+        this.productor = productor;
     }
 
     /*

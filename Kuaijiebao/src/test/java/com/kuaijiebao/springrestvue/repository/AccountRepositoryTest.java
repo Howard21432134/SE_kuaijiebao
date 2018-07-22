@@ -43,21 +43,21 @@ public class AccountRepositoryTest {
                 "student",0,"SJTU", "Hello",
                 "11122223333", "example@qq.com");
         entityManager.persistAndFlush(satoshi);
-        Account satoAccount=new Account(satoshi.getId(),"sato","password");
+        Account satoAccount=new Account("sato","password");
         entityManager.persistAndFlush(satoAccount);
 
-        Account fromDb = accountRepository.findOneById(satoAccount.getId());
+        Account fromDb = accountRepository.findByUserId(satoAccount.getUserId());
 
-        assertThat(fromDb.getId()).isEqualTo(satoAccount.getId());
+        assertThat(fromDb.getUserId()).isEqualTo(satoAccount.getUserId());
     }
 
     @Test
     public void whenInvalidId_thenReturnNull() {
 
-        Account fromDb = accountRepository.findOneById(-11l);
+        Account fromDb = accountRepository.findByUserId(-11l);
         assertThat(fromDb).isNull();
     }
-
+/*
     @Test
     public void whenFindOneByUsernameAndPassword_thenReturnAccount() {
 
@@ -67,7 +67,7 @@ public class AccountRepositoryTest {
                 "student",0,"SJTU", "Hello",
                 "11122223333", "example@qq.com");
         entityManager.persistAndFlush(satoshi);
-        Account satoAccount=new Account(satoshi.getId(),"sato","password");
+        Account satoAccount=new Account("sato","password");
         entityManager.persistAndFlush(satoAccount);
 
 
@@ -75,7 +75,7 @@ public class AccountRepositoryTest {
 
         assertThat(found.getId()).isEqualTo(satoshi.getId());
     }
-
+*/
     @Test
     public void whenInvalidUsernameAndValidPassword_thenReturnNull() {
         //
@@ -84,7 +84,7 @@ public class AccountRepositoryTest {
                 "student",0,"SJTU", "Hello",
                 "11122223333", "example@qq.com");
         entityManager.persistAndFlush(satoshi);
-        Account satoAccount=new Account(satoshi.getId(),"sato","password");
+        Account satoAccount=new Account("sato","password");
         entityManager.persistAndFlush(satoAccount);
 
         Account fromDb = accountRepository.findOneByUsernameAndPassword("doesNotExist",satoAccount.getPassword());
@@ -100,7 +100,7 @@ public class AccountRepositoryTest {
                 "student",0,"SJTU", "Hello",
                 "11122223333", "example@qq.com");
         entityManager.persistAndFlush(satoshi);
-        Account satoAccount=new Account(satoshi.getId(),"sato","password");
+        Account satoAccount=new Account("sato","password");
         entityManager.persistAndFlush(satoAccount);
 
         Account fromDb = accountRepository.findOneByUsernameAndPassword(satoAccount.getUsername(),"doesNotExist");
@@ -115,7 +115,7 @@ public class AccountRepositoryTest {
                 "student",0,"SJTU", "Hello",
                 "11122223333", "example@qq.com");
         entityManager.persistAndFlush(satoshi);
-        Account satoAccount=new Account(satoshi.getId(),"sato","password");
+        Account satoAccount=new Account("sato","password");
         entityManager.persistAndFlush(satoAccount);
 
         Account fromDb = accountRepository.findOneByUsernameAndPassword("doesNotExist","doesNotExist");
@@ -124,18 +124,18 @@ public class AccountRepositoryTest {
 
     @Test
     public void givenValidAccount_whenSave_thenReturnAccount() {
-        Account myAccount=new Account(11L,"sato","password");
+        Account myAccount=new Account("sato","password");
         Account fromDb = accountRepository.save(myAccount);
         assertThat(fromDb.getUsername()).isEqualTo(myAccount.getUsername());
     }
 
     @Test
     public void givenAccount_whenDeleteWithId_thenReturnNull() {
-        Account myAccount=new Account(11L,"sato","password");
+        Account myAccount=new Account("sato","password");
         entityManager.persistAndFlush(myAccount);
 
-        accountRepository.deleteById(11L);
-        Account fromDb = accountRepository.findOneById(11L);
+        accountRepository.deleteByAccountId(myAccount.getAccountId());
+        Account fromDb = accountRepository.findByAccountId(myAccount.getAccountId());
         assertThat(fromDb).isNull();
     }
 

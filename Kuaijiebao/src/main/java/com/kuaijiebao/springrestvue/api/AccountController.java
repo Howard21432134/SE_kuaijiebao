@@ -3,6 +3,7 @@ package com.kuaijiebao.springrestvue.api;
 
 import com.kuaijiebao.springrestvue.domain.BankCard;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,8 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/api")
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 public class AccountController {
 
     @Autowired
@@ -25,34 +27,32 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-    @GetMapping
-    public List<Account> getAll() {
+    @GetMapping(path = "/accounts")
+    public List<Account> getAllAccounts() {
         List<Account> accounts = accountService.findAll();
         return accounts;
     }
 
-
-    @GetMapping(path = "/validateUser")
-    public Account putCartItem(@RequestBody Account account) {
-
-        return accountService.findOneByUsernameAndPassword(account.getUsername(),
-                account.getPassword());
+    @GetMapping(path = "/accounts/{userId}", produces = {"application/hal+json"})
+    public Account getByUserId(@PathVariable Long userId) {
+        return accountService.findByUserId(userId);
     }
+
 
     //
     //can ONLY change the password field
-    @PutMapping(path = "/updatePassword/{userId}")
-    public Account putCartItem(@PathVariable Long userId, @RequestBody Account account) {
-        Account newAccount=accountService.findOneById(userId);
+    @PutMapping(path = "/accounts/{userId}/password")
+    public Account updatePassword(@PathVariable Long userId, @RequestBody Account account) {
+        Account newAccount=accountService.findByAccountId(userId);
         newAccount.setPassword(account.getPassword());
         return accountService.update(newAccount);
     }
 
 
-    @PostMapping(path ="/createAccount")
+    @PostMapping(path ="/accounts")
     @ResponseStatus(HttpStatus.CREATED)
-    public Account postUserNewCard(@RequestBody Account account) {
-        return accountService.create(account);
+    public Account createUserNewCard(@RequestBody Account account) {
+        return accountService.save(account);
     }
 
 

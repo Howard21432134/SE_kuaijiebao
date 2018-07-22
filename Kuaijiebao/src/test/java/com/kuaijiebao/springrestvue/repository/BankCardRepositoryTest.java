@@ -37,13 +37,13 @@ public class BankCardRepositoryTest {
         BankCard bankcardTwo = new BankCard("5555666677778888",11L);
         entityManager.persistAndFlush(bankcardOne);
         entityManager.persistAndFlush(bankcardTwo);
-        List<BankCard> fromDb = bankCardRepository.findOnesById(11L);
+        List<BankCard> fromDb = bankCardRepository.findByUserId(11L);
         assertThat(fromDb).hasSize(2).extracting(BankCard::getCardNum).contains("1111222233334444", "5555666677778888");
     }
 
     @Test
     public void whenInvalidId_thenReturnEmpty() {
-        List<BankCard> fromDb = bankCardRepository.findOnesById(-11l);
+        List<BankCard> fromDb = bankCardRepository.findByUserId(-11l);
         assertThat(fromDb).isEmpty();
     }
 
@@ -60,7 +60,7 @@ public class BankCardRepositoryTest {
         entityManager.persistAndFlush(myCard);
 
         bankCardRepository.deleteByCardNum("1111222233334444");
-        List<BankCard> fromDb = bankCardRepository.findOnesById(11L);
+        List<BankCard> fromDb = bankCardRepository.findByUserId(11L);
         assertThat(fromDb).isEmpty();
     }
 

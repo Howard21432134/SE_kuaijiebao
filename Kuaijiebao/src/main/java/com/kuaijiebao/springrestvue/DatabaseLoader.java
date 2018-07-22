@@ -23,8 +23,6 @@ public class DatabaseLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         logger.info("KuaiJieBao System Started.");
 
-        //userRepository.save(new User("sato","satoshi","sophomore","student",0,"SJTU", "Hello","11122223333","example@qq.com"));
-
 
 
 

@@ -54,7 +54,7 @@ public class AccountControllerTest {
 
     @Test
     public void whenValidInput_thenCreateAccount() throws IOException, Exception {
-        Account bobAccount = new Account(11L,"bob","passwordbob");
+        Account bobAccount = new Account("bob","passwordbob");
         mvc.perform(post("/api/account/createAccount").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(bobAccount)));
 
         List<Account> found = repository.findAll();
@@ -64,9 +64,9 @@ public class AccountControllerTest {
 
     @Test
     public void givenAccounts_whenGetAccounts_thenStatus200() throws Exception {
-        createTestAccount(11L,"john","passwordjohn");
-        createTestAccount(12L,"bob","passwordbob");
-        createTestAccount(13L,"alex","passwordalex");
+        createTestAccount("john","passwordjohn");
+        createTestAccount("bob","passwordbob");
+        createTestAccount("alex","passwordalex");
 
         // @formatter:off
         mvc.perform(get("/api/account").contentType(MediaType.APPLICATION_JSON))
@@ -79,8 +79,8 @@ public class AccountControllerTest {
         // @formatter:on
     }
 
-    private void createTestAccount(Long id, String username, String password) {
-        Account account = new Account(id, username, password);
+    private void createTestAccount( String username, String password) {
+        Account account = new Account(username, password);
         repository.saveAndFlush(account);
     }
 

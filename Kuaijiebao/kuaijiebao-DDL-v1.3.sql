@@ -2,7 +2,7 @@
 /* DBMS name:      MySQL 5.0                                    */
 /* Created on:     2018/7/6 14:47:26                            */
 /*==============================================================*/
-drop database kuaijiebao;
+drop database if exists kuaijiebao;
 create database kuaijiebao;
 use kuaijiebao;
 
@@ -33,9 +33,28 @@ drop table if exists user;
 /*==============================================================*/
 create table account
 (
-   username             char(15) not null,
-   user_id              bigint(10),
-   password             char(15) not null
+   id                   bigint(10) not null AUTO_INCREMENT,
+   username             char(15) not null,#needed when signup
+   user_id              bigint(10),#needed when signup
+   password             char(60) binary  not null,#passwordEncoder length 60 binary needed when signup
+   roles                char(20),
+   primary key(id)
+
+);
+
+create table user
+(
+   user_id              bigint(10) NOT NULL  AUTO_INCREMENT,
+   nickname            char(14) not null,#needed when signup
+   name                 char(14),
+   identity             char(50) not null,#needed when signup
+   job                  char(50),
+   income               int,
+   address             text,
+   introduction         text,
+   phone                char(50),
+   email                char(50),
+   primary key (user_id)
 );
 
 /*==============================================================*/
@@ -111,13 +130,15 @@ create table financial_product_deal
 /*==============================================================*/
 create table financial_product_deal_record
 (
+   dealrecord_id           bigint(10) not null AUTO_INCREMENT,
    product_id           bigint(10) not null,
    user_id               bigint(10) not null,
+   deal_id				  bigint(10)not null,
    num                  int not null,
    time                 datetime not null,
    price                float not null,
    type                 int not null,  #1 buy 2sell 3cancel
-   primary key (product_id, user_id)
+   primary key (dealrecord_id)
 );
 
 /*==============================================================*/
@@ -155,20 +176,7 @@ create table type
 /*==============================================================*/
 /* Table: user                                                  */
 /*==============================================================*/
-create table user
-(
-   user_id              bigint(10) NOT NULL  AUTO_INCREMENT,
-   nick_name            char(15) not null,
-   name                 char(7) not null,
-   identity             char(18) not null,
-   job                  char(15),
-   income               int,
-   address             text,
-   introduction         text,
-   phone                char(11) not null,
-   email                char(25),
-   primary key (user_id)
-);
+
 
 alter table account add constraint FK_login foreign key (user_id)
       references user (user_id) on delete restrict on update restrict;
@@ -202,4 +210,3 @@ alter table question_type add constraint FK_question_type foreign key (question_
 
 alter table question_type add constraint FK_question_type2 foreign key (type_id)
       references type (type_id) on delete restrict on update restrict;
-

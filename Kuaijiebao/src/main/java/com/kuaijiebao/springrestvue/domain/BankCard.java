@@ -20,6 +20,6 @@ public class BankCard {
     @Column(name="card")
     private String cardNum;
     @Column(name="user_id")
-    private Long id;
+    private Long userId;
 
 }

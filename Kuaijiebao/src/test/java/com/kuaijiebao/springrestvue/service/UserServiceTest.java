@@ -47,40 +47,37 @@ public class UserServiceTest {
     @Before
     public void setUp() {
 
-        User john = new User("john","john",
-                "MG234143","student",0,
+        User john = new User("john","MG234143",
+                "john","student",0,
                 "SJTU", "Hello","11122223333",
                 "john@qq.com");
-        john.setId(11L);
+        john.setUserId(11L);
 
 
-        User bob = new User("bob","bob",
-                "jh23453245","engineer",0,
+        User bob = new User("bob","jh23453245",
+                "bob","engineer",0,
                 "shanghai", "Hello","11122223333",
                 "bob@qq.com");
-        bob.setId(12L);
+        bob.setUserId(12L);
 
-        User alex = new User("alex","alex",
-                "kl48394593","pilot",0,
+        User alex = new User("alex","kl48394593",
+                "alex","pilot",0,
                 "hongkong", "Hello","11122223333",
                 "bob@qq.com");
-        alex.setId(13L);
+        alex.setUserId(13L);
 
 
         List<User> allUsers = Arrays.asList(john, bob, alex);
 
-        Mockito.when(userRepository.findOneByName(john.getName())).thenReturn(john);
-        Mockito.when(userRepository.findOneByName(alex.getName())).thenReturn(alex);
-        Mockito.when(userRepository.findOneByName("wrong_name")).thenReturn(null);
-        Mockito.when(userRepository.findOneById(john.getId())).thenReturn(john);
+        Mockito.when(userRepository.findByUserId(john.getUserId())).thenReturn(john);
         Mockito.when(userRepository.findAll()).thenReturn(allUsers);
-        Mockito.when(userRepository.findOneById(-99L)).thenReturn(null);
+        Mockito.when(userRepository.findByUserId(-99L)).thenReturn(null);
         Mockito.when(userRepository.save(john)).thenReturn(john);
     }
 
     @Test
     public void whenValidId_thenUserShouldBeFound() {
-        User fromDb = userService.findOneByUserId(11L);
+        User fromDb = userService.findByUserId(11L);
         assertThat(fromDb.getName()).isEqualTo("john");
 
         //verifyFindByIdIsCalledOnce();
@@ -89,7 +86,7 @@ public class UserServiceTest {
 
     @Test
     public void whenInValidId_thenUserShouldNotBeFound() {
-        User fromDb = userService.findOneByUserId(-99L);
+        User fromDb = userService.findByUserId(-99L);
         //verifyFindByIdIsCalledOnce();
         assertThat(fromDb).isNull();
     }
@@ -99,28 +96,27 @@ public class UserServiceTest {
 
         List<User> allEmployees = userService.findAll();
         //verifyFindAllEmployeesIsCalledOnce();
-        assertThat(allEmployees).hasSize(3).extracting(User::getId).contains(11L, 12L, 13L);
+        assertThat(allEmployees).hasSize(3).extracting(User::getUserId).contains(11L, 12L, 13L);
     }
-
+/*
     @Test
     public void GivenVaildUser_whenCreate_thenReturnRecord() {
         User john = new User("john","john",
                 "MG234143","student",0,
                 "SJTU", "Hello","11122223333",
                 "john@qq.com");
-        john.setId(11L);
         User fromDb=userService.create(john);
         assertThat(fromDb.getName()).isEqualTo(john.getName());
     }
-
+*/
     @Test
     public void GivenVaildUser_whenDeleteById_thenSuccess() {
         User john = new User("john","john",
                 "MG234143","student",0,
                 "SJTU", "Hello","11122223333",
                 "john@qq.com");
-        john.setId(11L);
-        userService.deleteById(11L);
+        john.setUserId(11L);
+        userService.deleteByUserId(11L);
     }
 
     @Test
@@ -129,16 +125,16 @@ public class UserServiceTest {
                 "MG234143","student",0,
                 "SJTU", "Hello","11122223333",
                 "john@qq.com");
-        john.setId(11L);
+        john.setUserId(11L);
         Mockito.when(userRepository.save(john)).thenReturn(john);
         userRepository.save(john);
         User johnEdited = new User("johnny","john",
                 "MG234143","student",0,
                 "SJTU", "Hello","11122223333",
                 "john@qq.com");
-        johnEdited.setId(11L);
+        johnEdited.setUserId(11L);
         Mockito.when(userRepository.save(johnEdited)).thenReturn(johnEdited);
-        User fromDb=userService.update(johnEdited);
+        User fromDb=userService.save(johnEdited);
         assertThat(fromDb.getNickname()).isEqualTo(johnEdited.getNickname());
     }
 

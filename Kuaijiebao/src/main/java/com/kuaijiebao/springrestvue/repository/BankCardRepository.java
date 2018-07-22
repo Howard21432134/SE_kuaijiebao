@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface BankCardRepository extends JpaRepository<BankCard, String> {
-    public List<BankCard> findOnesById(Long userId);
+    public List<BankCard> findByUserId(Long userId);
     public BankCard save(BankCard card);
     @Modifying
     @Transactional

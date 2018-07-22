@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import com.kuaijiebao.springrestvue.domain.Account;
 
 public class UserPrincipal implements UserDetails {
+    @JsonIgnore
     private Long id;
 
     private String username;
@@ -25,7 +26,7 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Long id, String username, String password, Long userId, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(/*Long id, */String username, String password, Long userId, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -41,7 +42,7 @@ public class UserPrincipal implements UserDetails {
         List<GrantedAuthority> authorities=AuthorityUtils.createAuthorityList(account.getRoles());
 
         return new UserPrincipal(
-                account.getAccountId(),
+                //account.getAccountId(),
                 account.getUsername(),
                 account.getPassword(),
                 account.getUserId(),

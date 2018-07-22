@@ -132,3 +132,7 @@ should download to!!
 
 hateoas
 http://www.baeldung.com/spring-hateoas-tutorial
+
+rest api naming
+https://restfulapi.net/resource-naming/
+https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/

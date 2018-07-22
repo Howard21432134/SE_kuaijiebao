@@ -35,9 +35,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value="/api/BEManage")
+@RequestMapping(value="/api")
 @EnableHypermediaSupport(type = HypermediaType.HAL)
 public class BEManageController {
+
+
 
     @Autowired
     UserService userService;
@@ -54,61 +56,61 @@ public class BEManageController {
     @Autowired
     AccountService accountService;
 
-    @GetMapping(path = "/manageUser/getAllUsers")
+    @GetMapping(path = "/user-management/users")
     public List<User> getAllUsers() {
         List<User> user = userService.findAll();
         return user;
     }
 
-    @DeleteMapping(path ="/manageUser/deleteUser/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteByUserId(id);
+    @DeleteMapping(path ="/user-management/users/{userId}")
+    public void deleteUser(@PathVariable Long userId) {
+        userService.deleteByUserId(userId);
     }
 
-    @GetMapping(path = "/manageQuestion/getAllQuestions")
+    @GetMapping(path = "/question-management/questions")
     public List<Question> getAllQuestions() {
         List<Question> question = questionService.findAll();
         return question;
     }
 
-    @PostMapping(path ="/manageQuestion/addQuestion")
+    @PostMapping(path ="/question-management/questions")
     @ResponseStatus(HttpStatus.CREATED)
-    public Question postNewQuestion(@RequestBody Question question) {
+    public Question createQuestion(@RequestBody Question question) {
         return questionService.addQuestion(question);
     }
 
 
-    @DeleteMapping(path ="/manageQuestion/deleteQuestion/{id}")
+    @DeleteMapping(path ="/question-management/questions/{id}")
     public void deleteQuestion(@PathVariable Long id) {
         questionService.delete(id);
     }
 
 
-    @GetMapping(path = "/manageFP/getAllFPs")
+    @GetMapping(path = "/fp-management/fps")
     public List<FP> getAllFPs() {
         return fpRepository.findAll();
     }
 
 
-    @PostMapping(path ="/manageFP/addFP")
+    @PostMapping(path ="/fp-management/fps")
     @ResponseStatus(HttpStatus.CREATED)
-    public FP postNewFP(@RequestBody FP fp) {
+    public FP createFP(@RequestBody FP fp) {
         return fpRepository.save(fp);
     }
 
 
-    @DeleteMapping(path="/manageFP/deleteFP/{id}")
+    @DeleteMapping(path="/fp-management/fps/{id}")
     public void deleteFP(@PathVariable Long id) {
         fpRepository.deleteById(id);
     }
 
 
-    @GetMapping(path = "/manageDebt/getAllDebts")
+    @GetMapping(path = "/debt-management/debts")
     public List<Debt> getAllDebts() {
         return debtRepository.findAll();
     }
 
-    @DeleteMapping(path="/manageDebt/deleteDebt/{id}")
+    @DeleteMapping(path="/debt-management/debts/{id}")
     public void deleteDebt(@PathVariable Long id) {
         debtRepository.deleteById(id);
     }
@@ -117,7 +119,7 @@ public class BEManageController {
     //*********************************************************************************
     //HATEOAS
     //
-    @RequestMapping(path = "/manageUser", method = RequestMethod.GET, produces = {"application/hal+json"})
+    @RequestMapping(path = "v1/user-management/users", method = RequestMethod.GET, produces = {"application/hal+json"})
     public Resources<User> getAllUsersHateoas() {
         final List<User> allUsers = userService.findAll();
 
@@ -127,11 +129,11 @@ public class BEManageController {
             user.add(selfLink);
             final Link accountLink = linkTo(methodOn(AccountController.class).getByUserId(userId)).withRel("account");
             user.add(accountLink);
-            final Link bankCardLink =linkTo(methodOn(UserController.class).getUserBankCardsByUserId(userId)).withRel("bankcard");
+            final Link bankCardLink =linkTo(methodOn(UserController.class).getBankCardsByUserId(userId)).withRel("bankcard");
             user.add(bankCardLink);
         }
 
-        Link link =linkTo(BEManageController.class).slash("manageUser").withSelfRel();
+        Link link =linkTo(BEManageController.class).slash("v1/user-management/users").withSelfRel();
         Resources<User> result = new Resources<User>(allUsers,link);
         return result;
     }

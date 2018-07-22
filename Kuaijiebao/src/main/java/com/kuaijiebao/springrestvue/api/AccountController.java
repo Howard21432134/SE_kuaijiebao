@@ -17,7 +17,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/api")
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 public class AccountController {
 
@@ -27,13 +27,13 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-    @GetMapping(path = "/getAllAccounts")
-    public List<Account> getAll() {
+    @GetMapping(path = "/accounts")
+    public List<Account> getAllAccounts() {
         List<Account> accounts = accountService.findAll();
         return accounts;
     }
 
-    @GetMapping(path = "/{userId}", produces = {"application/hal+json"})
+    @GetMapping(path = "/accounts/{userId}", produces = {"application/hal+json"})
     public Account getByUserId(@PathVariable Long userId) {
         return accountService.findByUserId(userId);
     }
@@ -41,18 +41,18 @@ public class AccountController {
 
     //
     //can ONLY change the password field
-    @PutMapping(path = "/updatePassword/{userId}")
-    public Account putUserPassword(@PathVariable Long userId, @RequestBody Account account) {
+    @PutMapping(path = "/accounts/{userId}/password")
+    public Account updatePassword(@PathVariable Long userId, @RequestBody Account account) {
         Account newAccount=accountService.findByAccountId(userId);
         newAccount.setPassword(account.getPassword());
         return accountService.update(newAccount);
     }
 
 
-    @PostMapping(path ="/createAccount")
+    @PostMapping(path ="/accounts")
     @ResponseStatus(HttpStatus.CREATED)
-    public Account postUserNewCard(@RequestBody Account account) {
-        return accountService.create(account);
+    public Account createUserNewCard(@RequestBody Account account) {
+        return accountService.save(account);
     }
 
 

@@ -27,12 +27,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("api/users")
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 public class UserController {
 
-    @Value("${foo.bar}")
-    private String BASE_PATH;
 
     @Autowired
     UserService userService;
@@ -58,19 +56,19 @@ public class UserController {
 
 
 
-    @GetMapping(path = "/getUser/{userId}", produces = {"application/hal+json"})
+    @GetMapping(path = "/{userId}", produces = {"application/hal+json"})
     public User getUserByUserId(@PathVariable Long userId) {
         return userService.findOneByUserId(userId);
     }
 
-    @PutMapping(path = "/updateUser/{userId}")
-    public User putUser(@PathVariable Long userId, @RequestBody User user) {
+    @PutMapping(path = "/{userId}")
+    public User updateUser(@PathVariable Long userId, @RequestBody User user) {
         user.setUserId(userId);
         return userService.update(user);
     }
 
-    @PutMapping(path ="/addEmail/{userId}")
-    public User putUserNewEmail(@PathVariable Long userId,
+    @PutMapping(path ="/{userId}/email")
+    public User updateEmail(@PathVariable Long userId,
                                 @RequestBody User user) {
         User newUser=userService.findOneByUserId(userId);
         newUser.setUserId(userId);
@@ -155,8 +153,8 @@ public class UserController {
     }
 
 
-    @PutMapping(path ="/addPhone/{userId}")
-    public User putUserNewPhone(@PathVariable Long userId,
+    @PutMapping(path ="/{userId}/phone")
+    public User updatePhone(@PathVariable Long userId,
                                 @RequestBody User user) {
         User newUser=userService.findOneByUserId(userId);
         newUser.setUserId(userId);
@@ -165,84 +163,60 @@ public class UserController {
     }
 
 
-    @GetMapping(path = "/getPassword/{userId}")
-    public Account getUserPasswordByUserId(@PathVariable Long userId) {
+    @GetMapping(path = "/{userId}/password")
+    public Account getPasswordByUserId(@PathVariable Long userId) {
         return accountService.findByUserId(userId);
     }
 
 
     //
     //can ONLY change the password field
-    @PutMapping(path = "/updatePassword/{userId}")
-    public Account putPassword(@PathVariable Long userId, @RequestBody Account account) {
+    @PutMapping(path = "/{userId}/password")
+    public Account updatePassword(@PathVariable Long userId, @RequestBody Account account) {
         Account newAccount=accountService.findByUserId(userId);
         newAccount.setPassword(account.getPassword());
         return accountService.update(newAccount);
     }
 
 
-    @GetMapping(path = "/getBankCard/{id}", produces = {"application/hal+json"})
-    public List<BankCard> getUserBankCardsByUserId(@PathVariable Long id) {
-        return bankCardService.findOnesByUserId(id);
+    @GetMapping(path = "/{userId}/bankcard", produces = {"application/hal+json"})
+    public List<BankCard> getBankCardsByUserId(@PathVariable Long userId) {
+        return bankCardService.findByUserId(userId);
     }
 
-    @PostMapping(path ="/addBankCard/{id}")
+    @PostMapping(path ="/{userId}/bankcard")
     @ResponseStatus(HttpStatus.CREATED)
-    public BankCard postUserNewCard(@PathVariable Long id,
+    public BankCard createBankCard(@PathVariable Long userId,
                                 @RequestBody BankCard bankCard) {
         BankCard newCard=bankCard;
-        newCard.setId(id);
+        newCard.setUserId(userId);
         return bankCardService.addCard(newCard);
     }
 
-    @DeleteMapping(path ="/removeBankCard/{id}")
-    void deleteUserCard(@PathVariable Long id,
+    @DeleteMapping(path ="/{userId}/bankcard")
+    void deleteBankCard(@PathVariable Long userId,
                                      @RequestBody BankCard bankCard) {
        bankCardService.deleteByCardNum(bankCard.getCardNum());
     }
 
 
-    @GetMapping(path ="/removeEmail/{id}")
+    @GetMapping(path ="{userId}/email")
     @ResponseStatus(HttpStatus.CREATED)
-    public User deleteUserEmail(@PathVariable Long id) {
-        User newUser=userService.findOneByUserId(id);
-        newUser.setUserId(id);
+    public User deleteUserEmail(@PathVariable Long userId) {
+        User newUser=userService.findOneByUserId(userId);
+        newUser.setUserId(userId);
         newUser.setEmail("");
         return userService.update(newUser);
     }
 
-    @GetMapping(path ="/removePhone/{id}")
+    @GetMapping(path ="/{userId}/phone")
     @ResponseStatus(HttpStatus.CREATED)
-    public User deleteUserPhone(@PathVariable Long id) {
-        User newUser=userService.findOneByUserId(id);
-        newUser.setUserId(id);
+    public User deletePhone(@PathVariable Long userId) {
+        User newUser=userService.findOneByUserId(userId);
+        newUser.setUserId(userId);
         newUser.setPhone("");
         return userService.update(newUser);
     }
 
 
-
-
-/*
-
-
-    @PostMapping("/addUser")
-    @ResponseStatus(HttpStatus.CREATED)
-    public User postNewUser(@RequestBody User user) {
-        return userService.create(user);
-    }
-
-    @DeleteMapping("/deleteUser")
-    void deleteUser(@RequestParam("id") Long id) {
-        userService.delete(id);
-    }
-
-
-*/
 }
-
-//curl http://localhost:8080/api/user/addUser -i -XPOST -H "Content-Type: application/json" -d "{\"username\":\"snow boll boy\",\"firstname\":\"tores\",\"lastname\":\"louis\",\"username\":\"snow boll boy\",\"email\":\"vvsx@qq.com\",\"imgLink\":\"snow.jpg\"}"
-
-//http://localhost:8080/api/user/validateUser?email=ja@qq.com&password=fafd
-//curl http://localhost:8080/api/cart/addCartOfUserId -i -XPOST -H "Content-Type: application/json" -d "[{\"userId\":\"222\",\"bookId\":\"1\",\"count\":\"2\"}]"
-//

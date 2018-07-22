@@ -18,7 +18,7 @@ public class BankCardService {
         return bankCardRepository.findAll();
     }
 
-    public List<BankCard> findOnesByUserId(Long userId) { return bankCardRepository.findOnesById(userId); }
+    public List<BankCard> findByUserId(Long userId) { return bankCardRepository.findByUserId(userId); }
 
     public BankCard addCard(BankCard bankCard) { return bankCardRepository.save(bankCard); }
 

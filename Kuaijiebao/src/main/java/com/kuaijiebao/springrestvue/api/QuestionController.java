@@ -20,18 +20,15 @@ public class QuestionController {
     @Autowired
     QuestionService questionService;
 
-    @GetMapping(path = "/getAllQuestions")
-    public List<Question> getAll() {
+    @GetMapping(path = "/questions")
+    public List<Question> getAllQuestions() {
         List<Question> question = questionService.findAll();
         return question;
     }
 
-    @GetMapping(path = "/getSearchKeyword")
-    public List<Question> getSearchKeywordQuestions(@RequestParam(name="keyword", required = false) String keyword) {
+    @GetMapping(path = "/questions/search")
+    public List<Question> getQuestionsByKeyword(@RequestParam(name="keyword", required = false) String keyword) {
         List<Question> questions = questionService.findVolumesByKeyword(keyword);
-       // System.out.println("--searchByKeyword--");
-        //for(Question question : questions)
-          //  System.out.println(question.getTitle());
         return questions;
     }
 

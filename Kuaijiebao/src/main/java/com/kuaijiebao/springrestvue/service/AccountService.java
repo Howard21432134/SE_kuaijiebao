@@ -19,11 +19,8 @@ public class AccountService {
         return accountRepository.findAll();
     }
     public Account findByAccountId(Long id) { return accountRepository.findByAccountId(id); }
-    public Account findOneByUsernameAndPassword(String username, String password) {
-        return accountRepository.findOneByUsernameAndPassword(username,password);
-    }
     public Account findByUserId(Long id){return accountRepository.findByUserId(id);}
-    public Account create(Account account) {
+    public Account save(Account account) {
         return accountRepository.save(account);
     }
     public Account update(Account account) {

@@ -42,21 +42,19 @@ public class StatisticsController {
     DebtRepository debtRepository;
 
 
-    @GetMapping(path = "/getDebtStatOfUserId")
-    public List<Debt> getUserDebtStat(@RequestParam Long id,
+    @GetMapping(path = "/DebtStat/{userId}")
+    public List<Debt> getDebtStatByUserId(@PathVariable Long userId,
                                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date since,
                                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date until) {
-        return debtService.showDebtByUserBetween(id,since,until);
+        return debtService.showDebtByUserBetween(userId,since,until);
 
     }
 
-    @GetMapping(path = "/getFPDRStatOfUserId")
-    public List<FPDR> getUserFPDRStat(@RequestParam Long id,
+    @GetMapping(path = "/FPDRStat/{userId}")
+    public List<FPDR> getFPDRStatByUserId(@PathVariable Long userId,
                                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date since,
                                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date until) {
-        return fpdrService.showFPDRByUserBetween(id, since, until);
-        //return fpdrRepository.findByTimeAtBetweenOrderByTimeAndIdIs(id, since, until);
-        //return fpdrRepository.findAll();
+        return fpdrService.showFPDRByUserBetween(userId, since, until);
     }
 
 }

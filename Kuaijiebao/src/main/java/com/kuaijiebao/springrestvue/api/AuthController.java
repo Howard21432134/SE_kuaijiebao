@@ -2,6 +2,8 @@ package com.kuaijiebao.springrestvue.api;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,16 +12,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import com.kuaijiebao.springrestvue.domain.Account;
 import com.kuaijiebao.springrestvue.domain.User;
@@ -30,8 +30,10 @@ import com.kuaijiebao.springrestvue.payload.LoginRequest;
 import com.kuaijiebao.springrestvue.payload.SignUpRequest;
 import com.kuaijiebao.springrestvue.exception.AppException;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -54,7 +56,7 @@ public class AuthController {
     //@Autowired
     //JwtTokenProvider tokenProvider;
 
-    @PostMapping("/signin")
+    @PostMapping("/v1/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -68,10 +70,10 @@ public class AuthController {
 
         //String jwt = tokenProvider.generateToken(authentication);
         //return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
-        return ResponseEntity.ok(authentication);
+        return ResponseEntity.ok(authentication.getPrincipal());
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/v1/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         if(accountRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
@@ -108,4 +110,5 @@ public class AuthController {
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "Account registered successfully"));
     }
+
 }

@@ -69,18 +69,15 @@ public class UserServiceTest {
 
         List<User> allUsers = Arrays.asList(john, bob, alex);
 
-        Mockito.when(userRepository.findOneByName(john.getName())).thenReturn(john);
-        Mockito.when(userRepository.findOneByName(alex.getName())).thenReturn(alex);
-        Mockito.when(userRepository.findOneByName("wrong_name")).thenReturn(null);
-        Mockito.when(userRepository.findOneByUserId(john.getUserId())).thenReturn(john);
+        Mockito.when(userRepository.findByUserId(john.getUserId())).thenReturn(john);
         Mockito.when(userRepository.findAll()).thenReturn(allUsers);
-        Mockito.when(userRepository.findOneByUserId(-99L)).thenReturn(null);
+        Mockito.when(userRepository.findByUserId(-99L)).thenReturn(null);
         Mockito.when(userRepository.save(john)).thenReturn(john);
     }
 
     @Test
     public void whenValidId_thenUserShouldBeFound() {
-        User fromDb = userService.findOneByUserId(11L);
+        User fromDb = userService.findByUserId(11L);
         assertThat(fromDb.getName()).isEqualTo("john");
 
         //verifyFindByIdIsCalledOnce();
@@ -89,7 +86,7 @@ public class UserServiceTest {
 
     @Test
     public void whenInValidId_thenUserShouldNotBeFound() {
-        User fromDb = userService.findOneByUserId(-99L);
+        User fromDb = userService.findByUserId(-99L);
         //verifyFindByIdIsCalledOnce();
         assertThat(fromDb).isNull();
     }
@@ -137,7 +134,7 @@ public class UserServiceTest {
                 "john@qq.com");
         johnEdited.setUserId(11L);
         Mockito.when(userRepository.save(johnEdited)).thenReturn(johnEdited);
-        User fromDb=userService.update(johnEdited);
+        User fromDb=userService.save(johnEdited);
         assertThat(fromDb.getNickname()).isEqualTo(johnEdited.getNickname());
     }
 

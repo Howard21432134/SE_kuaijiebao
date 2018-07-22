@@ -58,25 +58,25 @@ public class UserController {
 
     @GetMapping(path = "/{userId}", produces = {"application/hal+json"})
     public User getUserByUserId(@PathVariable Long userId) {
-        return userService.findOneByUserId(userId);
+        return userService.findByUserId(userId);
     }
 
     @PutMapping(path = "/{userId}")
     public User updateUser(@PathVariable Long userId, @RequestBody User user) {
         user.setUserId(userId);
-        return userService.update(user);
+        return userService.save(user);
     }
 
     @PutMapping(path ="/{userId}/email")
     public User updateEmail(@PathVariable Long userId,
                                 @RequestBody User user) {
-        User newUser=userService.findOneByUserId(userId);
+        User newUser=userService.findByUserId(userId);
         newUser.setUserId(userId);
         newUser.setEmail(user.getEmail());
 
         mailAuthService.SendValidationMail("satoaikawa@sjtu.edu.cn","Validation Mail", "Code: 123456789");
 
-        return userService.update(newUser);
+        return userService.save(newUser);
     }
 
     @PostMapping(path ="/registerInfo")
@@ -116,7 +116,7 @@ public class UserController {
         if(existUser){
 
             Account account=accountRepository.findByUsername(code.getUsername()).orElse(null);
-            User user=userRepository.findOneByUserId(account.getUserId());
+            User user=userRepository.findByUserId(account.getUserId());
 
             UserPendingValidation userInfo=userPendingValidationRepository.findByUsername(code.getUsername());
             if("EMAIL_ADDRESS".equals(userInfo.getElem())){
@@ -156,10 +156,10 @@ public class UserController {
     @PutMapping(path ="/{userId}/phone")
     public User updatePhone(@PathVariable Long userId,
                                 @RequestBody User user) {
-        User newUser=userService.findOneByUserId(userId);
+        User newUser=userService.findByUserId(userId);
         newUser.setUserId(userId);
         newUser.setPhone(user.getPhone());
-        return userService.update(newUser);
+        return userService.save(newUser);
     }
 
 
@@ -202,20 +202,20 @@ public class UserController {
 
     @GetMapping(path ="{userId}/email")
     @ResponseStatus(HttpStatus.CREATED)
-    public User deleteUserEmail(@PathVariable Long userId) {
-        User newUser=userService.findOneByUserId(userId);
+    public User deleteEmail(@PathVariable Long userId) {
+        User newUser=userService.findByUserId(userId);
         newUser.setUserId(userId);
         newUser.setEmail("");
-        return userService.update(newUser);
+        return userService.save(newUser);
     }
 
     @GetMapping(path ="/{userId}/phone")
     @ResponseStatus(HttpStatus.CREATED)
     public User deletePhone(@PathVariable Long userId) {
-        User newUser=userService.findOneByUserId(userId);
+        User newUser=userService.findByUserId(userId);
         newUser.setUserId(userId);
         newUser.setPhone("");
-        return userService.update(newUser);
+        return userService.save(newUser);
     }
 
 

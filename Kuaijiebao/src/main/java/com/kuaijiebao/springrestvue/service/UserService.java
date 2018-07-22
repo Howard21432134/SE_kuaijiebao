@@ -15,19 +15,10 @@ public class UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
-
-    public User findOneByUserId(Long id) { return userRepository.findOneByUserId(id); }
-
-    //public User create(User user) {
-    //    return userRepository.save(user);
-    //}
-
-    public User update(User user) {
+    public User findByUserId(Long id) { return userRepository.findByUserId(id); }
+    public User save(User user) {
         return userRepository.save(user);
     }
-
-    //public User findOneByEmail(String email) { return userRepository.findOneByEmail(email); }
-
     public void deleteByUserId(Long id) {
         userRepository.deleteByUserId(id);
     }

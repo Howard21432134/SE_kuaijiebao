@@ -6,6 +6,8 @@ import com.kuaijiebao.springrestvue.repository.AccountRepository;
 import com.kuaijiebao.springrestvue.repository.UserPendingValidationRepository;
 import com.kuaijiebao.springrestvue.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -22,10 +24,15 @@ import com.kuaijiebao.springrestvue.payload.ValidationRequest;
 import com.kuaijiebao.springrestvue.payload.ValidationCode;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+
 @CrossOrigin
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("api/user")
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 public class UserController {
+
+    @Value("${foo.bar}")
+    private String BASE_PATH;
 
     @Autowired
     UserService userService;
@@ -51,14 +58,14 @@ public class UserController {
 
 
 
-    @GetMapping(path = "/getUser/{userId}")
+    @GetMapping(path = "/getUser/{userId}", produces = {"application/hal+json"})
     public User getUserByUserId(@PathVariable Long userId) {
         return userService.findOneByUserId(userId);
     }
 
     @PutMapping(path = "/updateUser/{userId}")
     public User putUser(@PathVariable Long userId, @RequestBody User user) {
-        user.setId(userId);
+        user.setUserId(userId);
         return userService.update(user);
     }
 
@@ -66,7 +73,7 @@ public class UserController {
     public User putUserNewEmail(@PathVariable Long userId,
                                 @RequestBody User user) {
         User newUser=userService.findOneByUserId(userId);
-        newUser.setId(userId);
+        newUser.setUserId(userId);
         newUser.setEmail(user.getEmail());
 
         mailAuthService.SendValidationMail("satoaikawa@sjtu.edu.cn","Validation Mail", "Code: 123456789");
@@ -111,16 +118,16 @@ public class UserController {
         if(existUser){
 
             Account account=accountRepository.findByUsername(code.getUsername()).orElse(null);
-            User user=userRepository.findOneById(account.getUserId());
+            User user=userRepository.findOneByUserId(account.getUserId());
 
             UserPendingValidation userInfo=userPendingValidationRepository.findByUsername(code.getUsername());
             if("EMAIL_ADDRESS".equals(userInfo.getElem())){
-                user.setId(user.getId());
+                user.setUserId(user.getUserId());
                 user.setEmail(userInfo.getItem());
             }else if("BANK_CARD".equals(userInfo.getElem())){
                 //stub bankcard
             }else if("PHONE_NUMBER".equals(userInfo.getElem())){
-                user.setId(user.getId());
+                user.setUserId(user.getUserId());
                 user.setPhone(userInfo.getItem());
             }else{
                 URI location = ServletUriComponentsBuilder
@@ -152,7 +159,7 @@ public class UserController {
     public User putUserNewPhone(@PathVariable Long userId,
                                 @RequestBody User user) {
         User newUser=userService.findOneByUserId(userId);
-        newUser.setId(userId);
+        newUser.setUserId(userId);
         newUser.setPhone(user.getPhone());
         return userService.update(newUser);
     }
@@ -160,7 +167,7 @@ public class UserController {
 
     @GetMapping(path = "/getPassword/{userId}")
     public Account getUserPasswordByUserId(@PathVariable Long userId) {
-        return accountService.findOneById(userId);
+        return accountService.findByUserId(userId);
     }
 
 
@@ -168,13 +175,13 @@ public class UserController {
     //can ONLY change the password field
     @PutMapping(path = "/updatePassword/{userId}")
     public Account putPassword(@PathVariable Long userId, @RequestBody Account account) {
-        Account newAccount=accountService.findOneById(userId);
+        Account newAccount=accountService.findByUserId(userId);
         newAccount.setPassword(account.getPassword());
         return accountService.update(newAccount);
     }
 
 
-    @GetMapping(path = "/getBankCard/{id}")
+    @GetMapping(path = "/getBankCard/{id}", produces = {"application/hal+json"})
     public List<BankCard> getUserBankCardsByUserId(@PathVariable Long id) {
         return bankCardService.findOnesByUserId(id);
     }
@@ -199,7 +206,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public User deleteUserEmail(@PathVariable Long id) {
         User newUser=userService.findOneByUserId(id);
-        newUser.setId(id);
+        newUser.setUserId(id);
         newUser.setEmail("");
         return userService.update(newUser);
     }
@@ -208,7 +215,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public User deleteUserPhone(@PathVariable Long id) {
         User newUser=userService.findOneByUserId(id);
-        newUser.setId(id);
+        newUser.setUserId(id);
         newUser.setPhone("");
         return userService.update(newUser);
     }

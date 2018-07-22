@@ -89,7 +89,7 @@ public class AuthController {
                 signUpRequest.getName(),signUpRequest.getJob(), signUpRequest.getIncome(), signUpRequest.getAddress(),
                 signUpRequest.getIntroduction(), signUpRequest.getPhone(), signUpRequest.getEmail());
         User userResult=userRepository.save(user);
-        newAccount.setUserId(userResult.getId());
+        newAccount.setUserId(userResult.getUserId());
         newAccount.setPassword(passwordEncoder.encode(newAccount.getPassword()));
         newAccount.setRoles("ROLE_USER");
         Account result = accountRepository.save(newAccount);

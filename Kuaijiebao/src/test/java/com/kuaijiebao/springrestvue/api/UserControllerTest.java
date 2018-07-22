@@ -224,7 +224,7 @@ public class UserControllerTest {
     public void GivenValidPassword_whenPutPassword_thenUpdatePassword() throws IOException, Exception {
         Account johnAccount=new Account("john","passwordjohn");
         accountRepository.saveAndFlush(johnAccount);
-        mvc.perform(put("/api/user/updatePassword/"+johnAccount.getId())
+        mvc.perform(put("/api/user/updatePassword/"+johnAccount.getAccountId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJson(johnAccount)))
                 .andDo(print())

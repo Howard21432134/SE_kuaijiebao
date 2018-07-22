@@ -30,7 +30,7 @@ public class DebtController {
 
     @GetMapping(path="/ShowDebtByUserActivity")
     public List<Debt> ShowDebtByUserActivity(@RequestBody User user){
-        return debtService.ShowDebtbyUserActivity(user.getId());
+        return debtService.ShowDebtbyUserActivity(user.getUserId());
     }
 
     @GetMapping(path="/DebtDetailActivity/{id}")

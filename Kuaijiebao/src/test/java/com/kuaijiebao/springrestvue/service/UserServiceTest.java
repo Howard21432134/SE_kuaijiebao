@@ -51,20 +51,20 @@ public class UserServiceTest {
                 "john","student",0,
                 "SJTU", "Hello","11122223333",
                 "john@qq.com");
-        john.setId(11L);
+        john.setUserId(11L);
 
 
         User bob = new User("bob","jh23453245",
                 "bob","engineer",0,
                 "shanghai", "Hello","11122223333",
                 "bob@qq.com");
-        bob.setId(12L);
+        bob.setUserId(12L);
 
         User alex = new User("alex","kl48394593",
                 "alex","pilot",0,
                 "hongkong", "Hello","11122223333",
                 "bob@qq.com");
-        alex.setId(13L);
+        alex.setUserId(13L);
 
 
         List<User> allUsers = Arrays.asList(john, bob, alex);
@@ -72,9 +72,9 @@ public class UserServiceTest {
         Mockito.when(userRepository.findOneByName(john.getName())).thenReturn(john);
         Mockito.when(userRepository.findOneByName(alex.getName())).thenReturn(alex);
         Mockito.when(userRepository.findOneByName("wrong_name")).thenReturn(null);
-        Mockito.when(userRepository.findOneById(john.getId())).thenReturn(john);
+        Mockito.when(userRepository.findOneByUserId(john.getUserId())).thenReturn(john);
         Mockito.when(userRepository.findAll()).thenReturn(allUsers);
-        Mockito.when(userRepository.findOneById(-99L)).thenReturn(null);
+        Mockito.when(userRepository.findOneByUserId(-99L)).thenReturn(null);
         Mockito.when(userRepository.save(john)).thenReturn(john);
     }
 
@@ -99,7 +99,7 @@ public class UserServiceTest {
 
         List<User> allEmployees = userService.findAll();
         //verifyFindAllEmployeesIsCalledOnce();
-        assertThat(allEmployees).hasSize(3).extracting(User::getId).contains(11L, 12L, 13L);
+        assertThat(allEmployees).hasSize(3).extracting(User::getUserId).contains(11L, 12L, 13L);
     }
 /*
     @Test
@@ -118,8 +118,8 @@ public class UserServiceTest {
                 "MG234143","student",0,
                 "SJTU", "Hello","11122223333",
                 "john@qq.com");
-        john.setId(11L);
-        userService.deleteById(11L);
+        john.setUserId(11L);
+        userService.deleteByUserId(11L);
     }
 
     @Test
@@ -128,14 +128,14 @@ public class UserServiceTest {
                 "MG234143","student",0,
                 "SJTU", "Hello","11122223333",
                 "john@qq.com");
-        john.setId(11L);
+        john.setUserId(11L);
         Mockito.when(userRepository.save(john)).thenReturn(john);
         userRepository.save(john);
         User johnEdited = new User("johnny","john",
                 "MG234143","student",0,
                 "SJTU", "Hello","11122223333",
                 "john@qq.com");
-        johnEdited.setId(11L);
+        johnEdited.setUserId(11L);
         Mockito.when(userRepository.save(johnEdited)).thenReturn(johnEdited);
         User fromDb=userService.update(johnEdited);
         assertThat(fromDb.getNickname()).isEqualTo(johnEdited.getNickname());

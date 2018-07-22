@@ -119,8 +119,9 @@ H2
 http://yosshio0426.hatenadiary.com/entry/2014/06/09/001949
 
 send email
-http://blog.apitore.com/2017/05/26/sendgrid-java/
-http://teachingprogramming.net/archives/720
+//http://blog.apitore.com/2017/05/26/sendgrid-java/
+//http://teachingprogramming.net/archives/720
+https://my.oschina.net/lsf930709/blog/847720
 user ninshou
 http://teachingprogramming.net/archives/718
 https://github.com/teachingprogramming/lecture2018java2/blob/master/src/main/java/d00000/webapp/AuthController.java
@@ -128,3 +129,6 @@ https://github.com/teachingprogramming/lecture2018java2/blob/master/src/main/jav
 spring cloud
 https://www.packtpub.com/application-development/spring-microservices-spring-boot
 should download to!!
+
+hateoas
+http://www.baeldung.com/spring-hateoas-tutorial

@@ -46,15 +46,15 @@ public class AccountRepositoryTest {
         Account satoAccount=new Account("sato","password");
         entityManager.persistAndFlush(satoAccount);
 
-        Account fromDb = accountRepository.findOneById(satoAccount.getId());
+        Account fromDb = accountRepository.findByUserId(satoAccount.getUserId());
 
-        assertThat(fromDb.getId()).isEqualTo(satoAccount.getId());
+        assertThat(fromDb.getUserId()).isEqualTo(satoAccount.getUserId());
     }
 
     @Test
     public void whenInvalidId_thenReturnNull() {
 
-        Account fromDb = accountRepository.findOneById(-11l);
+        Account fromDb = accountRepository.findByUserId(-11l);
         assertThat(fromDb).isNull();
     }
 /*
@@ -134,8 +134,8 @@ public class AccountRepositoryTest {
         Account myAccount=new Account("sato","password");
         entityManager.persistAndFlush(myAccount);
 
-        accountRepository.deleteById(myAccount.getId());
-        Account fromDb = accountRepository.findOneById(myAccount.getId());
+        accountRepository.deleteByAccountId(myAccount.getAccountId());
+        Account fromDb = accountRepository.findByAccountId(myAccount.getAccountId());
         assertThat(fromDb).isNull();
     }
 

@@ -67,7 +67,7 @@ public class AccountServiceTest {
                 "john","student",0,
                 "SJTU", "Hello","11122223333",
                 "john@qq.com");
-        john.setId(11L);
+        john.setUserId(11L);
         Account johnAccount=new Account("john","passwordjohn");
 
 
@@ -75,24 +75,24 @@ public class AccountServiceTest {
                 "bob","engineer",0,
                 "shanghai", "Hello","11122223333",
                 "bob@qq.com");
-        bob.setId(12L);
+        bob.setUserId(12L);
         Account bobAccount=new Account("bob","passwordbob");
 
         User alex = new User("alex","kl48394593",
                 "alex","pilot",0,
                 "hongkong", "Hello","11122223333",
                 "bob@qq.com");
-        alex.setId(13L);
+        alex.setUserId(13L);
         Account alexAccount=new Account("alex","passwordalex");
 
 
         List<Account> allAccounts = Arrays.asList(johnAccount, bobAccount, alexAccount);
 
-        Mockito.when(accountRepository.findOneById(johnAccount.getId())).thenReturn(johnAccount);
-        Mockito.when(accountRepository.findOneById(alexAccount.getId())).thenReturn(alexAccount);
-        Mockito.when(accountRepository.findOneById(-99L)).thenReturn(null);
-        Mockito.when(accountRepository.findOneById(bobAccount.getId())).thenReturn(bobAccount);
-        Mockito.when(accountRepository.findOneById(-99L)).thenReturn(null);
+        Mockito.when(accountRepository.findByAccountId(johnAccount.getAccountId())).thenReturn(johnAccount);
+        Mockito.when(accountRepository.findByAccountId(alexAccount.getAccountId())).thenReturn(alexAccount);
+        Mockito.when(accountRepository.findByAccountId(-99L)).thenReturn(null);
+        Mockito.when(accountRepository.findByAccountId(bobAccount.getAccountId())).thenReturn(bobAccount);
+        Mockito.when(accountRepository.findById(-99L)).thenReturn(null);
 
         Mockito.when(accountRepository.findOneByUsernameAndPassword(johnAccount.getUsername(),johnAccount.getPassword())).thenReturn(johnAccount);
         Mockito.when(accountRepository.findOneByUsernameAndPassword(bobAccount.getUsername(),bobAccount.getPassword())).thenReturn(bobAccount);
@@ -125,7 +125,7 @@ public class AccountServiceTest {
 */
     @Test
     public void whenInValidId_thenAccountShouldNotBeFound() {
-        Account fromDb = accountService.findOneById(-99L);
+        Account fromDb = accountService.findByAccountId(-99L);
         //verifyFindByIdIsCalledOnce();
         assertThat(fromDb).isNull();
     }
@@ -148,7 +148,7 @@ public class AccountServiceTest {
     @Test
     public void GivenVaildAccount_whenDelete_thenSuccess() {
         Account johnAccount=new Account("john","passwordjohn");
-        accountService.delete(11L);
+        accountService.delete(johnAccount.getAccountId());
     }
 
 }

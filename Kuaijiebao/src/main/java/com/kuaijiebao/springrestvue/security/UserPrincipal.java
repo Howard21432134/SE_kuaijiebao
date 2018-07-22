@@ -33,18 +33,18 @@ public class UserPrincipal implements UserDetails {
         this.userId=userId;
     }
 
-    public static UserPrincipal create(Account user) {
+    public static UserPrincipal create(Account account) {
         //List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
         //        new SimpleGrantedAuthority(role.getName().name())
         //).collect(Collectors.toList());
 
-        List<GrantedAuthority> authorities=AuthorityUtils.createAuthorityList(user.getRoles());
+        List<GrantedAuthority> authorities=AuthorityUtils.createAuthorityList(account.getRoles());
 
         return new UserPrincipal(
-                user.getId(),
-                user.getUsername(),
-                user.getPassword(),
-                user.getUserId(),
+                account.getAccountId(),
+                account.getUsername(),
+                account.getPassword(),
+                account.getUserId(),
                 authorities
         );
     }

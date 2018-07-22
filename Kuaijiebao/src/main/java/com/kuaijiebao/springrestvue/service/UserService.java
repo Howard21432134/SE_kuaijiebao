@@ -16,7 +16,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User findOneByUserId(Long id) { return userRepository.findOneById(id); }
+    public User findOneByUserId(Long id) { return userRepository.findOneByUserId(id); }
 
     //public User create(User user) {
     //    return userRepository.save(user);
@@ -28,8 +28,8 @@ public class UserService {
 
     //public User findOneByEmail(String email) { return userRepository.findOneByEmail(email); }
 
-    public void deleteById(Long id) {
-        userRepository.deleteById(id);
+    public void deleteByUserId(Long id) {
+        userRepository.deleteByUserId(id);
     }
 
 

@@ -14,13 +14,13 @@ import javax.transaction.Transactional;
 //@RepositoryRestResource(collectionResourceRel = "books", path = "books")
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    public User findOneById(Long id);
+    public User findOneByUserId(Long id);
     public User findOneByName(String name);
     //@Query("select u from User u where u.phone=?1")
     //public User findOneByPhoneUsingQuery(String phone);
     @Modifying
     @Transactional
-    public void deleteById(Long id);
+    public void deleteByUserId(Long id);
     public User save(User user);
 
 }

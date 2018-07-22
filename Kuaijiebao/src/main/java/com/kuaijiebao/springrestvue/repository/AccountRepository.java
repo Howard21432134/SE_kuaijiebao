@@ -22,7 +22,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     //
     //Optional<Account> findByEmail(String email);
     //Optional<Account> findByUsernameOrEmail(String username, String email);
-    List<Account> findByIdIn(List<Long> userIds);
+    List<Account> findByUserIdIn(List<Long> userIds);
     Optional<Account> findByUsername(String username);
     Boolean existsByUsername(String username);
     //Boolean existsByEmail(String email);
@@ -30,12 +30,13 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     //
     //
 
-    public Account findOneById(Long id);
+    public Account findByAccountId(Long id);
+    public Account findByUserId(Long id);
     public Account findOneByUsernameAndPassword(String username, String Password);
     public Account save(Account account);
     @Modifying
     @Transactional
-    public void deleteById(Long id);
+    public void deleteByAccountId(Long id);
 
 
 }

@@ -33,14 +33,14 @@ public class UserRepositoryTest {
                 "11122223333", "example@qq.com");
         entityManager.persistAndFlush(satoshi);
 
-        User found = userRepository.findOneById(satoshi.getId());
+        User found = userRepository.findOneByUserId(satoshi.getUserId());
 
         assertThat(found.getName()).isEqualTo(satoshi.getName());
     }
 
     @Test
     public void whenInvalidId_thenReturnNull() {
-        User fromDb = userRepository.findOneById(-99L);
+        User fromDb = userRepository.findOneByUserId(-99L);
         assertThat(fromDb).isNull();
     }
 
@@ -79,8 +79,8 @@ public class UserRepositoryTest {
                 "student",0,"SJTU", "Hello",
                 "11122223333", "example@qq.com");
         entityManager.persistAndFlush(satoshi);
-        userRepository.deleteById(satoshi.getId());
-        User fromDb = userRepository.findOneById(satoshi.getId());
+        userRepository.deleteById(satoshi.getUserId());
+        User fromDb = userRepository.findOneByUserId(satoshi.getUserId());
         assertThat(fromDb).isNull();
     }
 

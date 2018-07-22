@@ -3,6 +3,7 @@ package com.kuaijiebao.springrestvue.api;
 
 import com.kuaijiebao.springrestvue.domain.BankCard;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/account")
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 public class AccountController {
 
     @Autowired
@@ -25,25 +27,23 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-    @GetMapping
+    @GetMapping(path = "/getAllAccounts")
     public List<Account> getAll() {
         List<Account> accounts = accountService.findAll();
         return accounts;
     }
 
-/*
-    @GetMapping(path = "/validateUser")
-    public Account validateUser(@RequestBody Account account) {
-
-        return accountService.findOneByUsernameAndPassword(account.getUsername(),
-                account.getPassword());
+    @GetMapping(path = "/{userId}", produces = {"application/hal+json"})
+    public Account getByUserId(@PathVariable Long userId) {
+        return accountService.findByUserId(userId);
     }
-*/
+
+
     //
     //can ONLY change the password field
     @PutMapping(path = "/updatePassword/{userId}")
     public Account putUserPassword(@PathVariable Long userId, @RequestBody Account account) {
-        Account newAccount=accountService.findOneById(userId);
+        Account newAccount=accountService.findByAccountId(userId);
         newAccount.setPassword(account.getPassword());
         return accountService.update(newAccount);
     }

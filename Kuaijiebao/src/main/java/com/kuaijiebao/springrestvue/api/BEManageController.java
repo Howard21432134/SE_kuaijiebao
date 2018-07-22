@@ -18,9 +18,25 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//*********************************************************************************
+//dependency for HATEOAS
+//
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
+import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 @CrossOrigin
 @RestController
-@RequestMapping("/api/BEManage")
+@RequestMapping(value="/api/BEManage")
+@EnableHypermediaSupport(type = HypermediaType.HAL)
 public class BEManageController {
 
     @Autowired
@@ -35,6 +51,9 @@ public class BEManageController {
     @Autowired
     DebtRepository debtRepository;
 
+    @Autowired
+    AccountService accountService;
+
     @GetMapping(path = "/manageUser/getAllUsers")
     public List<User> getAllUsers() {
         List<User> user = userService.findAll();
@@ -43,7 +62,7 @@ public class BEManageController {
 
     @DeleteMapping(path ="/manageUser/deleteUser/{id}")
     public void deleteUser(@PathVariable Long id) {
-        userService.deleteById(id);
+        userService.deleteByUserId(id);
     }
 
     @GetMapping(path = "/manageQuestion/getAllQuestions")
@@ -94,5 +113,27 @@ public class BEManageController {
         debtRepository.deleteById(id);
     }
 
+
+    //*********************************************************************************
+    //HATEOAS
+    //
+    @RequestMapping(path = "/manageUser", method = RequestMethod.GET, produces = {"application/hal+json"})
+    public Resources<User> getAllUsersHateoas() {
+        final List<User> allUsers = userService.findAll();
+
+        for (final User user : allUsers) {
+            Long userId = user.getUserId();
+            Link selfLink = linkTo(methodOn(UserController.class).getUserByUserId(userId)).withSelfRel();
+            user.add(selfLink);
+            final Link accountLink = linkTo(methodOn(AccountController.class).getByUserId(userId)).withRel("account");
+            user.add(accountLink);
+            final Link bankCardLink =linkTo(methodOn(UserController.class).getUserBankCardsByUserId(userId)).withRel("bankcard");
+            user.add(bankCardLink);
+        }
+
+        Link link =linkTo(BEManageController.class).slash("manageUser").withSelfRel();
+        Resources<User> result = new Resources<User>(allUsers,link);
+        return result;
+    }
 
 }

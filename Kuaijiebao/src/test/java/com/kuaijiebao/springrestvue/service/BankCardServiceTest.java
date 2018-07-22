@@ -55,9 +55,9 @@ public class BankCardServiceTest {
         List<BankCard> allBankCards = Arrays.asList(bobsOne,bobsTwo,alexs);
 
 
-        Mockito.when(bankCardRepository.findOnesById(11L)).thenReturn(bobBankCards);
-        Mockito.when(bankCardRepository.findOnesById(-99L)).thenReturn(null);
-        Mockito.when(bankCardRepository.findOnesById(12L)).thenReturn(alexBankCards);
+        Mockito.when(bankCardRepository.findByUserId(11L)).thenReturn(bobBankCards);
+        Mockito.when(bankCardRepository.findByUserId(-99L)).thenReturn(null);
+        Mockito.when(bankCardRepository.findByUserId(12L)).thenReturn(alexBankCards);
         Mockito.when(bankCardRepository.findAll()).thenReturn(allBankCards);
         Mockito.when(bankCardRepository.save(alexs)).thenReturn(alexs);
 
@@ -65,13 +65,13 @@ public class BankCardServiceTest {
 
     @Test
     public void whenValidId_thenBankCardShouldBeFound() {
-        List<BankCard> fromDb = bankCardService.findOnesByUserId(11L);
+        List<BankCard> fromDb = bankCardService.findByUserId(11L);
         assertThat(fromDb).hasSize(2).extracting(BankCard::getCardNum).contains("1111222233334444", "22223333444445555");
     }
 
     @Test
     public void whenInvalidId_thenReturnNull() {
-        List<BankCard> fromDb = bankCardService.findOnesByUserId(-99L);
+        List<BankCard> fromDb = bankCardService.findByUserId(-99L);
         assertThat(fromDb).isNull();
     }
 

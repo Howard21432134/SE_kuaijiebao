@@ -108,7 +108,6 @@ public class UserControllerTest {
                 "kl48394593","pilot",0,
                 "hongkong", "Hello","11122223333",
                 "bob@qq.com");
-        bob.setId(11L);
         repository.saveAndFlush(bob);
         mvc.perform(put("/api/user/updateUser/11")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -213,7 +212,7 @@ public class UserControllerTest {
     @Test
     public void givenAccount_whenGetPassword_thenStatus200() throws Exception {
 
-        Account johnAccount=new Account(11L,"john","passwordjohn");
+        Account johnAccount=new Account("john","passwordjohn");
         accountRepository.saveAndFlush(johnAccount);
         mvc.perform(get("/api/user/getPassword/11").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -223,9 +222,9 @@ public class UserControllerTest {
 
     @Test
     public void GivenValidPassword_whenPutPassword_thenUpdatePassword() throws IOException, Exception {
-        Account johnAccount=new Account(11L,"john","passwordjohn");
+        Account johnAccount=new Account("john","passwordjohn");
         accountRepository.saveAndFlush(johnAccount);
-        mvc.perform(put("/api/user/updatePassword/11")
+        mvc.perform(put("/api/user/updatePassword/"+johnAccount.getAccountId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJson(johnAccount)))
                 .andDo(print())

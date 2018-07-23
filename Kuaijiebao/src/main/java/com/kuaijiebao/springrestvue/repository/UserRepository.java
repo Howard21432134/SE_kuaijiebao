@@ -15,6 +15,8 @@ import javax.transaction.Transactional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     public User findByUserId(Long id);
+    public boolean existsByEmail(String  email);
+    public boolean existsByPhone(String email);
     @Modifying
     @Transactional
     public void deleteByUserId(Long id);

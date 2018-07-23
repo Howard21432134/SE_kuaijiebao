@@ -27,13 +27,13 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-    @GetMapping(path = "/accounts")
+    @GetMapping(path = "/v1/accounts")
     public List<Account> getAllAccounts() {
         List<Account> accounts = accountService.findAll();
         return accounts;
     }
 
-    @GetMapping(path = "/accounts/{userId}", produces = {"application/hal+json"})
+    @GetMapping(path = "/v1/accounts/{userId}", produces = {"application/hal+json"})
     public Account getByUserId(@PathVariable Long userId) {
         return accountService.findByUserId(userId);
     }
@@ -41,7 +41,7 @@ public class AccountController {
 
     //
     //can ONLY change the password field
-    @PutMapping(path = "/accounts/{userId}/password")
+    @PutMapping(path = "/v1/accounts/{userId}/password")
     public Account updatePassword(@PathVariable Long userId, @RequestBody Account account) {
         Account newAccount=accountService.findByAccountId(userId);
         newAccount.setPassword(account.getPassword());
@@ -49,7 +49,7 @@ public class AccountController {
     }
 
 
-    @PostMapping(path ="/accounts")
+    @PostMapping(path ="/v1/accounts")
     @ResponseStatus(HttpStatus.CREATED)
     public Account createUserNewCard(@RequestBody Account account) {
         return accountService.save(account);

@@ -55,7 +55,7 @@ public class AccountControllerTest {
     @Test
     public void whenValidInput_thenCreateAccount() throws IOException, Exception {
         Account bobAccount = new Account("bob","passwordbob");
-        mvc.perform(post("/api/account/createAccount").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(bobAccount)));
+        mvc.perform(post("/api/v1/accounts").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(bobAccount)));
 
         List<Account> found = repository.findAll();
         assertThat(found).extracting(Account::getUsername).containsOnly("bob");
@@ -69,7 +69,7 @@ public class AccountControllerTest {
         createTestAccount("alex","passwordalex");
 
         // @formatter:off
-        mvc.perform(get("/api/account").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v1/accounts").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))

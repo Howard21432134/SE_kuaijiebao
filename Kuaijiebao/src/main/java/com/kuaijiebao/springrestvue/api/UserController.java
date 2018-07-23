@@ -3,6 +3,7 @@ package com.kuaijiebao.springrestvue.api;
 import com.kuaijiebao.springrestvue.domain.*;
 import com.kuaijiebao.springrestvue.payload.ApiResponse;
 import com.kuaijiebao.springrestvue.repository.AccountRepository;
+import com.kuaijiebao.springrestvue.repository.BankCardRepository;
 import com.kuaijiebao.springrestvue.repository.UserPendingValidationRepository;
 import com.kuaijiebao.springrestvue.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Random;
 
 import com.kuaijiebao.springrestvue.domain.BankCard;
 import com.kuaijiebao.springrestvue.service.UserService;
@@ -27,7 +29,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("/api")
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 public class UserController {
 
@@ -53,63 +55,85 @@ public class UserController {
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    BankCardRepository bankCardRepository;
 
 
 
-    @GetMapping(path = "/{userId}", produces = {"application/hal+json"})
+
+    @GetMapping(path = "/v2/users/{userId}", produces = {"application/hal+json"})
     public User getUserByUserId(@PathVariable Long userId) {
         return userService.findByUserId(userId);
     }
 
-    @PutMapping(path = "/{userId}")
+    @PutMapping(path = "/v2/users/{userId}")
     public User updateUser(@PathVariable Long userId, @RequestBody User user) {
         user.setUserId(userId);
         return userService.save(user);
     }
 
-    @PutMapping(path ="/{userId}/email")
+    @PutMapping(path ="/v2/users/{userId}/email")
     public User updateEmail(@PathVariable Long userId,
                                 @RequestBody User user) {
         User newUser=userService.findByUserId(userId);
         newUser.setUserId(userId);
         newUser.setEmail(user.getEmail());
 
-        mailAuthService.SendValidationMail("satoaikawa@sjtu.edu.cn","Validation Mail", "Code: 123456789");
+        //mailAuthService.SendValidationMail("satoaikawa@sjtu.edu.cn","Validation Mail", "Code: 123456789");
 
         return userService.save(newUser);
     }
 
-    @PostMapping(path ="/registerInfo")
+    //
+    //VPN should be set to global mode
+    //
+    @PostMapping(path ="/v2/users/registerInfo")
     public ResponseEntity<?> registerUserInfoModification(@RequestBody ValidationRequest request) {
+
+        String generatedCode=getRandomCode();
 
         boolean accountExists=accountRepository.existsByUsername(request.getUsername());
         if(accountExists==false){
-            URI location = ServletUriComponentsBuilder
-                    .fromCurrentContextPath().path("/user/registerInfo")
-                    .buildAndExpand().toUri();
-            return ResponseEntity.created(location).body(new ApiResponse(false, "\"User with username "+request.getUsername()+"does not exist."));
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(false, "User with username "+request.getUsername()+" does not exist."));
         }
-        UserPendingValidation user=userPendingValidationRepository.findByUsername(request.getUsername());
-        if(user==null){
-            UserPendingValidation newUser=new UserPendingValidation(request.getUsername(),
-                    "ImCode", request.getElem(),request.getItem());
-            userPendingValidationRepository.save(newUser);//POST
+
+        if("EMAIL_ADDRESS".equals(request.getElem())){
+            if(userRepository.existsByEmail(request.getItem()))
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "The email address already used."));
+        }else if("BANK_CARD".equals(request.getElem())){
+            if(bankCardRepository.existsByCardNum(request.getItem()))
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "The bankcard already used."));
+        }else if("PHONE_NUMBER".equals(request.getElem())){
+            if(userRepository.existsByPhone(request.getItem()))
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "The phone number already used."));
         }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "ERROR: User Info registration FAILED."));
+        }
+
+        UserPendingValidation user=userPendingValidationRepository.findByUsername(request.getUsername());
+        if(user==null){//POST
             UserPendingValidation newUser=new UserPendingValidation(request.getUsername(),
-                    "ImCode", request.getElem(),request.getItem());
-            userPendingValidationRepository.save(newUser);//PUT
+                    generatedCode, request.getElem(),request.getItem());
+            userPendingValidationRepository.save(newUser);
+        }else{//PUT if user with username already register validation info for some elem.
+            UserPendingValidation newUser=new UserPendingValidation(request.getUsername(),
+                    generatedCode, request.getElem(),request.getItem());
+            newUser.setId(user.getId());
+            userPendingValidationRepository.save(newUser);
         }
         //
         //IMPORTANT
-        //
-        //mailAuthService.SendValidationMail("satoaikawa@sjtu.edu.cn","Validation Mail", "Code: 123456789");
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/user/registerInfo")
-                .buildAndExpand().toUri();
 
-        return ResponseEntity.created(location).body(new ApiResponse(false, "\"User Info registered successfully."));
+        //if user change email user should validate with that updating email address
+        //else user change phone or bankcard user can choose validating email
+        if("EMAIL_ADDRESS".equals(request.getElem()))
+            mailAuthService.SendValidationMail(request.getItem(),"Kuaijiebao Validation Mail", "Validation Code: "+generatedCode);
+        else
+            mailAuthService.SendValidationMail(request.getEmail(),"Kuaijiebao Validation Mail", "Validation Code: "+generatedCode);
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(true, "User Info registered successfully."));
     }
-    @PostMapping(path ="/validateInfo")
+    @PostMapping(path ="/v2/users/validateInfo")
     public ResponseEntity<?> validateUserInfoModification(@RequestBody ValidationCode code) {
         boolean existUser=userPendingValidationRepository.existsByUsernameAndCode(code.getUsername(),code.getCode());
 
@@ -119,41 +143,31 @@ public class UserController {
             User user=userRepository.findByUserId(account.getUserId());
 
             UserPendingValidation userInfo=userPendingValidationRepository.findByUsername(code.getUsername());
-            if("EMAIL_ADDRESS".equals(userInfo.getElem())){
+            if("EMAIL_ADDRESS".equals(userInfo.getElem())){//update email
                 user.setUserId(user.getUserId());
                 user.setEmail(userInfo.getItem());
-            }else if("BANK_CARD".equals(userInfo.getElem())){
-                //stub bankcard
-            }else if("PHONE_NUMBER".equals(userInfo.getElem())){
+                userRepository.save(user);
+            }else if("BANK_CARD".equals(userInfo.getElem())){//add bankcard
+                BankCard card=new BankCard(userInfo.getItem(),user.getUserId());
+                bankCardRepository.save(card);
+            }else if("PHONE_NUMBER".equals(userInfo.getElem())){//update phone
                 user.setUserId(user.getUserId());
                 user.setPhone(userInfo.getItem());
+                userRepository.save(user);
             }else{
-                URI location = ServletUriComponentsBuilder
-                        .fromCurrentContextPath().path("/user/validateInfo/{username}")
-                        .buildAndExpand(userInfo.getUsername()).toUri();
-
-                return ResponseEntity.created(location).body(new ApiResponse(false, "\"User Info modification failed."));
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "User Info modification FAILED."));
             }
-            userRepository.save(user);
             userPendingValidationRepository.deleteByUsername(code.getUsername());
+            return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(true, "User Info modification SUCCESS."));
 
-            URI location = ServletUriComponentsBuilder
-                    .fromCurrentContextPath().path("/user/validateInfo/{username}")
-                    .buildAndExpand(userInfo.getUsername()).toUri();
-
-            return ResponseEntity.created(location).body(new ApiResponse(true, "User Info modified successfully."));
         }else{
-            URI location = ServletUriComponentsBuilder
-                    .fromCurrentContextPath().path("/user/validateInfo")
-                    .buildAndExpand().toUri();
-
-            return ResponseEntity.created(location).body(new ApiResponse(false, "\"User Info modification failed."));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "User Info modification FAILED."));
         }
 
     }
 
 
-    @PutMapping(path ="/{userId}/phone")
+    @PutMapping(path ="/v2/users/{userId}/phone")
     public User updatePhone(@PathVariable Long userId,
                                 @RequestBody User user) {
         User newUser=userService.findByUserId(userId);
@@ -163,7 +177,7 @@ public class UserController {
     }
 
 
-    @GetMapping(path = "/{userId}/password")
+    @GetMapping(path = "/v2/users/{userId}/password")
     public Account getPasswordByUserId(@PathVariable Long userId) {
         return accountService.findByUserId(userId);
     }
@@ -171,7 +185,7 @@ public class UserController {
 
     //
     //can ONLY change the password field
-    @PutMapping(path = "/{userId}/password")
+    @PutMapping(path = "/v2/users/{userId}/password")
     public Account updatePassword(@PathVariable Long userId, @RequestBody Account account) {
         Account newAccount=accountService.findByUserId(userId);
         newAccount.setPassword(account.getPassword());
@@ -179,12 +193,12 @@ public class UserController {
     }
 
 
-    @GetMapping(path = "/{userId}/bankcard", produces = {"application/hal+json"})
+    @GetMapping(path = "/v2/users/{userId}/bankcard", produces = {"application/hal+json"})
     public List<BankCard> getBankCardsByUserId(@PathVariable Long userId) {
         return bankCardService.findByUserId(userId);
     }
 
-    @PostMapping(path ="/{userId}/bankcard")
+    @PostMapping(path ="/v2/users/{userId}/bankcard")
     @ResponseStatus(HttpStatus.CREATED)
     public BankCard createBankCard(@PathVariable Long userId,
                                 @RequestBody BankCard bankCard) {
@@ -193,14 +207,14 @@ public class UserController {
         return bankCardService.addCard(newCard);
     }
 
-    @DeleteMapping(path ="/{userId}/bankcard")
+    @DeleteMapping(path ="/v2/users/{userId}/bankcard")
     void deleteBankCard(@PathVariable Long userId,
                                      @RequestBody BankCard bankCard) {
        bankCardService.deleteByCardNum(bankCard.getCardNum());
     }
 
 
-    @GetMapping(path ="{userId}/email")
+    @GetMapping(path ="/v2/users{userId}/email")
     @ResponseStatus(HttpStatus.CREATED)
     public User deleteEmail(@PathVariable Long userId) {
         User newUser=userService.findByUserId(userId);
@@ -209,13 +223,24 @@ public class UserController {
         return userService.save(newUser);
     }
 
-    @GetMapping(path ="/{userId}/phone")
+    @GetMapping(path ="/v2/users/{userId}/phone")
     @ResponseStatus(HttpStatus.CREATED)
     public User deletePhone(@PathVariable Long userId) {
         User newUser=userService.findByUserId(userId);
         newUser.setUserId(userId);
         newUser.setPhone("");
         return userService.save(newUser);
+    }
+
+
+    //
+    //SIMPLE random code generator
+    public String getRandomCode(){
+        Random random = new Random();
+
+        //between 100000 and 999999
+        int x = random.nextInt(900000) + 100000;
+        return Integer.toString(x);
     }
 
 

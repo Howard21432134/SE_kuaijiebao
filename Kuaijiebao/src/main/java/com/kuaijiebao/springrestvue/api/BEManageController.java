@@ -56,61 +56,61 @@ public class BEManageController {
     @Autowired
     AccountService accountService;
 
-    @GetMapping(path = "/user-management/users")
+    @GetMapping(path = "/v2/user-management/users")
     public List<User> getAllUsers() {
         List<User> user = userService.findAll();
         return user;
     }
 
-    @DeleteMapping(path ="/user-management/users/{userId}")
+    @DeleteMapping(path ="/v2/user-management/users/{userId}")
     public void deleteUser(@PathVariable Long userId) {
         userService.deleteByUserId(userId);
     }
 
-    @GetMapping(path = "/question-management/questions")
+    @GetMapping(path = "/v2/question-management/questions")
     public List<Question> getAllQuestions() {
         List<Question> question = questionService.findAll();
         return question;
     }
 
-    @PostMapping(path ="/question-management/questions")
+    @PostMapping(path ="/v2/question-management/questions")
     @ResponseStatus(HttpStatus.CREATED)
     public Question createQuestion(@RequestBody Question question) {
         return questionService.addQuestion(question);
     }
 
 
-    @DeleteMapping(path ="/question-management/questions/{id}")
+    @DeleteMapping(path ="/v2/question-management/questions/{id}")
     public void deleteQuestion(@PathVariable Long id) {
         questionService.delete(id);
     }
 
 
-    @GetMapping(path = "/fp-management/fps")
+    @GetMapping(path = "/v2/fp-management/fps")
     public List<FP> getAllFPs() {
         return fpRepository.findAll();
     }
 
 
-    @PostMapping(path ="/fp-management/fps")
+    @PostMapping(path ="/v2/fp-management/fps")
     @ResponseStatus(HttpStatus.CREATED)
     public FP createFP(@RequestBody FP fp) {
         return fpRepository.save(fp);
     }
 
 
-    @DeleteMapping(path="/fp-management/fps/{id}")
+    @DeleteMapping(path="/v2/fp-management/fps/{id}")
     public void deleteFP(@PathVariable Long id) {
         fpRepository.deleteById(id);
     }
 
 
-    @GetMapping(path = "/debt-management/debts")
+    @GetMapping(path = "/v2/debt-management/debts")
     public List<Debt> getAllDebts() {
         return debtRepository.findAll();
     }
 
-    @DeleteMapping(path="/debt-management/debts/{id}")
+    @DeleteMapping(path="/v2/debt-management/debts/{id}")
     public void deleteDebt(@PathVariable Long id) {
         debtRepository.deleteById(id);
     }
@@ -119,7 +119,7 @@ public class BEManageController {
     //*********************************************************************************
     //HATEOAS
     //
-    @RequestMapping(path = "v1/user-management/users", method = RequestMethod.GET, produces = {"application/hal+json"})
+    @RequestMapping(path = "/v3/user-management/users", method = RequestMethod.GET, produces = {"application/hal+json"})
     public Resources<User> getAllUsersHateoas() {
         final List<User> allUsers = userService.findAll();
 
@@ -133,7 +133,7 @@ public class BEManageController {
             user.add(bankCardLink);
         }
 
-        Link link =linkTo(BEManageController.class).slash("v1/user-management/users").withSelfRel();
+        Link link =linkTo(BEManageController.class).slash("/v3/user-management/users").withSelfRel();
         Resources<User> result = new Resources<User>(allUsers,link);
         return result;
     }

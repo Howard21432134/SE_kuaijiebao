@@ -13,6 +13,7 @@ import java.util.List;
 public interface BankCardRepository extends JpaRepository<BankCard, String> {
     public List<BankCard> findByUserId(Long userId);
     public BankCard save(BankCard card);
+    public boolean existsByCardNum(String cardNum);
     @Modifying
     @Transactional
     public void deleteByCardNum(String cardNum);

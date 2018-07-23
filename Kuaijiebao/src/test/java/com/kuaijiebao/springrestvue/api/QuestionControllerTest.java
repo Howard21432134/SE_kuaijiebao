@@ -69,7 +69,7 @@ public class QuestionControllerTest {
         Question qTwo=new Question("HowToSignUp?","Can anybody tell me how to sign up?","ImAnswer.");
         questionRepository.saveAndFlush(qOne);
         questionRepository.saveAndFlush(qTwo);
-        mvc.perform(get("/api/counsel/getAllQuestions").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v2/counsel/questions").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -82,7 +82,7 @@ public class QuestionControllerTest {
         Question qTwo=new Question("HowToSignUp?","Can anybody tell me how to sign up?","ImAnswer.");
         questionRepository.saveAndFlush(qOne);
         questionRepository.saveAndFlush(qTwo);
-        mvc.perform(get("/api/counsel/getSearchKeyword?keyword="+keyword).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v2/questions/search?keyword="+keyword).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(org.hamcrest.Matchers.containsString(keyword)));

@@ -132,6 +132,8 @@ should download to!!
 
 hateoas
 http://www.baeldung.com/spring-hateoas-tutorial
+https://tech.io/playgrounds/6723/applying-hateoas-to-a-rest-api-with-spring-boot
+https://speakerdeck.com/olivergierke/domain-driven-design-and-rest?slide=50
 
 rest api naming
 https://restfulapi.net/resource-naming/

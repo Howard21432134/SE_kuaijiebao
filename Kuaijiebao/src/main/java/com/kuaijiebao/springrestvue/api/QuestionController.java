@@ -14,19 +14,19 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/counsel")
+@RequestMapping("/api")
 public class QuestionController {
 
     @Autowired
     QuestionService questionService;
 
-    @GetMapping(path = "/questions")
+    @GetMapping(path = "/v2/counsel/questions")
     public List<Question> getAllQuestions() {
         List<Question> question = questionService.findAll();
         return question;
     }
 
-    @GetMapping(path = "/questions/search")
+    @GetMapping(path = "/v2/questions/search")
     public List<Question> getQuestionsByKeyword(@RequestParam(name="keyword", required = false) String keyword) {
         List<Question> questions = questionService.findVolumesByKeyword(keyword);
         return questions;

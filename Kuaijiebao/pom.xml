@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>spring-rest-react</name>
+	<name>spring-rest-vue</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>

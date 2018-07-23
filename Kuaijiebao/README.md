@@ -138,3 +138,10 @@ https://speakerdeck.com/olivergierke/domain-driven-design-and-rest?slide=50
 rest api naming
 https://restfulapi.net/resource-naming/
 https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/
+
+
+springboot + vuejs
+https://blog.codecentric.de/en/2018/04/spring-boot-vuejs/
+
+cool project username
+https://brandongaille.com/115-cool-catchy-project-names-that-are-great/

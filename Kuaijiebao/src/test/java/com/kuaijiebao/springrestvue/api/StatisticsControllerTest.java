@@ -73,7 +73,7 @@ public class StatisticsControllerTest {
         debtRepository.saveAndFlush(debtOne);
         debtRepository.saveAndFlush(debtTwo);
 
-        mvc.perform(get("/api/statistics/getDebtStatOfUserId?id=1&since=2000-01-01&until=2100-01-01").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v2/statistics/debt-stat/1?since=2000-01-01&until=2100-01-01").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -94,7 +94,7 @@ public class StatisticsControllerTest {
         fpdrRepository.saveAndFlush(FPDROne);
         fpdrRepository.saveAndFlush(FPDRTwo);
 
-        mvc.perform(get("/api/statistics/getFPDRStatOfUserId?id=1&since=2000-01-01&until=2100-01-01").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v2/statistics/fpdr-stat/1?since=2000-01-01&until=2100-01-01").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))

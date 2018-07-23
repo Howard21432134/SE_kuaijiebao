@@ -59,6 +59,13 @@ public class Account{
 
     }
 
+    public Account(String username, String password, Long userId) {
+        this.username = username;
+        this.password = password;
+        this.userId = userId;
+
+    }
+
     public Long getAccountId() {
         return accountId;
     }

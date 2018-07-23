@@ -25,8 +25,8 @@ public class MailAuthService {
         simpleMailMessage.setTo(to);//接收邮件的邮箱
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(text);
-        System.out.println("Sending...");
+        System.out.println("MAILAuthService:Sending to "+to+"...");
         mailSender.send(simpleMailMessage);
-        System.out.println("Sent...");
+        System.out.println("MAILAuthService:Sent to "+to+"...");
     }
 }

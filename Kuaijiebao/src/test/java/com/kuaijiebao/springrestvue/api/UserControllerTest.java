@@ -60,115 +60,54 @@ public class UserControllerTest {
         accountRepository.deleteAll();
 
     }
-/*
-    @Test
-    public void whenValidInput_thenCreateUser() throws IOException, Exception {
-        User bob = new User("bob","bob",
-                "kl48394593","pilot",0,
-                "hongkong", "Hello","11122223333",
-                "bob@qq.com");
-        mvc.perform(post("/api/user/createUser").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(bob)));
 
-        List<User> found = repository.findAll();
-        assertThat(found).extracting(User::getName).containsOnly("bob");
-    }
-*/
-/*
-    @Test
-    public void givenUsers_whenGetUsers_thenStatus200() throws Exception {
-        createTestUser("john","john",
-                "MG234143","student",0,
-                "SJTU", "Hello","11122223333",
-                "john@qq.com");
-        createTestUser("bob","bob",
-                "jh23453245","engineer",0,
-                "shanghai", "Hello","11122223333",
-                "bob@qq.com");
 
-        createTestUser("alex","alex",
-                "kl48394593","pilot",0,
-                "hongkong", "Hello","11122223333",
-                "alex@qq.com");
-
-        // @formatter:off
-        mvc.perform(get("/api/user").contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(2))))
-                .andExpect(jsonPath("$[0].name", is("john")))
-                .andExpect(jsonPath("$[1].name", is("bob")));
-        // @formatter:on
-    }
-*/
 
     @Test
-    public void GivenValidUser_whenPutUser_thenUpdateUser() throws IOException, Exception {
+    public void givenUser_whenGetUsersByUserId_thenStatus200() throws Exception {
+
         User bob = new User("bob","bob",
                 "kl48394593","pilot",0,
                 "hongkong", "Hello","11122223333",
                 "bob@qq.com");
         repository.saveAndFlush(bob);
-        mvc.perform(put("/api/user/updateUser/11")
+
+        mvc.perform(get("/api/v2/users/"+bob.getUserId()))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith("application/hal+json"))
+                .andExpect(jsonPath("$.nickname", is(bob.getNickname())));
+    }
+
+
+    @Test
+    public void GivenValidUser_whenPutUser_thenUpdateUser() throws Exception {
+        User bob = new User("bob","bob",
+                "kl48394593","pilot",0,
+                "hongkong", "Hello","11122223333",
+                "bob@qq.com");
+        repository.saveAndFlush(bob);
+        mvc.perform(put("/api/v2/users/"+bob.getUserId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJson(bob)))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith("application/hal+json"))
                 .andExpect(jsonPath("$.name", is(bob.getName())));
 
     }
-/*
-    @Test
-    public void GivenValidUser_whenPutUserNewEmail_thenUpdateUser() throws IOException, Exception {
-        User bob = new User("bob","bob",
-                "kl48394593","pilot",0,
-                "hongkong", "Hello","11122223333",
-                "bob@qq.com");
-        bob.setId(11L);
-        //repository.saveAndFlush(bob);
-        mvc.perform(put("/api/user/addEmail/11")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.toJson(bob)))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.email", is(bob.getEmail())));
-
-    }
-
-    @Test
-    public void GivenValidUser_whenPutUserNewPhone_thenUpdateUser() throws IOException, Exception {
-        User bob = new User("bob","bob",
-                "kl48394593","pilot",0,
-                "hongkong", "Hello","13635459980",
-                "bob@qq.com");
-        bob.setId(11L);
-        repository.saveAndFlush(bob);
-        mvc.perform(put("/api/user/addPhone/11")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.toJson(bob)))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.phone", is(bob.getPhone())));
-
-
-    }
-
-*/
 
 
 
     @Test
-    public void whenValidInput_thenCreateBankCard() throws IOException, Exception {
+    public void whenValidInput_thenCreateBankCard() throws Exception {
         BankCard myCard=new BankCard("1111222233334444",11L);
-        mvc.perform(post("/api/user/addBankCard/11")
+        mvc.perform(post("/api/v2/users/11/bankcard")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJson(myCard)));
 
         List<BankCard> found = bankCardRepository.findAll();
-        assertThat(found).extracting(BankCard::getCardNum).containsOnly("1111222233334444");
+        assertThat(found).extracting(BankCard::getCardNum).containsOnly(myCard.getCardNum());
     }
 
     @Test
@@ -182,13 +121,13 @@ public class UserControllerTest {
         bankCardRepository.saveAndFlush(myCardThree);
 
         // @formatter:off
-        mvc.perform(get("/api/user/getBankCard/11").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v2/users/11/bankcard").contentType("application/hal+json"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith("application/hal+json"))
                 .andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(2))))
-                .andExpect(jsonPath("$[0].cardNum", is("1111222233334444")))
-                .andExpect(jsonPath("$[1].cardNum", is("5555666677778888")));
+                .andExpect(jsonPath("$[0].cardNum", is(myCardOne.getCardNum())))
+                .andExpect(jsonPath("$[1].cardNum", is(myCardTwo.getCardNum())));
         // @formatter:on
     }
 
@@ -197,7 +136,7 @@ public class UserControllerTest {
 
         BankCard myCard=new BankCard("1111222233334444",11L);
         bankCardRepository.saveAndFlush(myCard);
-        mvc.perform(delete("/api/user/removeBankCard/11")
+        mvc.perform(delete("/api/v2/users/11/bankcard")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJson(myCard)))
                 .andDo(print())
@@ -214,17 +153,17 @@ public class UserControllerTest {
 
         Account johnAccount=new Account("john","passwordjohn");
         accountRepository.saveAndFlush(johnAccount);
-        mvc.perform(get("/api/user/getPassword/11").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v2/users/11/password").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
 
 
     @Test
-    public void GivenValidPassword_whenPutPassword_thenUpdatePassword() throws IOException, Exception {
-        Account johnAccount=new Account("john","passwordjohn");
+    public void GivenValidPassword_whenPutPassword_thenUpdatePassword() throws Exception {
+        Account johnAccount=new Account("john","passwordjohn",11L);
         accountRepository.saveAndFlush(johnAccount);
-        mvc.perform(put("/api/user/updatePassword/"+johnAccount.getAccountId())
+        mvc.perform(put("/api/v2/users/"+johnAccount.getUserId()+"/password")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJson(johnAccount)))
                 .andDo(print())
@@ -232,20 +171,5 @@ public class UserControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.password", is(johnAccount.getPassword())));
     }
-
-
-
-    private void createTestUser(String nickname, String name, String identity,
-                                    String job, Integer income, String address,
-                                    String introduction, String phone,
-                                    String email) {
-        User user = new User(nickname, name, identity,
-                job, income, address, introduction,
-                phone, email);
-        repository.saveAndFlush(user);
-    }
-
-
-
 
 }

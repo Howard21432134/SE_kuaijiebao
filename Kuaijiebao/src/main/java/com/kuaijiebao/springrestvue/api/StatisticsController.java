@@ -23,7 +23,7 @@ import com.kuaijiebao.springrestvue.domain.Debt;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/statistics")
+@RequestMapping("/api")
 public class StatisticsController {
 
     ///
@@ -42,7 +42,7 @@ public class StatisticsController {
     DebtRepository debtRepository;
 
 
-    @GetMapping(path = "/DebtStat/{userId}")
+    @GetMapping(path = "/v2/statistics/debt-stat/{userId}")
     public List<Debt> getDebtStatByUserId(@PathVariable Long userId,
                                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date since,
                                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date until) {
@@ -50,7 +50,7 @@ public class StatisticsController {
 
     }
 
-    @GetMapping(path = "/FPDRStat/{userId}")
+    @GetMapping(path = "/v2/statistics/fpdr-stat/{userId}")
     public List<FPDR> getFPDRStatByUserId(@PathVariable Long userId,
                                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date since,
                                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date until) {

@@ -78,7 +78,7 @@ public class BEManageControllerTest {
         User john=new User("johnny","business person");
         userRepository.saveAndFlush(bob);
         userRepository.saveAndFlush(john);
-        mvc.perform(get("/api/BEManage/manageUser/getAllUsers").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v2/user-management/users").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -88,7 +88,7 @@ public class BEManageControllerTest {
 
         User bob=new User("bobby","student");
         userRepository.saveAndFlush(bob);
-        mvc.perform(delete("/api/BEManage/manageUser/deleteUser/"+bob.getId()).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(delete("/api/v2/user-management/users/"+bob.getUserId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -100,7 +100,7 @@ public class BEManageControllerTest {
         Question qTwo=new Question("HowToSignUp?","Can anybody tell me how to sign up?","ImAnswer.");
         questionRepository.saveAndFlush(qOne);
         questionRepository.saveAndFlush(qTwo);
-        mvc.perform(get("/api/BEManage/manageQuestion/getAllQuestions").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v2/user-management/users").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -108,7 +108,7 @@ public class BEManageControllerTest {
     @Test
     public void whenValidInput_thenAddQuestion() throws Exception {
         Question qOne=new Question("HowToLend?","Can anybody tell me how to lend money?","ImAnswer.");
-        mvc.perform(post("/api/BEManage/manageQuestion/addQuestion").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(qOne)));
+        mvc.perform(post("/api/v2/question-management/questions").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(qOne)));
 
         List<Question> found = questionRepository.findAll();
         assertThat(found).extracting(Question::getTitle).containsOnly(qOne.getTitle());
@@ -121,7 +121,7 @@ public class BEManageControllerTest {
         Question qTwo=new Question("HowToSignUp?","Can anybody tell me how to sign up?","ImAnswer.");
         questionRepository.saveAndFlush(qOne);
         questionRepository.saveAndFlush(qTwo);
-        mvc.perform(delete("/api/BEManage/manageQuestion/deleteQuestion/"+qOne.getId()).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(delete("/api/v2/question-management/questions/"+qOne.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -133,7 +133,7 @@ public class BEManageControllerTest {
         FP fpTwo=new FP(20l,"JapaneseSomeCars",30000f,"MAZDA");
         fpRepository.saveAndFlush(fpOne);
         fpRepository.saveAndFlush(fpTwo);
-        mvc.perform(get("/api/BEManage/manageFP/getAllFPs").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v2/fp-management/fps").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -142,7 +142,7 @@ public class BEManageControllerTest {
     public void whenValidInput_thenAddFP() throws Exception {
 
         FP fpOne=new FP(100l,"JapaneseSomeCosmetics",300f,"Shiseido");
-        mvc.perform(post("/api/BEManage/manageFP/addFP").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(fpOne)));
+        mvc.perform(post("/api/v2/fp-management/fps").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(fpOne)));
         List<FP> found = fpRepository.findAll();
         assertThat(found).extracting(FP::getName).containsOnly(fpOne.getName());
     }
@@ -153,7 +153,7 @@ public class BEManageControllerTest {
 
         FP fpOne=new FP(100l,"JapaneseSomeCosmetics",300f,"Shiseido");
         fpRepository.saveAndFlush(fpOne);
-        mvc.perform(delete("/api/BEManage/manageFP/deleteFP/"+fpOne.getId()).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(delete("/api/v2/fp-management/fps/"+fpOne.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -167,7 +167,7 @@ public class BEManageControllerTest {
         Debt debtTwo=new Debt(1l,22l,150l,dateTwo,"ImContent",true,dateTwo,true,dateTwo,true,1f,1);
         debtRepository.saveAndFlush(debtOne);
         debtRepository.saveAndFlush(debtTwo);
-        mvc.perform(get("/api/BEManage/manageFP/getAllFPs").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v2/debt-management/debts").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -181,7 +181,7 @@ public class BEManageControllerTest {
         Debt debtTwo=new Debt(1l,22l,150l,dateTwo,"ImContent",true,dateTwo,true,dateTwo,true,1f,1);
         debtRepository.saveAndFlush(debtOne);
         debtRepository.saveAndFlush(debtTwo);
-        mvc.perform(delete("/api/BEManage/manageDebt/deleteDebt/"+debtOne.getId()).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(delete("/api/v2/debt-management/debts/"+debtOne.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }

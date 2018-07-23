@@ -21,3 +21,4 @@
 
 select * from user_pending_validation;
 #delete from kuaijiebao. user_pending_validation where pending_id=3;
+#delete from kuaijiebao.user_pending_validation where pending_id=2;

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
@@ -60,6 +61,10 @@ public class UserController {
     BankCardRepository bankCardRepository;
 
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+
 
 
     @GetMapping(path = "/v2/users/{userId}", produces = {"application/hal+json"})
@@ -98,6 +103,8 @@ public class UserController {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(false, "User with username "+request.getUsername()+" does not exist."));
         }
 
+        //
+        //password can be duplicated
         if("EMAIL_ADDRESS".equals(request.getElem())){
             if(userRepository.existsByEmail(request.getItem()))
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "The email address already used."));
@@ -107,6 +114,10 @@ public class UserController {
         }else if("PHONE_NUMBER".equals(request.getElem())){
             if(userRepository.existsByPhone(request.getItem()))
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "The phone number already used."));
+        }else if("PASS_WORD".equals(request.getElem())) {
+            //
+            //stub error
+            //
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "ERROR: User Info registration FAILED."));
         }
@@ -155,6 +166,10 @@ public class UserController {
                 user.setUserId(user.getUserId());
                 user.setPhone(userInfo.getItem());
                 userRepository.save(user);
+            }else if("PASS_WORD".equals(userInfo.getElem())){//update password
+                account.setAccountId(account.getAccountId());
+                account.setPassword(passwordEncoder.encode(userInfo.getItem()));
+                accountRepository.save(account);
             }else{
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "User Info modification FAILED."));
             }

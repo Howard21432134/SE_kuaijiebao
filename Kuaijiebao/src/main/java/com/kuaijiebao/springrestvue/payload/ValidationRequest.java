@@ -25,7 +25,7 @@ public class ValidationRequest {
 
     @NotBlank
     @Size(min = 2, max = 30)
-    private String elem;//BANK_CARD PHONE_NUMBER EMAIL_ADDRESS
+    private String elem;//BANK_CARD PHONE_NUMBER EMAIL_ADDRESS PASS_WORD
 
     @NotBlank
     @Size(min = 2, max = 30)

@@ -104,11 +104,9 @@ public class AuthController {
         //AuthorityUtils.createAuthorityList(manager.getRoles())
         //user.setRoles(Collections.singleton(userRole));
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/users/{username}")
-                .buildAndExpand(result.getUsername()).toUri();
 
-        return ResponseEntity.created(location).body(new ApiResponse(true, "Account registered successfully"));
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(true, "Account registered successfully"));
 
     }
 

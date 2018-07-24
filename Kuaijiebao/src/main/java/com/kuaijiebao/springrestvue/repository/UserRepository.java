@@ -18,9 +18,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     public User findByUserId(Long id);
     public boolean existsByEmail(String  email);
     public boolean existsByPhone(String email);
+    public User save(User user);
     @Modifying
     @Transactional
     public void deleteByUserId(Long id);
-    public User save(User user);
+
 
 }

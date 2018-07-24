@@ -14,8 +14,8 @@ import java.util.Optional;
 public interface UserPendingValidationRepository extends JpaRepository<UserPendingValidation, Long> {
     public UserPendingValidation findByUsername(String username);
     public boolean existsByUsernameAndCode(String username,String code);
+    public UserPendingValidation save(UserPendingValidation user);
     @Modifying
     @Transactional
-    public UserPendingValidation save(UserPendingValidation user);
     public void deleteByUsername(String username);
 }

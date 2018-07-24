@@ -1,4 +1,4 @@
-package com.kuaijiebao.springrestvue;
+package com.kuaijiebao.springrestvue.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,9 +9,12 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.junit.Assert.*;
+
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class MailTest {
+public class MailAuthServiceTest {
 
     @Autowired
     private JavaMailSender mailSender;
@@ -20,14 +23,15 @@ public class MailTest {
     private String username;
 
     @Test
-    public void testSendMail() {
+    public void WhenValidInput_WhenSendValidationMail_ThenSuccess() {
+
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(username);
-        simpleMailMessage.setTo("satoaikawa@sjtu.edu.cn");//接收邮件的邮箱
+        simpleMailMessage.setTo("example@sjtu.edu.cn");//接收邮件的邮箱
         simpleMailMessage.setSubject("Kuaijiebao Validation Email");
         simpleMailMessage.setText("ImValidationCode");
 
         mailSender.send(simpleMailMessage);
-    }
 
+    }
 }

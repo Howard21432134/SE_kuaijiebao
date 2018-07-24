@@ -24,13 +24,17 @@ public class DebtController {
 
 
     @PostMapping(path="/AddDebtActivity")
-    public void AddDebtActivity(@RequestBody Debt debt){
-        debtService.AddDebtActivity(debt);
+    public Debt AddDebtActivity(@RequestBody Debt debt){
+        debt.setType(true);
+        debt.setWhetherDischarge(false);
+        debt.setWhetherSucceed(false);
+        debt.setState(1);
+        return debtService.AddDebtActivity(debt);
     }
 
-    @GetMapping(path="/ShowDebtByUserActivity")
-    public List<Debt> ShowDebtByUserActivity(@RequestBody User user){
-        return debtService.ShowDebtbyUserActivity(user.getUserId());
+    @GetMapping(path="/ShowDebtByUserActivity/{id}")
+    public List<Debt> ShowDebtByUserActivity(@PathVariable Long id){
+        return debtService.ShowDebtbyUserActivity(id);
     }
 
     @GetMapping(path="/DebtDetailActivity/{id}")
@@ -39,16 +43,16 @@ public class DebtController {
     }
 
     @PutMapping(path="/EditDebtActivity")
-    public void EditDebtActivity(@RequestBody Debt debt){
-        debtService.AddDebtActivity(debt);
+    public Debt EditDebtActivity(@RequestBody Debt debt){
+        return debtService.AddDebtActivity(debt);
     }
 
     @DeleteMapping(path="/DeleteDebtActivity/{id}")
     public Boolean DeleteDebtActivity(@PathVariable Long id){ return debtService.DeleteDebtActivity(id);}
 
-    @PutMapping(path="/DischargeDebtActivity/Debt={id}&Time={time}")
-    public Boolean DischargeDebtActivity(@PathVariable Long id,@PathVariable Date time){
-        return debtService.DischargeDebtActivity(id,time);
+    @PutMapping(path="/DischargeDebtActivity")
+    public Debt DischargeDebtActivity(@RequestBody Debt debt){
+        return debtService.AddDebtActivity(debt);
     }
 
     @GetMapping(path="/ShowDebtByOwnerActivity/{id}")
@@ -57,18 +61,9 @@ public class DebtController {
     @GetMapping(path="/ShowDebtUnsucceedActivity")
     public List<Debt> ShowDebtUnsucceedActivity(){ return debtService.ShowDebtUnsucceedActivity();}
 
-    @PutMapping(path="/EditDebtActivity/debt={DebtId}&Owner={id}&RTime={time}&Rate={rate}")
-    public Boolean ReceiveDebtActivity(@PathVariable Long DebtId,@PathVariable Long id,@PathVariable Date time,@PathVariable Float rate){
-        Debt debt = debtService.DebtDetailActivity(DebtId);
-        if(debt.getType()==false){ return false;}
-        debt.setWhetherSucceed(true);
-        debt.setSucceedTime(time);
-        debt.setOwnerId(id);
-        debt.setType(false);
-        debt.setState(2);
-        debt.setRate(rate);
-        debtService.AddDebtActivity(debt);
-        return true;
+    @PutMapping(path="/EditDebtActivity/Receive")
+    public Debt ReceiveDebtActivity(@RequestBody Debt debt){
+        return debtService.AddDebtActivity(debt);
     }
 
     @GetMapping(path="/ShowDebtOnsaleActivity")
@@ -79,6 +74,8 @@ public class DebtController {
         Debt debt=debtService.DebtDetailActivity(DebtId);
         if(debt.getType()==false){ return false;}
         debt.setOwnerId(id);
+        debt.setState(2);
+        debt.setType(false);
         debtService.AddDebtActivity(debt);
         return true;
     }

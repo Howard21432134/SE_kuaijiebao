@@ -17,6 +17,11 @@ public class FPDRController {
     @Autowired
     FPDRService fpdrService;
 
+    @PostMapping(path="/AddFPDRActivity")
+    public FPDR AddFPDRActivity(@RequestBody FPDR fpdr){
+        return fpdrService.AddFPDRActivity(fpdr);
+    }
+
     @GetMapping(path="/ShowFPDRActivity/User={id}")
     public List<FPDR> ShowFPDRByUserActivity(@PathVariable Long id){ return fpdrService.ShowFPDRByUserActivity(id);}
 

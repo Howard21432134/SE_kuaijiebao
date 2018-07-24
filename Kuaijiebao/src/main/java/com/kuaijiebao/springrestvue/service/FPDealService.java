@@ -21,8 +21,8 @@ public class FPDealService {
 
     public FPDeal FPDealActivity(Long id){ return fpDealRepository.findOneById(id);}
 
-    public FPDeal AddFPDealActivity(FPDeal fp){ return fpDealRepository.save(fp);}
+    public void AddFPDealActivity(FPDeal fp){ fpDealRepository.save(fp);}
 
-    public void DeleteFPDealActivity(Long id){ fpDealRepository.deleteById(id);}
+    public void DeleteFPDealActivity(FPDeal fp){ fpDealRepository.delete(fp);}
 
 }

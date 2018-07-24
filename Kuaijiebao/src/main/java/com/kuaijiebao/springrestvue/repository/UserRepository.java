@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kuaijiebao.springrestvue.domain.User;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 //@RepositoryRestResource(collectionResourceRel = "books", path = "books")
 @Repository

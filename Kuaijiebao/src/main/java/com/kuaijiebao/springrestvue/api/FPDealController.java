@@ -24,45 +24,41 @@ public class FPDealController {
     @Autowired
     FPService fpService;
 
-    @PostMapping(path="/AddFPDealActivity/User={id}&FP={FP_id}&Time={time}&num={num}")
-    public Boolean BuyFPActivity(@PathVariable Long id,@PathVariable Long FP_id,@PathVariable Date time,@PathVariable Long num,@PathVariable Float price){
-        FP fp=fpService.FPDetailActivity(FP_id);
-        if(fp.getSum()<num){ return false;}
-        FPDeal fpDeal=new FPDeal();
-        fpDeal.setNum(num);
-        fpDeal.setProductId(FP_id);
-        fpDeal.setUserId(id);
+    @PostMapping(path="/AddFPDealActivity")
+    public Boolean BuyFPActivity(@RequestBody FPDR fpdr){
+        FPDeal fpDeal = new FPDeal();
+        fpDeal.setProductId(fpdr.getProductId());
+        fpDeal.setUserId(fpdr.getUserId());
+        fpDeal.setNum(fpdr.getNum());
+        FP fp=fpService.FPDetailActivity(fpDeal.getProductId());
+        if(fp.getSum()<fpDeal.getNum()){ return false;}
         fpDeal.setType(true);
         fpDealService.AddFPDealActivity(fpDeal);
-        FPDR fpdr=new FPDR();
-        fpdr.setType(1);
-        fpdr.setUserId(id);
-        fpdr.setProductId(FP_id);
-        fpdr.setNum(num);
-        fpdr.setPrice(fp.getPrice());
-        fpdr.setTime(time);
-        fpdr.setDealId(fpDeal.getId());
-        fpdrService.AddFPDRActivity(fpdr);
-        fp.setSum(fp.getSum()-num);
+        fp.setSum(fp.getSum()-fpDeal.getNum());
         fpService.AddFPActivity(fp);
+        fpdr.setDealId(fpDeal.getId());
+        fpdr.setType(1);
+        fpdr.setPrice(fp.getPrice());
+        fpdrService.AddFPDRActivity(fpdr);
         return true;
     }
 
-    @DeleteMapping("/DeleteFPDealActivity/FPDeal={id}&Time={time}")
-    public void CancelFPDealActivity(@PathVariable Long id,@PathVariable Date time){
-        FPDeal fpDeal=fpDealService.FPDealActivity(id);
+    @PutMapping("/CancelFPDealActivity")
+    public Boolean CancelFPDealActivity(@RequestBody FPDR fpdr){
+        FPDeal fpDeal = fpDealService.FPDealActivity(fpdr.getDealId());
+        if(fpDeal.getType()!=true){ return false;}
         fpDeal.setType(false);
-        FP fp=fpService.FPDetailActivity(fpDeal.getProductId());
-        FPDR fpdr=new FPDR();
-        fpdr.setDealId(fpDeal.getId());
-        fpdr.setTime(time);
+        fpDealService.AddFPDealActivity(fpDeal);
+        FP fp = fpService.FPDetailActivity(fpDeal.getProductId());
+        fp.setSum(fp.getSum()+fpDeal.getNum());
+        fpService.AddFPActivity(fp);
+        fpdr.setType(3);
         fpdr.setPrice(fp.getPrice());
-        fpdr.setProductId(fp.getId());
+        fpdr.setProductId(fpDeal.getProductId());
         fpdr.setUserId(fpDeal.getUserId());
         fpdr.setNum(fpDeal.getNum());
-        fpdr.setType(3);
         fpdrService.AddFPDRActivity(fpdr);
-        fpDealService.AddFPDealActivity(fpDeal);
+        return true;
     }
 
     @GetMapping("/ShowFPDealActivity/User={id}")

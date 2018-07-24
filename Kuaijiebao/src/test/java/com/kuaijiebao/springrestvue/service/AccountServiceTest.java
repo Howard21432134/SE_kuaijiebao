@@ -2,9 +2,6 @@ package com.kuaijiebao.springrestvue.service;
 
 import static org.junit.Assert.*;
 
-import com.kuaijiebao.springrestvue.domain.BankCard;
-import com.kuaijiebao.springrestvue.domain.User;
-import com.kuaijiebao.springrestvue.repository.UserRepository;
 import com.kuaijiebao.springrestvue.domain.Account;
 import com.kuaijiebao.springrestvue.repository.AccountRepository;
 
@@ -36,119 +33,90 @@ public class AccountServiceTest {
         }
     }
 
-    @TestConfiguration
-    static class UserServiceTestContextConfiguration {
-        @Bean
-        public UserService userService() {
-            return new UserService();
-        }
-    }
-
     @Autowired
-    private UserService userService;
-
-    @MockBean
-    private UserRepository userRepository;
-
-    @Autowired
-    private AccountService accountService;
+    private AccountService service;
 
     @MockBean
     private AccountRepository accountRepository;
 
 
 
+    Account john=new Account("john","passwordjohn",11L);
+    Account bob=new Account("bobby","passwordbob",12L);
+    Account alex=new Account("alex","passwordalex",13L);
+    List<Account> allAccounts = Arrays.asList(john, bob, alex);
+
     @Before
     public void setUp() {
 
-        //
-        //Mock user signUp
-        User john = new User("john","MG234143",
-                "john","student",0,
-                "SJTU", "Hello","11122223333",
-                "john@qq.com");
-        john.setUserId(11L);
-        Account johnAccount=new Account("john","passwordjohn");
-
-
-        User bob = new User("bob","jh23453245",
-                "bob","engineer",0,
-                "shanghai", "Hello","11122223333",
-                "bob@qq.com");
-        bob.setUserId(12L);
-        Account bobAccount=new Account("bob","passwordbob");
-
-        User alex = new User("alex","kl48394593",
-                "alex","pilot",0,
-                "hongkong", "Hello","11122223333",
-                "bob@qq.com");
-        alex.setUserId(13L);
-        Account alexAccount=new Account("alex","passwordalex");
-
-
-        List<Account> allAccounts = Arrays.asList(johnAccount, bobAccount, alexAccount);
-
-        Mockito.when(accountRepository.findByAccountId(johnAccount.getAccountId())).thenReturn(johnAccount);
-        Mockito.when(accountRepository.findByAccountId(alexAccount.getAccountId())).thenReturn(alexAccount);
+        Mockito.when(accountRepository.findByAccountId(john.getAccountId())).thenReturn(john);
+        Mockito.when(accountRepository.findByAccountId(bob.getAccountId())).thenReturn(bob);
+        Mockito.when(accountRepository.findByAccountId(alex.getAccountId())).thenReturn(alex);
         Mockito.when(accountRepository.findByAccountId(-99L)).thenReturn(null);
-        Mockito.when(accountRepository.findByAccountId(bobAccount.getAccountId())).thenReturn(bobAccount);
-        Mockito.when(accountRepository.findById(-99L)).thenReturn(null);
 
-        Mockito.when(accountRepository.findOneByUsernameAndPassword(johnAccount.getUsername(),johnAccount.getPassword())).thenReturn(johnAccount);
-        Mockito.when(accountRepository.findOneByUsernameAndPassword(bobAccount.getUsername(),bobAccount.getPassword())).thenReturn(bobAccount);
-        Mockito.when(accountRepository.findOneByUsernameAndPassword("doesNotExist",bobAccount.getPassword())).thenReturn(null);
-        Mockito.when(accountRepository.findOneByUsernameAndPassword(alexAccount.getUsername(),alexAccount.getPassword())).thenReturn(alexAccount);
-        Mockito.when(accountRepository.findOneByUsernameAndPassword(alexAccount.getPassword(),"doesNotExist")).thenReturn(null);
+        Mockito.when(accountRepository.findByUserId(john.getUserId())).thenReturn(john);
+        Mockito.when(accountRepository.findByUserId(bob.getUserId())).thenReturn(bob);
+        Mockito.when(accountRepository.findByUserId(alex.getUserId())).thenReturn(alex);
+        Mockito.when(accountRepository.findByUserId(-99L)).thenReturn(null);
+
+        Mockito.when(accountRepository.findByUsernameAndPassword(john.getUsername(),john.getPassword())).thenReturn(john);
+        Mockito.when(accountRepository.findByUsernameAndPassword(bob.getUsername(),bob.getPassword())).thenReturn(bob);
+        Mockito.when(accountRepository.findByUsernameAndPassword(alex.getUsername(),alex.getPassword())).thenReturn(alex);
+        Mockito.when(accountRepository.findByUsernameAndPassword("doesNotExist","doesNotExist")).thenReturn(null);
 
         Mockito.when(accountRepository.findAll()).thenReturn(allAccounts);
 
-        Mockito.when(accountRepository.save(johnAccount)).thenReturn(johnAccount);
+        Mockito.when(accountRepository.save(john)).thenReturn(john);
 
     }
 
-    /*
-    @Test
-    public void whenValidId_thenAccountShouldBeFound() {
-        Account fromDb = accountService.findOneById(11L);
-        assertThat(fromDb.getId()).isEqualTo(11L);
 
-        //verifyFindByIdIsCalledOnce();
+    //
+    //findByAccountId
+    @Test
+    public void GivenValidAccountId_WhenFindByAccountId_thenAccountShouldBeFound() {
+        Account fromDb = service.findByAccountId(john.getAccountId());
+        assertThat(fromDb.getAccountId()).isEqualTo(john.getAccountId());
     }
-
+    //
+    //findByUserId
     @Test
-    public void whenValidUsernameAndPassword_thenAccountShouldBeFound() {
-        Account fromDb = accountService.findOneByUsernameAndPassword("john","passwordjohn");
-        assertThat(fromDb.getId()).isEqualTo(11L);
-
-        //verifyFindByIdIsCalledOnce();
-    }
-*/
-    @Test
-    public void whenInValidId_thenAccountShouldNotBeFound() {
-        Account fromDb = accountService.findByAccountId(-99L);
-        //verifyFindByIdIsCalledOnce();
-        assertThat(fromDb).isNull();
+    public void GivenValidUserId_WhenFindByUserId_thenAccountShouldBeFound() {
+        Account fromDb = service.findByUserId(john.getUserId());
+        assertThat(fromDb.getUserId()).isEqualTo(john.getUserId());
     }
 /*
     @Test
-    public void given3Accounts_whenGetAll_thenReturn3Records() {
-
-        List<Account> allAccounts = accountService.findAll();
-        //verifyFindAllEmployeesIsCalledOnce();
-        assertThat(allAccounts).hasSize(3).extracting(Account::getId).contains(11L, 12L, 13L);
-    }
-
-    @Test
-    public void GivenVaildAccount_whenCreate_thenReturnRecord() {
-        Account johnAccount=new Account("john","passwordjohn");
-        Account fromDb=accountService.create(johnAccount);
-        assertThat(fromDb.getUsername()).isEqualTo(johnAccount.getUsername());
+    public void whenInValidId_thenAccountShouldNotBeFound() {
+        Account fromDb = service.findByAccountId(-99L);
+        //verifyFindByIdIsCalledOnce();
+        assertThat(fromDb).isNull();
     }
 */
+
+    //
+    //findAll
     @Test
-    public void GivenVaildAccount_whenDelete_thenSuccess() {
-        Account johnAccount=new Account("john","passwordjohn");
-        accountService.delete(johnAccount.getAccountId());
+    public void given3ValidAccounts_whenFindAll_thenReturn3Records() {
+        List<Account> allAccounts = service.findAll();
+        assertThat(allAccounts).hasSize(3)
+                .extracting(Account::getAccountId)
+                .contains(john.getAccountId(),bob.getAccountId(),alex.getAccountId());
+    }
+
+    //
+    //save
+    @Test
+    public void GivenValidAccount_whenSave_thenReturnRecord() {
+        Account fromDb=service.save(john);
+        assertThat(fromDb.getAccountId()).isEqualTo(john.getAccountId());
+    }
+
+    //
+    //delete
+    @Test
+    public void GivenValidAccount_whenDelete_thenSuccess() {
+        service.delete(john.getAccountId());
     }
 
 }

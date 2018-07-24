@@ -3,8 +3,6 @@ package com.kuaijiebao.springrestvue.repository;
 import static org.junit.Assert.*;
 
 
-import com.kuaijiebao.springrestvue.domain.BankCard;
-import com.kuaijiebao.springrestvue.domain.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,11 +15,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.kuaijiebao.springrestvue.domain.Account;
-
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -31,114 +29,110 @@ public class AccountRepositoryTest {
     private TestEntityManager entityManager;
 
     @Autowired
-    private UserRepository userRepository;
+    private AccountRepository repository;
 
-    @Autowired
-    private AccountRepository accountRepository;
+    Account austin=new Account("austion","password",11L);
 
-    @Test
-    public void whenFindById_thenReturnAccount() {
-
-        User satoshi = new User("sato","satoshi","sophomore",
-                "student",0,"SJTU", "Hello",
-                "11122223333", "example@qq.com");
-        entityManager.persistAndFlush(satoshi);
-        Account satoAccount=new Account("sato","password");
-        entityManager.persistAndFlush(satoAccount);
-
-        Account fromDb = accountRepository.findByUserId(satoAccount.getUserId());
-
-        assertThat(fromDb.getUserId()).isEqualTo(satoAccount.getUserId());
-    }
-
-    @Test
-    public void whenInvalidId_thenReturnNull() {
-
-        Account fromDb = accountRepository.findByUserId(-11l);
-        assertThat(fromDb).isNull();
-    }
-/*
-    @Test
-    public void whenFindOneByUsernameAndPassword_thenReturnAccount() {
-
-        //
-        //Mock SignUp
-        User satoshi = new User("sato","satoshi","sophomore",
-                "student",0,"SJTU", "Hello",
-                "11122223333", "example@qq.com");
-        entityManager.persistAndFlush(satoshi);
-        Account satoAccount=new Account("sato","password");
-        entityManager.persistAndFlush(satoAccount);
-
-
-        Account found = accountRepository.findOneByUsernameAndPassword(satoAccount.getUsername(),satoAccount.getPassword());
-
-        assertThat(found.getId()).isEqualTo(satoshi.getId());
-    }
-*/
-    @Test
-    public void whenInvalidUsernameAndValidPassword_thenReturnNull() {
-        //
-        //Mock SignUp
-        User satoshi = new User("sato","satoshi","sophomore",
-                "student",0,"SJTU", "Hello",
-                "11122223333", "example@qq.com");
-        entityManager.persistAndFlush(satoshi);
-        Account satoAccount=new Account("sato","password");
-        entityManager.persistAndFlush(satoAccount);
-
-        Account fromDb = accountRepository.findOneByUsernameAndPassword("doesNotExist",satoAccount.getPassword());
-        assertThat(fromDb).isNull();
+    @Before
+    public void initialize() {
+        entityManager.persistAndFlush(austin);
     }
 
 
+    //
+    //findByAccountId
     @Test
-    public void whenValidUsernameAndInvalidPassword_thenReturnNull() {
-        //
-        //Mock SignUp
-        User satoshi = new User("sato","satoshi","sophomore",
-                "student",0,"SJTU", "Hello",
-                "11122223333", "example@qq.com");
-        entityManager.persistAndFlush(satoshi);
-        Account satoAccount=new Account("sato","password");
-        entityManager.persistAndFlush(satoAccount);
-
-        Account fromDb = accountRepository.findOneByUsernameAndPassword(satoAccount.getUsername(),"doesNotExist");
-        assertThat(fromDb).isNull();
+    public void GivenValidAccount_whenFindByAccountId_thenReturnAccount() {
+        Account found = repository.findByAccountId(austin.getAccountId());
+        assertThat(found.getAccountId()).isEqualTo(austin.getAccountId());
     }
 
+    //
+    //findByAccountId
     @Test
-    public void whenInvalidUsernameAndInvalidPassword_thenReturnNull() {
-        //
-        //Mock SignUp
-        User satoshi = new User("sato","satoshi","sophomore",
-                "student",0,"SJTU", "Hello",
-                "11122223333", "example@qq.com");
-        entityManager.persistAndFlush(satoshi);
-        Account satoAccount=new Account("sato","password");
-        entityManager.persistAndFlush(satoAccount);
-
-        Account fromDb = accountRepository.findOneByUsernameAndPassword("doesNotExist","doesNotExist");
-        assertThat(fromDb).isNull();
+    public void GivenInvalidAccountId_whenFindByAccountId_thenReturnNull() {
+        Account found = repository.findByAccountId(-99L);
+        assertThat(found).isNull();
     }
 
+    //
+    //findByUserId
+    @Test
+    public void GivenValidAccount_whenFindByUserId_thenReturnAccount() {
+        Account found = repository.findByUserId(austin.getUserId());
+        assertThat(found.getUserId()).isEqualTo(austin.getUserId());
+    }
+
+    //
+    //findByUserId
+    @Test
+    public void GivenInvalidAccountId_whenFindByUserId_thenReturnNull() {
+        Account found = repository.findByUserId(-99L);
+        assertThat(found).isNull();
+    }
+
+    //
+    //findByUsername
+    @Test
+    public void GivenValidAccount_whenFindByUsername_thenReturnAccount() {
+        Account found = repository.findByUsername(austin.getUsername()).orElse(null);
+        assertThat(found.getUsername()).isEqualTo(austin.getUsername());
+    }
+
+    //
+    //findByUsername
+    @Test
+    public void GivenInvalidAccountId_whenFindByUsername_thenReturnNull() {
+        Account found = repository.findByUsername("DoesNotExist").orElse(null);
+        assertThat(found).isNull();
+    }
+
+    //
+    //existsByUsername
+    @Test
+    public void GivenValidAccount_whenExistsByUsername_thenReturnTrue() {
+        boolean found = repository.existsByUsername(austin.getUsername());
+        assertThat(found).isTrue();
+    }
+
+    //
+    //existsByUsername
+    @Test
+    public void GivenInValidAccount_whenExistsByUsername_thenReturnFalse() {
+        boolean found = repository.existsByUsername("DoesNotExist");
+        assertThat(found).isFalse();
+    }
+
+    //
+    //findByUsernameAndPassword
+    @Test
+    public void  GivenValidAccount_whenFindByUsernameAndPassword_thenReturnAccount() {
+        Account found = repository.findByUsernameAndPassword(austin.getUsername(),austin.getPassword());
+        assertThat(found.getAccountId()).isEqualTo(austin.getAccountId());
+    }
+
+    //
+    //findByUsernameAndPassword
+    @Test
+    public void  GivenInValidAccount_whenFindByUsernameAndPassword_thenReturnNull() {
+        Account found = repository.findByUsernameAndPassword("DoesNotExist",austin.getPassword());
+        assertThat(found).isNull();
+    }
+
+    //
+    //save
     @Test
     public void givenValidAccount_whenSave_thenReturnAccount() {
-        Account myAccount=new Account("sato","password");
-        Account fromDb = accountRepository.save(myAccount);
-        assertThat(fromDb.getUsername()).isEqualTo(myAccount.getUsername());
+        Account jenny=new Account("jenny","password",12L);
+        Account fromDb = repository.save(jenny);
+        assertThat(fromDb.getAccountId()).isEqualTo(jenny.getAccountId());
     }
 
+    //
+    //deleteByUserId
     @Test
-    public void givenAccount_whenDeleteWithId_thenReturnNull() {
-        Account myAccount=new Account("sato","password");
-        entityManager.persistAndFlush(myAccount);
-
-        accountRepository.deleteByAccountId(myAccount.getAccountId());
-        Account fromDb = accountRepository.findByAccountId(myAccount.getAccountId());
-        assertThat(fromDb).isNull();
+    public void givenValidUser_whenDeleteByAccountId_thenSuccess() {
+        repository.deleteByAccountId(austin.getUserId());
     }
-
-
 
 }

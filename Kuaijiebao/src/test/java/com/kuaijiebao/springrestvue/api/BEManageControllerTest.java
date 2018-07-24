@@ -121,7 +121,7 @@ public class BEManageControllerTest {
         Question qTwo=new Question("HowToSignUp?","Can anybody tell me how to sign up?","ImAnswer.");
         questionRepository.saveAndFlush(qOne);
         questionRepository.saveAndFlush(qTwo);
-        mvc.perform(delete("/api/v2/question-management/questions/"+qOne.getId()).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(delete("/api/v2/question-management/questions/"+qOne.getQuestionId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }

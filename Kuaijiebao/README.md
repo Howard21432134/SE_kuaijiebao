@@ -126,10 +126,6 @@ user ninshou
 http://teachingprogramming.net/archives/718
 https://github.com/teachingprogramming/lecture2018java2/blob/master/src/main/java/d00000/webapp/AuthController.java
 
-spring cloud
-https://www.packtpub.com/application-development/spring-microservices-spring-boot
-should download to!!
-
 hateoas
 http://www.baeldung.com/spring-hateoas-tutorial
 https://tech.io/playgrounds/6723/applying-hateoas-to-a-rest-api-with-spring-boot
@@ -145,3 +141,7 @@ https://blog.codecentric.de/en/2018/04/spring-boot-vuejs/
 
 cool project username
 https://brandongaille.com/115-cool-catchy-project-names-that-are-great/
+
+spring cloud
+http://www.baeldung.com/spring-cloud-bootstrapping
+https://github.com/eugenp/tutorials/tree/master/spring-cloud/spring-cloud-bootstrap

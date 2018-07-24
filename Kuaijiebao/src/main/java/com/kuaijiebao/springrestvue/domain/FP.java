@@ -20,6 +20,7 @@ public class FP {
     @Column(name="product_id")
     private Long id;
     private Long sum;
+    @Column(name="product_name")
     private String name;
     private Float price;
     private String productor;

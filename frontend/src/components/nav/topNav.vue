@@ -13,15 +13,23 @@
           <el-col :span="24">
             <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
               <el-menu-item index="/">工作台</el-menu-item>
-              <el-menu-item index="/systemManager">我要借款</el-menu-item>
+              <el-menu-item index="/debtManager">我要借款</el-menu-item>
               <el-menu-item index="/enterpriseManager">我要理财</el-menu-item>
-              <el-menu-item index="/systemManager">信用管理</el-menu-item>
-              <el-menu-item index="/systemManager">数据统计</el-menu-item>
-              <el-menu-item index="/systemManager">咨询</el-menu-item>
+              <el-menu-item index="/fpManager">我要理财(会川慧，rename Path name ver)</el-menu-item>
+              <el-menu-item index="/pcManager">信用管理</el-menu-item>
+              <el-menu-item index="/statisticsManager">数据统计</el-menu-item>
+              <el-menu-item index="/counselManager">咨询</el-menu-item>
             </el-menu>
           </el-col>
         </el-row>
-
+        <el-row v-show="$store.state.topNavState==='debt'">
+          <el-col :span="24">
+            <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
+              <el-menu-item index="/debtManager">借款申请</el-menu-item>
+              <el-menu-item index="/mydebtManager">借款管理</el-menu-item>
+            </el-menu>
+          </el-col>
+        </el-row>
         <el-row v-show="$store.state.topNavState==='enterprise'">
           <el-col :span="24">
             <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
@@ -31,6 +39,40 @@
             </el-menu>
           </el-col>
         </el-row>
+        <el-row v-show="$store.state.topNavState==='fp'">
+          <el-col :span="24">
+            <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
+              <el-menu-item index="/fpManager">理财产品管理</el-menu-item>
+              <el-menu-item index="/myfpManager">我的债权</el-menu-item>
+              <el-menu-item index="/transferfpManager">债权转让</el-menu-item>
+            </el-menu>
+          </el-col>
+        </el-row>
+        <el-row v-show="$store.state.topNavState==='pc'">
+          <el-col :span="24">
+            <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
+              <el-menu-item index="/pcManager">信用查询</el-menu-item>
+              <el-menu-item index="/mypcManager">信用额度管理</el-menu-item>
+            </el-menu>
+          </el-col>
+        </el-row>
+        <el-row v-show="$store.state.topNavState==='statistics'">
+          <el-col :span="24">
+            <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
+              <el-menu-item index="/statisticsManager">借贷款统计</el-menu-item>
+              <el-menu-item index="/fpstatManager">理财统计</el-menu-item>
+            </el-menu>
+          </el-col>
+        </el-row>
+        <el-row v-show="$store.state.topNavState==='counsel'">
+          <el-col :span="24">
+            <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
+              <el-menu-item index="/counselManager">常见问题</el-menu-item>
+              <el-menu-item index="/onlinecounselManager">在线咨询</el-menu-item>
+            </el-menu>
+          </el-col>
+        </el-row>
+
       </div>
       <div class="topbar-account topbar-btn">
         <el-dropdown trigger="click">
@@ -85,12 +127,14 @@
       },
       fetchNavData () { // 初始化菜单激活项
         var cur_path = this.$route.path; //获取当前路由
+        //console.log("cur_path:"+cur_path);
         var routers = this.$router.options.routes; // 获取路由对象
         var nav_type = "home", nav_name = "home";
         for (var i = 0; i < routers.length; i++) {
           var children = routers[i].children;
           if(children){
             for (var j = 0; j < children.length; j++) {
+              //console.log("path:"+children[j].path);
               if (children[j].path === cur_path) {
                 nav_type = routers[i].type;
                 nav_name = routers[i].name;
@@ -105,6 +149,7 @@
           this.defaultActiveIndex = "/";
         } else {
           this.defaultActiveIndex = "/" + nav_name + "Manager";
+          //console.log(this.defaultActiveIndex);
         }
       },
       logout(){
@@ -129,7 +174,7 @@
     },
     watch: {
       '$route': function(to, from){ // 路由改变时执行
-        //console.info("to.path:" + to.path);
+        console.info("to.path:" + to.path);
         this.fetchNavData();
       }
     }

@@ -17,11 +17,11 @@ import javax.transaction.Transactional;
 //@RepositoryRestResource(collectionResourceRel = "books", path = "books")
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
-    Optional<Account> findByUsername(String username);
-    Boolean existsByUsername(String username);
     public Account findByAccountId(Long id);
     public Account findByUserId(Long id);
-    public Account findOneByUsernameAndPassword(String username, String Password);
+    Optional<Account> findByUsername(String username);
+    Boolean existsByUsername(String username);
+    public Account findByUsernameAndPassword(String username, String Password);
     public Account save(Account account);
     @Modifying
     @Transactional

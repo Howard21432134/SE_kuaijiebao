@@ -11,6 +11,7 @@ import com.kuaijiebao.springrestvue.domain.Question;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> , JpaSpecificationExecutor<Question>{
-    public Question findOneById(Long id);
-    public void deleteById(Long id);
+    public Question findOneByQuestionId(Long id);
+    public void deleteByQuestionId(Long id);
+    public Question save(Question question);
 }

@@ -27,12 +27,7 @@ public class FPDeal {
     private Long num;
     private Boolean type;
 
-    public FPDeal(Long productId,Long userId,Long num,Boolean type){
-        this.productId=productId;
-        this.userId=userId;
-        this.num=num;
-        this.type=type;
-    }
+
     /*
     public FPDeal(){}
 

@@ -18,19 +18,14 @@ public class FPController {
     @Autowired
     FPService fpService;
 
-    @GetMapping(path="ShowFPAcitivity/{}")
+    @GetMapping(path="/ShowFPActivity")
     public List<FP> ShowFPActivity(){ return fpService.ShowFPActivity();}
 
-    @GetMapping(path="/FPDetailAcitivity/{FP_id}")
+    @GetMapping(path="/FPDetailActivity/{FP_id}")
     public FP FPDetailActivity(@PathVariable Long FP_id){ return fpService.FPDetailActivity(FP_id);}
 
-    @PostMapping(path="/AddFPActivity/Sum={sum}&Name={name}&Price={price}&Productor={productor}")
-    public void AddFPActivity(@PathVariable Long sum,@PathVariable String name,@PathVariable Float price,@PathVariable String productor){
-        FP fp=new FP();
-        fp.setSum(sum);
-        fp.setName(name);
-        fp.setPrice(price);
-        fp.setProductor(productor);
-        fpService.AddFPActivity(fp);
+    @PostMapping(path="/AddFPActivity")
+    public FP AddFPActivity(@RequestBody FP fp){
+        return fpService.AddFPActivity(fp);
     }
 }

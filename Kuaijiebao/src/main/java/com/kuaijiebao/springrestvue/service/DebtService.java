@@ -13,7 +13,7 @@ public class DebtService {
     @Autowired
     DebtRepository debtRepository;
 
-    public void AddDebtActivity(Debt debt){ debtRepository.save(debt);}
+    public Debt AddDebtActivity(Debt debt){ return debtRepository.save(debt);}
 
     public List<Debt> ShowDebtbyUserActivity(Long id){ return debtRepository.findAllByUserId(id);}
 

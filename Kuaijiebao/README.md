@@ -138,6 +138,8 @@ https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-a
 
 springboot + vuejs
 https://blog.codecentric.de/en/2018/04/spring-boot-vuejs/
+pomfile basedir
+https://stackoverflow.com/questions/1012402/maven2-property-that-indicates-the-parent-directory
 
 cool project username
 https://brandongaille.com/115-cool-catchy-project-names-that-are-great/

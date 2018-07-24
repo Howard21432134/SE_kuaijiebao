@@ -152,6 +152,8 @@ create table financial_product_deal
    product_id           bigint(10) not null,
    user_id               bigint(10) not null,
    num                  int not null,
+   #starttime                 datetime,
+   #endtime                 datetime,
    primary key (deal_id)
 );
 

@@ -8,19 +8,23 @@
       <div class="topbar-logos">
         <a href="/" style="color: #fff;">快借宝系统</a>
       </div>
+
+
       <div class="topbar-title">
+
         <el-row v-show="$store.state.topNavState==='home'">
           <el-col :span="24">
             <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
               <el-menu-item index="/">工作台</el-menu-item>
               <el-menu-item index="/enterpriseManager">我要借款</el-menu-item>
               <el-menu-item index="/orderManager">我要理财</el-menu-item>
-              <el-menu-item index="/systemManager">信用管理</el-menu-item>
-              <el-menu-item index="/systemManager">数据统计</el-menu-item>
-              <el-menu-item index="/systemManager">咨询</el-menu-item>
+              <el-menu-item index="/personalcreditManager">信用管理</el-menu-item>
+              <el-menu-item index="/statisticsManager">数据统计</el-menu-item>
+              <el-menu-item index="/counselManager">咨询</el-menu-item>
             </el-menu>
           </el-col>
         </el-row>
+
 
         <el-row v-show="$store.state.topNavState==='enterprise'">
           <el-col :span="24">
@@ -31,7 +35,48 @@
             </el-menu>
           </el-col>
         </el-row>
+
+        <el-row v-show="$store.state.topNavState==='order'">
+          <el-col :span="24">
+            <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
+              <el-menu-item index="/enterpriseManager">企业信息</el-menu-item>
+              <el-menu-item index="/vehicleManager">车辆信息</el-menu-item>
+              <el-menu-item index="/deptManager">组织架构</el-menu-item>
+            </el-menu>
+          </el-col>
+        </el-row>
+
+        <el-row v-show="$store.state.topNavState==='personalcredit'">
+          <el-col :span="24">
+            <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
+              <el-menu-item index="/enterpriseManager">查询当面信用额度</el-menu-item>
+              <el-menu-item index="/vehicleManager">查询额度変更及原因</el-menu-item>
+            </el-menu>
+          </el-col>
+        </el-row>
+
+        <el-row v-show="$store.state.topNavState==='statistics'">
+          <el-col :span="24">
+            <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
+              <el-menu-item index="/enterpriseManager">借贷款统计</el-menu-item>
+              <el-menu-item index="/vehicleManager">理财统计</el-menu-item>
+            </el-menu>
+          </el-col>
+        </el-row>
+
+        <el-row v-show="$store.state.topNavState==='counsel'">
+          <el-col :span="24">
+            <el-menu :default-active="defaultActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
+              <el-menu-item index="/enterpriseManager">常见问题</el-menu-item>
+              <el-menu-item index="/vehicleManager">在线咨询</el-menu-item>
+            </el-menu>
+          </el-col>
+        </el-row>
+
+
       </div>
+
+
       <div class="topbar-account topbar-btn">
         <el-dropdown trigger="click">
           <span class="el-dropdown-link userinfo-inner">

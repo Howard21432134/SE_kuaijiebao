@@ -22,6 +22,13 @@ import Register from '@/views/admin/register.vue'
 import RegisterNext from '@/views/admin/registerNext.vue'
 import InfoSetting from '@/views/workbench/inform_setting.vue'
 
+
+//$store.state.topNavState in topNav.vue=== type in index.js
+//
+//
+//
+//
+
 // 懒加载方式，当路由被访问的时候才加载对应组件
 const Login = resolve => require(['@/views/login'], resolve)
 
@@ -85,6 +92,8 @@ let router = new Router({
         }
       ]
     },
+
+
     {
       path: '/enterpriseManager',
       type: 'enterprise',
@@ -143,6 +152,250 @@ let router = new Router({
         }
       ]
     },
+
+
+
+
+
+    {
+      path: '/orderManager',
+      type: 'order',
+      name: 'order',
+      component: Home,
+      redirect: '/enterprise/list',
+      menuShow: true,
+      children: [
+        {
+          path: '/enterprise/list',
+          name: '企业信息',
+          components: {
+            default: EnterpriseList,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-setting',
+          menuShow: true
+        },
+        {
+          path: '/enterprise/detail',
+          name: '企业详情',
+          components: {
+            default: EnterpriseDetail,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-setting',
+          menuShow: false
+        },
+        {
+          path: '/enterprise/add',
+          name: '添加企业',
+          components: {
+            default: EnterpriseAdd,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-menu',
+          menuShow: true
+        },
+        {
+          path: '/enterprise/validate',
+          name: '企业认证',
+          components: {
+            default: EnterpriseValidate,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-menu',
+          menuShow: true
+        }
+      ]
+    },
+
+//**************Statistics Module******************
+    {
+      path: '/statisticsManager',
+      type: 'statistics',
+      name: 'statistics',
+      component: Home,
+      redirect: '/enterprise/list',
+      menuShow: true,
+      children: [
+        {
+          path: '/enterprise/list',
+          name: '企业信息',
+          components: {
+            default: EnterpriseList,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-setting',
+          menuShow: true
+        },
+        {
+          path: '/enterprise/detail',
+          name: '企业详情',
+          components: {
+            default: EnterpriseDetail,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-setting',
+          menuShow: false
+        },
+        {
+          path: '/enterprise/add',
+          name: '添加企业',
+          components: {
+            default: EnterpriseAdd,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-menu',
+          menuShow: true
+        },
+        {
+          path: '/enterprise/validate',
+          name: '企业认证',
+          components: {
+            default: EnterpriseValidate,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-menu',
+          menuShow: true
+        }
+      ]
+    },
+//**************Counsel Module******************
+    {
+      path: '/counselManager',
+      type: 'counsel',
+      name: 'counsel',
+      component: Home,
+      redirect: '/enterprise/list',
+      menuShow: true,
+      children: [
+        {
+          path: '/enterprise/list',
+          name: '企业信息',
+          components: {
+            default: EnterpriseList,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-setting',
+          menuShow: true
+        },
+        {
+          path: '/enterprise/detail',
+          name: '企业详情',
+          components: {
+            default: EnterpriseDetail,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-setting',
+          menuShow: false
+        },
+        {
+          path: '/enterprise/add',
+          name: '添加企业',
+          components: {
+            default: EnterpriseAdd,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-menu',
+          menuShow: true
+        },
+        {
+          path: '/enterprise/validate',
+          name: '企业认证',
+          components: {
+            default: EnterpriseValidate,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-menu',
+          menuShow: true
+        }
+      ]
+    },
+//**************personalcredit Module******************
+    {
+      path: '/personalcreditlManager',
+      type: 'personalcredit',
+      name: 'personalcredit',
+      component: Home,
+      redirect: '/enterprise/list',
+      menuShow: true,
+      children: [
+        {
+          path: '/enterprise/list',
+          name: '企业信息',
+          components: {
+            default: EnterpriseList,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-setting',
+          menuShow: true
+        },
+        {
+          path: '/enterprise/detail',
+          name: '企业详情',
+          components: {
+            default: EnterpriseDetail,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-setting',
+          menuShow: false
+        },
+        {
+          path: '/enterprise/add',
+          name: '添加企业',
+          components: {
+            default: EnterpriseAdd,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-menu',
+          menuShow: true
+        },
+        {
+          path: '/enterprise/validate',
+          name: '企业认证',
+          components: {
+            default: EnterpriseValidate,
+            top: TopNav,
+            aside: LeftNav
+          },
+          leaf: true,
+          iconCls: 'el-icon-menu',
+          menuShow: true
+        }
+      ]
+    },
+
+
+
     {
       path: '/vehicleManager',
       type: 'enterprise',

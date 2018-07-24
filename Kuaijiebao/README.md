@@ -147,3 +147,14 @@ https://brandongaille.com/115-cool-catchy-project-names-that-are-great/
 spring cloud
 http://www.baeldung.com/spring-cloud-bootstrapping
 https://github.com/eugenp/tutorials/tree/master/spring-cloud/spring-cloud-bootstrap
+
+
+vuejs+ restfulapi
+https://www.webprofessional.jp/fetching-data-third-party-api-vue-axios/
+https://qiita.com/567000/items/dde495d6a8ad1c25fa43
+https://router.vuejs.org/ja/guide/essentials/nested-routes.html
+https://qiita.com/po3rin/items/3968f825f3c86f9c4e21
+https://www.cnblogs.com/yeqrblog/p/8991587.html
+
+https://github.com/sitepoint-editors/vuejs-news/blob/master/app.js
+http://vuejs-news.herokuapp.com/

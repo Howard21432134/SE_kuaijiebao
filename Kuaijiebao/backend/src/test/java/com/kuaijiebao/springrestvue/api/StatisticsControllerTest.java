@@ -68,8 +68,8 @@ public class StatisticsControllerTest {
         Date dateOne=new Date();
         Date dateTwo=new Date();
 
-        Debt debtOne=new Debt(1l,11l,100l,dateOne,"ImContent",true,dateOne,true,dateOne,true,1f,1);
-        Debt debtTwo=new Debt(1l,22l,150l,dateTwo,"ImContent",true,dateTwo,true,dateTwo,true,1f,1);
+        Debt debtOne=new Debt(1l,11l,100l,dateOne,dateOne,"ImContent",true,dateOne,true,dateOne,true,1f,1);
+        Debt debtTwo=new Debt(1l,22l,150l,dateTwo,dateTwo,"ImContent",true,dateTwo,true,dateTwo,true,1f,1);
         debtRepository.saveAndFlush(debtOne);
         debtRepository.saveAndFlush(debtTwo);
 

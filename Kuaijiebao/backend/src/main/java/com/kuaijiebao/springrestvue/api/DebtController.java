@@ -6,11 +6,13 @@ import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Date;
+import java.util.Calendar;
 
 import com.kuaijiebao.springrestvue.domain.Debt;
 import com.kuaijiebao.springrestvue.domain.User;
 import com.kuaijiebao.springrestvue.service.DebtService;
 import com.kuaijiebao.springrestvue.service.UserService;
+import com.kuaijiebao.springrestvue.payload.addDebtRequest;
 
 @CrossOrigin
 @RestController
@@ -24,11 +26,28 @@ public class DebtController {
 
 
     @PostMapping(path="/AddDebtActivity")
-    public Debt AddDebtActivity(@RequestBody Debt debt){
+    public Debt AddDebtActivity(@RequestBody addDebtRequest request){
+
+        Debt debt=new Debt();
+        debt.setUserId(request.getUserId());
+        debt.setSum(request.getSum());
+        debt.setRate(request.getRate());
+        debt.setValidTime(request.getValidTime());
+        debt.setExpectDischargeTime(request.getExpectDischargeTime());
+        debt.setContent(request.getContent());
+
+        //Date date=debt.getDue();
+        //Calendar calendar = Calendar.getInstance();
+        //calendar.setTime(date);
+        //calendar.add(Calendar.MONTH, 3);
+        //Date d1 = calendar.getTime();
+        //System.out.println(sdf.format(d1));
+
         debt.setType(true);
         debt.setWhetherDischarge(false);
         debt.setWhetherSucceed(false);
         debt.setState(1);
+
         return debtService.AddDebtActivity(debt);
     }
 

@@ -26,6 +26,7 @@ import com.kuaijiebao.springrestvue.service.BankCardService;
 import com.kuaijiebao.springrestvue.service.MailAuthService;
 import com.kuaijiebao.springrestvue.payload.ValidationRequest;
 import com.kuaijiebao.springrestvue.payload.ValidationCode;
+import com.kuaijiebao.springrestvue.payload.updateUserRequest;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
@@ -73,9 +74,17 @@ public class UserController {
     }
 
     @PutMapping(path = "/v2/users/{userId}")
-    public User updateUser(@PathVariable Long userId, @RequestBody User user) {
-        user.setUserId(userId);
-        return userService.save(user);
+    public User updateUser(@PathVariable Long userId, @RequestBody updateUserRequest user) {
+        User newUser=userService.findByUserId(userId);
+        System.out.println(user);
+        newUser.setUserId(userId);
+        newUser.setNickname(user.getNickname());
+        newUser.setJob(user.getJob());
+        newUser.setAddress(user.getAddress());
+        newUser.setIncome(user.getIncome());
+        newUser.setIntroduction(user.getIntroduction());
+
+        return userService.save(newUser);
     }
 
     @PutMapping(path ="/v2/users/{userId}/email")

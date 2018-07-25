@@ -98,7 +98,9 @@
         console.log("LOGIN "+status);
         //API.getUserByUserId(5);
         //API.registerUserInfoModification(1);
-        API.validateUserInfoModification(1);
+        //API.validateUserInfoModification(1);
+        //API.AddDebtActivity(1);
+        API.ShowDebtByUserActivity(1);
         if(status === 'success'){
           localStorage.setItem('access-user', JSON.stringify(result));
           window.localStorage.removeItem('register-user');

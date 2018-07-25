@@ -4,7 +4,7 @@
     <p>用户昵称</p>
     <el-input placeholder="$nickname" v-model="nickname" style="width:25%" clearable></el-input>
     <p>电话</p>
-    <el-input placeholder="$phonenum" v-model="phonenum" style="width:25%" clearable></el-input>
+    <el-input placeholder="$phone" v-model="phonenum" style="width:25%" clearable></el-input>
       <el-button>验证</el-button>
     <p>邮箱</p>
     <el-input placeholder="$email" v-model="email" style="width:25%" clearable></el-input>
@@ -16,9 +16,9 @@
     <p>年收入</p>
     <el-input placeholder="$income" v-model="income"  style="width:25%" clearable></el-input>
     <p>个人说明</p>
-    <el-input placeholder="$discription" v-model="discription" style="width:25%" clearable></el-input>
+    <el-input placeholder="$introduction" v-model="introduction" style="width:25%" clearable></el-input>
     <el-row>
-      <el-button>确定</el-button>
+      <el-button @click.native.prevent="handleUpdate">确定</el-button>
       <el-button>取消</el-button>
     </el-row>
 
@@ -27,21 +27,54 @@
 </template>
 
 <script>
+    import API from '../../api/api_user';
     export default {
-        name: "inform_setting",
+      name: "inform_setting",
       data() {
         return {
-          nickname : 'imnickname',
-          phonenum : 'fd',
-          email : ' ',
-          job : ' ',
-          address : ' ',
-          income : ' ',
-          discription : ' '
+          allowSubmit:false,
+
+          nickname:' ',
+          phone: ' ',
+          email: ' ',
+          job: ' ',
+          address: ' ',
+          income: ' ',
+          introduction: ' '
 
         }
-      }
+      },
+      mounted() {
+        this.loadData();
+      },
+      methods: {
+        loadData() {
+          API.getUserByUserId(1, (user) => {
+            this.nickname = user.nickname;
+            this.phone = user.phone;
+            this.email = user.email;
+            this.job = user.job;
+            this.address = user.address;
+            this.income = user.income;
+            this.introduction = user.introduction;
+          });
+        },
+        handleUpdate(){
 
+
+
+          let user={
+            nickname:this.nickname,
+            phone: this.phone,
+            email: this.email,
+            job: this.job,
+            address: this.address,
+            income: this.income,
+            introduction: this.introduction
+          };
+          API.updateUser(1,user,this.loadData);
+        }
+      }
     }
 </script>
 

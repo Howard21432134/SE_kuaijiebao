@@ -20,22 +20,22 @@
     <el-dialog title="添加借款申请" :close-on-press-escape="false" :close-on-click-modal="false" :visible.sync="dialogAddVisible" :before-close="handleClose">
       <el-form :model="form">
         <el-form-item label="借款金额：" :label-width="formLabelWidth">
-          <el-input v-model="form.number" placeholder="请填写借款金额" auto-complete="off"></el-input>
+          <el-input v-model="form.sum" placeholder="请填写借款金额" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="借款利率：" :label-width="formLabelWidth">
-          <el-input v-model="form.number" placeholder="请填写借款利率" auto-complete="off"></el-input>
+          <el-input v-model="form.rate" placeholder="请填写借款利率" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="申请截止时间：" :label-width="formLabelWidth">
-          <el-date-picker v-model="value1" type="date" placeholder="选择日期">
+          <el-date-picker v-model="form.date1" type="date" placeholder="选择日期">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="预计还款时间：" :label-width="formLabelWidth">
-          <el-date-picker v-model="value1" type="date" placeholder="选择日期">
+          <el-date-picker v-model="form.date2" type="date" placeholder="选择日期">
           </el-date-picker>
         </el-form-item>
 
         <el-form-item label="借款说明：" :label-width="formLabelWidth">
-          <el-input v-model="form.number" placeholder="请填写借款说明" auto-complete="off"></el-input>
+          <el-input v-model="form.contents" placeholder="请填写借款说明" auto-complete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -64,6 +64,11 @@
           content: '1',
           remark: '',
           createTime: '',
+          sum:'',
+          date1:'',
+          date2:'',
+          rate:'',
+          contents:'',
         },
         formLabelWidth: '120px',
         dialogAddVisible: false,

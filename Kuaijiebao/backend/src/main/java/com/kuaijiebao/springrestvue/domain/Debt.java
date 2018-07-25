@@ -25,6 +25,8 @@ public class Debt {
     @Column(name="owner_id")
     private Long ownerId;
     private Long sum;
+    @Column(name="valid_time")
+    private Date validTime;
     @Column(name="expect_discharge_time")
     private Date expectDischargeTime;//expect discharge time
     private String content;
@@ -38,15 +40,16 @@ public class Debt {
     private Date dischargeTime;
     private Boolean type;
     private Float rate;
-    private int state;
+    private Integer state;
 
-    public Debt(Long userId, Long ownerId, Long sum, Date expectDischargeTime, String content,
+    public Debt(Long userId, Long ownerId, Long sum, Date validTime, Date expectDischargeTime, String content,
                Boolean whetherSucceed, Date succeedTime, Boolean whetherDischarge,
-               Date dischargeTime, Boolean type, Float rate, int state){
+               Date dischargeTime, Boolean type, Float rate, Integer state){
 
         this.userId = userId;
         this.ownerId = ownerId;
         this.sum = sum;
+        this.validTime = validTime;
         this.expectDischargeTime = expectDischargeTime;
         this.content = content;
         this.whetherSucceed = whetherSucceed;

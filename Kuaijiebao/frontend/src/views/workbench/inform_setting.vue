@@ -49,7 +49,14 @@
       },
       methods: {
         loadData() {
-          API.getUserByUserId(1, (user) => {
+          let user = window.localStorage.getItem('access-user');
+          let userId;
+          if (user) {
+            user = JSON.parse(user);
+            userId = user.userId || '';
+          }
+
+          API.getUserByUserId(userId, (user) => {
             this.nickname = user.nickname;
             this.phone = user.phone;
             this.email = user.email;
@@ -60,10 +67,16 @@
           });
         },
         handleUpdate(){
+          let user = window.localStorage.getItem('access-user');
+          let userId;
+          if (user) {
+            user = JSON.parse(user);
+            userId = user.userId || '';
+          }
 
 
 
-          let user={
+          let userModified={
             nickname:this.nickname,
             phone: this.phone,
             email: this.email,
@@ -72,7 +85,7 @@
             income: this.income,
             introduction: this.introduction
           };
-          API.updateUser(1,user,this.loadData);
+          API.updateUser(userId,userModified,this.loadData);
         }
       }
     }

@@ -173,8 +173,16 @@
         done();
       },
       handleRegister(){
+
+        let user = window.localStorage.getItem('access-user');
+        let username;
+        if (user) {
+          user = JSON.parse(user);
+          username = user.username || '';
+        }
+
         let request={
-          username:"james",
+          username:username,
           email:this.form.email,
           elem:"BANK_CARD",
           item:this.form.number,
@@ -182,8 +190,14 @@
         API.registerUserInfoModification(request,(response)=>{console.log(response)});
       },
       handleValidate(){
+        let user = window.localStorage.getItem('access-user');
+        let username;
+        if (user) {
+          user = JSON.parse(user);
+          username = user.username || '';
+        }
         let request={
-          username:"james",
+          username:username,
           code:this.form.code,
         };
         API.validateUserInfoModification(request,(response)=>{console.log(response)});

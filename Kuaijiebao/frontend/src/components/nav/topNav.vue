@@ -87,8 +87,9 @@
     data(){
       return {
         loading: false,
-        companyName: '',
+        //companyName: '',
         nickname: '',
+        userId:'',
         defaultActiveIndex: '/',
         homeMenu: false,
         messageCount: 5
@@ -156,10 +157,12 @@
     },
     mounted() {
       let user = window.localStorage.getItem('access-user');
+      //console.log(userInfo);
       if (user) {
         user = JSON.parse(user);
-        this.nickname = user.nickname || '';
-        this.companyName = user.companyName || '';
+        this.nickname = user.username || '';
+        //this.companyName = user.companyName || '';
+        this.userId = user.userId || '';
       }
     },
     watch: {

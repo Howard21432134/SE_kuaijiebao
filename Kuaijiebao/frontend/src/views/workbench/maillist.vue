@@ -35,8 +35,14 @@
     },
     methods: {
       handleRegister(){
+        let user = window.localStorage.getItem('access-user');
+        let username;
+        if (user) {
+          user = JSON.parse(user);
+          username = user.username || '';
+        }
         let request={
-          username:"james",
+          username:username,
           email:this.email,
           elem:"PASS_WORD",
           item:this.newPassword1,
@@ -45,7 +51,7 @@
       },
       handleValidate(){
         let request={
-          username:"james",
+          username:username,
           code:this.code,
         };
         API.validateUserInfoModification(request,(response)=>{console.log(response)});

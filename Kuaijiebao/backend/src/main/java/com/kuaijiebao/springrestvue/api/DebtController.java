@@ -1,5 +1,6 @@
 package com.kuaijiebao.springrestvue.api;
 
+import com.kuaijiebao.springrestvue.repository.DebtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,9 @@ public class DebtController {
 
     @Autowired
     DebtService debtService;
+
+    @Autowired
+    DebtRepository debtRepository;
 
 
     @PostMapping(path="/AddDebtActivity")
@@ -61,8 +65,15 @@ public class DebtController {
         return debtService.DebtDetailActivity(id);
     }
 
-    @PutMapping(path="/EditDebtActivity")
-    public Debt EditDebtActivity(@RequestBody Debt debt){
+    @PutMapping(path="/EditDebtActivity/{id}")
+    public Debt EditDebtActivity(@PathVariable Long id, @RequestBody Debt request){
+        Debt debt=debtRepository.findOneById(id);
+        debt.setId(id);//debtId
+        debt.setSum(request.getSum());
+        debt.setRate(request.getRate());
+        debt.setValidTime(request.getValidTime());
+        debt.setExpectDischargeTime(request.getExpectDischargeTime());
+        debt.setContent(request.getContent());
         return debtService.AddDebtActivity(debt);
     }
 

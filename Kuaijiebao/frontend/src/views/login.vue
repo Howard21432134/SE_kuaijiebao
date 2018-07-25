@@ -10,7 +10,7 @@
              class="demo-ruleForm login-container">
       <h3 class="title">欢迎登录</h3>
       <el-form-item prop="username">
-        <el-input type="text" v-model="account.username" auto-complete="off" placeholder="手机号或公司企业码"></el-input>
+        <el-input type="text" v-model="account.username" auto-complete="off" placeholder="请输入登录名"></el-input>
       </el-form-item>
       <el-form-item prop="pwd">
         <el-input type="password" v-model="account.pwd" :autofocus="pwdFocus" auto-complete="off" placeholder="请输入登录密码"></el-input>
@@ -57,6 +57,8 @@
       };
       return {
         loading: false,
+        authenticated:false,
+        userData:{},
         account: {
           username: '',
           pwd: ''
@@ -83,26 +85,25 @@
         this.pwdFocus = true;
       }
     },
+
+
     methods: {
       handleLogin(){
         let that = this;
         let result = {
           id: '1',
-          username: 'admin',
-          nickname: this.account.username,
+          username: this.account.username,
           name: 'administrator',
-          email: '888888@163.com'
+          email: '888888@163.com',
+          userId:'',
+          password:this.account.pwd,
         };
         this.loading = true;
-        let status = API.login(result);
-        console.log("LOGIN "+status);
-        //API.getUserByUserId(5);
-        //API.registerUserInfoModification(1);
-        //API.validateUserInfoModification(1);
-        //API.AddDebtActivity(1);
-        API.ShowDebtByUserActivity(1);
-        if(status === 'success'){
-          localStorage.setItem('access-user', JSON.stringify(result));
+        API.login(result,(response)=>{if(response.userId!==undefined){this.authenticated=true;console.log(response);this.userData=response;}});
+        if(this.authenticated===true){
+          localStorage.setItem('access-user', JSON.stringify(this.userData));//////////////////////////save user localdata
+          //let user = window.localStorage.getItem('access-user');
+          //console.log(user);
           window.localStorage.removeItem('register-user');
           that.$router.push({path: '/'});
         } else {

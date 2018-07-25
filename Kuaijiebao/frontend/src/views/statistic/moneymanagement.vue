@@ -3,17 +3,19 @@
     <el-row>
       <el-date-picker v-model="value7" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
       </el-date-picker>
-      <el-button>查询</el-button>
+      <el-button @click.native.prevent="searchBetween">查询</el-button>
     </el-row>
     <el-col :span="24" class="warp-main" v-loading="loading" element-loading-text="拼命加载中">
       <el-col :span="24" class="toolbar" style="padding-bottom: 0;">
         <el-form :inline="true" :model="filters">
+          <!--
           <el-form-item>
             <el-input v-model="filters.name" placeholder="请输入产品编号" auto-complete="off" @keyup.enter.native="fetchData"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" size="medium" v-on:click="fetchData">查询</el-button>
           </el-form-item>
+          -->
         </el-form>
       </el-col>
       <el-table ref="multipleTable" :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
@@ -96,24 +98,9 @@
         total: 5,
         currentPage: 1,
         pageSize: 10,
-        tableData: [{
-          eNumber: 'A10001',
-          eName: '卖出',
-          eIndustry: '2018-03-05',
-          eRange: '5000',
-          eModel: '4.68%',
-          amount: '123456',
-          name:'XXX'
-        },
-          {
-            eNumber: 'A10002',
-            eName: '买进',
-            eIndustry: '2018-03-05',
-            eRange: '5000',
-            eModel: '5.84%',
-            amount: '456123',
-            name:'XXX'
-          }],
+        tableData: [
+
+        ],
         multipleSelection: [],
         filters: {
           name: ''
@@ -167,6 +154,46 @@
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
+      },
+      loadData(){
+        let request={
+          since:"2000-01-01",
+          until:"2030-01-01",
+
+        };
+        let user = window.localStorage.getItem('access-user');
+        let userId;
+        if (user) {
+          user = JSON.parse(user);
+          userId = user.userId || '';
+        }
+        API.getDebtStatByUserId(userId,request,(response)=>{
+          this.tableData=response;
+        });
+      },
+      searchBetween(){
+        let user = window.localStorage.getItem('access-user');
+        let userId;
+        if (user) {
+          user = JSON.parse(user);
+          userId = user.userId || '';
+        }
+        let request={
+          since:this.toLocaleString(this.value7[0]),
+          until:this.toLocaleString(this.value7[1]),
+        };
+        API.getFPDRStatByUserId(userId,request,(response)=>{
+          this.tableData=response;
+        });
+      },
+      // 出力例:2008/5/1 2:00:00
+      toLocaleString( date ) {
+        return [
+          date.getFullYear(),
+          date.getMonth() + 1,
+          date.getDate()
+        ].join( '-' );
+        //+' '+ date.toLocaleTimeString();
       }
     }
   }

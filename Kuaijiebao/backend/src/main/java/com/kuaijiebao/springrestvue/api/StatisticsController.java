@@ -21,6 +21,13 @@ import com.kuaijiebao.springrestvue.domain.FPDR;
 import com.kuaijiebao.springrestvue.domain.Debt;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
@@ -41,19 +48,32 @@ public class StatisticsController {
     @Autowired
     DebtRepository debtRepository;
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+
+        binder.registerCustomEditor(
+                Date.class,
+                new CustomDateEditor(dateFormat, false)
+        );
+    }
+
+
+    // @DateTimeFormat(pattern="yyyy-MM-dd")
 
     @GetMapping(path = "/v2/statistics/debt-stat/{userId}")
     public List<Debt> getDebtStatByUserId(@PathVariable Long userId,
-                                @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date since,
-                                @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date until) {
+                                @RequestParam(required = false)  Date since,
+                                @RequestParam(required = false)  Date until) {
         return debtService.showDebtByUserBetween(userId,since,until);
 
     }
 
     @GetMapping(path = "/v2/statistics/fpdr-stat/{userId}")
     public List<FPDR> getFPDRStatByUserId(@PathVariable Long userId,
-                                @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date since,
-                                @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date until) {
+                                @RequestParam(required = false) Date since,
+                                @RequestParam(required = false) Date until) {
         return fpdrService.showFPDRByUserBetween(userId, since, until);
     }
 

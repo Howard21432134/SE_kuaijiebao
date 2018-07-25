@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -26,17 +27,21 @@ public class Debt {
     private Long ownerId;
     private Long sum;
     @Column(name="valid_time")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
     private Date validTime;
     @Column(name="expect_discharge_time")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
     private Date expectDischargeTime;//expect discharge time
     private String content;
     @Column(name="whether_succeed")
     private Boolean whetherSucceed;
     @Column(name="succeed_time")
     private Date succeedTime;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
     @Column(name="whether_discharge")
     private Boolean whetherDischarge;
     @Column(name="discharge_time")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
     private Date dischargeTime;
     private Boolean type;
     private Float rate;

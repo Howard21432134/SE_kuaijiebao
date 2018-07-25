@@ -8,20 +8,23 @@
       <el-col :xs="24" :sm="16" :md="16" :lg="16" class="el-col-sm-push-4 el-col-md-push-4 el-col-lg-push-4">
         <el-form ref="AccountForm" :model="account" :rules="rules" label-position="right" label-width="100px"
                  class="demo-ruleForm register-container">
-          <el-form-item prop="workName" label="昵称：">
-            <el-input type="text" v-model="account.workName" :autofocus="true" auto-complete="off" placeholder="请输入昵称"></el-input>
+          <el-form-item prop="nickname" label="昵称：">
+            <el-input type="text" v-model="account.nickname" :autofocus="true" auto-complete="off" placeholder="请输入昵称"></el-input>
           </el-form-item>
-          <el-form-item prop="pwd" label="密码：">
-            <el-input type="password" v-model="account.pwd" auto-complete="off" placeholder="请输入密码"></el-input>
+          <el-form-item prop="password" label="密码：">
+            <el-input type="password" v-model="account.password" auto-complete="off" placeholder="请输入密码"></el-input>
           </el-form-item>
           <el-form-item prop="ensurePwd" label="确认密码：">
             <el-input type="password" v-model="account.ensurePwd" auto-complete="off" placeholder="请输入确认密码"></el-input>
           </el-form-item>
-          <el-form-item prop="realName" label="真实姓名">
-            <el-input type="text" v-model="account.realName" :autofocus="true" auto-complete="off" placeholder="请填写真实姓名"></el-input>
+          <el-form-item prop="username" label="登录名：">
+            <el-input type="text" v-model="account.username" :autofocus="true" auto-complete="off" placeholder="请输入登录名"></el-input>
           </el-form-item>
-          <el-form-item prop="IDnumber" label="身份证号">
-            <el-input type="text" v-model="account.IDnumber" :autofocus="true" auto-complete="off" placeholder="请输入身份证号"></el-input>
+          <el-form-item prop="name" label="真实姓名">
+            <el-input type="text" v-model="account.name" :autofocus="true" auto-complete="off" placeholder="请填写真实姓名"></el-input>
+          </el-form-item>
+          <el-form-item prop="identity" label="身份证号">
+            <el-input type="text" v-model="account.identity" :autofocus="true" auto-complete="off" placeholder="请输入身份证号"></el-input>
           </el-form-item>
           <el-form-item style="margin-bottom:0; width:100%;">
             <el-button type="primary" style="width:100%;" @click.native.prevent="handleRegister" :loading="loading">注册</el-button>
@@ -38,14 +41,15 @@
   </div>
 </template>
 <script>
+  import API from '../../api/api_user'
   export default {
     data() {
       var validateWorkName = (rules, value, callback) => {
         if (value === '') {
           callback(new Error('请输入昵称'));
         } else {
-          if (this.account.workName !== '') {
-            this.account.workName = value;
+          if (this.account.nickname !== '') {
+            this.account.nickname = value;
 			this.nameCorrect = true;
           }
           callback();
@@ -55,8 +59,8 @@
         if (value === '') {
           callback(new Error('请输入密码'));
         } else {
-          if (this.account.pwd !== '') {
-            this.account.pwd = value;
+          if (this.account.password !== '') {
+            this.account.password = value;
 			this.pwdCorrect = true;
           }
           callback();
@@ -79,15 +83,17 @@
 		pwdCorrect: false,
 		ensurePwdCorrect: false,
         account: {
-          workName: '',
-          pwd: '',
-		  ensurePwd: ''
+          nickname:'',
+          password:'',
+          name:'',
+          identity:'',
+		      ensurePwd: ''
         },
         rules: {
-          workName: [
+          nickname: [
             { required: true, validator: validateWorkName, trigger: 'blur' }
           ],
-          pwd: [
+          password: [
             { required: true, validator: validatePwd, trigger: 'blur' }
           ],
           ensurePwd: [
@@ -105,6 +111,7 @@
         if(that.nameCorrect && that.pwdCorrect && that.ensurePwdCorrect){
           that.loading = true;
           localStorage.setItem('register-user', JSON.stringify(result));
+          this.createUser(this.account);
           const h = that.$createElement;
           that.$notify({
             title: '标题名称',
@@ -116,7 +123,12 @@
           that.loading = false;
 		  this.$message.error("请完善必填信息");
         }
-      }
+      },
+      createUser(user){
+        API.registerUser(user,(response)=>{
+          console.log(response);
+        });
+      },
     }
   }
 </script>

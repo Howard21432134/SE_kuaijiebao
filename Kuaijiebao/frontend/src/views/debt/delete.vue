@@ -12,15 +12,15 @@
         </el-form>
       </el-col>
       <el-table ref="multipleTable" :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
-        <el-table-column type="selection" width="60"></el-table-column>
-        <el-table-column prop="eNumber" label="申请编号" width="180" sortable></el-table-column>
-        <el-table-column prop="eName" label="申请金额" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="eIndustry" label="申请截止时间" width="180"></el-table-column>
-        <el-table-column prop="eRange" label="利率" width="180"></el-table-column>
-        <el-table-column prop="eModel" label="预计还款时间" width="180"></el-table-column>
+        <el-table-column prop="id" label="申请编号" width="180" sortable></el-table-column>
+        <el-table-column prop="sum" label="申请金额" width="180"></el-table-column>
+        <el-table-column prop="rate" label="利率" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="content" label="借款说明" width="180"></el-table-column>
+        <el-table-column prop="validTime" label="申请截止日期" width="180"></el-table-column>
+        <el-table-column prop="expectDischargeTime" label="预计还款日期" width="180"></el-table-column>
         <el-table-column label="撤销">
           <template slot-scope="scope">
-            <el-button size="mini" @click.native="open" type="danger">撤销</el-button>
+            <el-button size="mini" @click.native="handleDeleteDebt(scope)" type="danger">撤销</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -43,22 +43,8 @@
   </div>
 </template>
 <script>
-  import API from '../../api/api_enterprise'
+  import API from '../../api/api_user';
   export default {
-    methods: {
-      open() {
-        this.$alert('这是一段内容', '标题名称', {
-          confirmButtonText: '确定',
-          callback: action => {
-            this.$message({
-              type: 'info',
-              message: `action: ${ action }`
-            });
-          }
-        });
-      }
-    },
-
     data() {
       return {
         loading: false,
@@ -66,20 +52,16 @@
         total: 5,
         currentPage: 1,
         pageSize: 10,
-        tableData: [{
-          eNumber: 'A10001',
-          eName: '5000',
-          eIndustry: '2018-05-06',
-          eRange: '4.68%',
-          eModel: '2018-09-16',
+        tableData: [],
+        form:{
+          id:'',//debtId
+          userId:1,
+          sum:'',
+          validTime:'',
+          expectDischargeTime:'',
+          rate:'',
+          contents:'',
         },
-          {
-            eNumber: 'A1002',
-            eName: '6000',
-            eIndustry: '2018-04-04',
-            eRange: '5.68%',
-            eModel: '2018-12-05',
-          }],
         multipleSelection: [],
         filters: {
           name: ''
@@ -91,6 +73,9 @@
       // 此时 data 已经被 observed 了
       //this.fetchData();  //调用接口获取动态数据
 
+    },
+    mounted(){
+      this.loadData();
     },
     methods: {
       toggleSelection(rows) {
@@ -133,7 +118,34 @@
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
-      }
+      },
+      open() {
+        this.$alert('这是一段内容', '标题名称', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });
+          }
+        });
+      },
+      loadData() {
+        let user = window.localStorage.getItem('access-user');
+        let userId;
+        if (user) {
+          user = JSON.parse(user);
+          userId = user.userId || '';
+        }
+        API.ShowDebtByUserActivity(userId, (response) => {
+          this.tableData=response;
+        });
+      },
+      handleDeleteDebt(elem){
+        let debtId=elem.row.id;
+        API.DeleteDebtActivity(debtId,(response)=>{console.log(response);});
+        this.loadData();
+      },
     }
   }
 </script>

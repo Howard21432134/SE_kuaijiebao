@@ -17,11 +17,11 @@
           <el-form-item prop="ensurePwd" label="确认密码：">
             <el-input type="password" v-model="account.ensurePwd" auto-complete="off" placeholder="请输入确认密码"></el-input>
           </el-form-item>
-          <el-form-item prop="realName" label="真实姓名：">
-            <el-input type="text" v-model="account.realName" :autofocus="true" auto-complete="off" placeholder="请输入昵称"></el-input>
+          <el-form-item prop="realName" label="真实姓名">
+            <el-input type="text" v-model="account.realName" :autofocus="true" auto-complete="off" placeholder="请填写真实姓名"></el-input>
           </el-form-item>
-          <el-form-item prop="IDnumber" label="身份证号：">
-            <el-input type="text" v-model="account.IDnumber" :autofocus="true" auto-complete="off" placeholder="请输入昵称"></el-input>
+          <el-form-item prop="IDnumber" label="身份证号">
+            <el-input type="text" v-model="account.IDnumber" :autofocus="true" auto-complete="off" placeholder="请输入身份证号"></el-input>
           </el-form-item>
           <el-form-item style="margin-bottom:0; width:100%;">
             <el-button type="primary" style="width:100%;" @click.native.prevent="handleRegister" :loading="loading">注册</el-button>

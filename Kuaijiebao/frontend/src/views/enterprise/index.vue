@@ -4,24 +4,25 @@
       <el-col :span="24" class="toolbar" style="padding-bottom: 0;">
         <el-form :inline="true" :model="filters">
           <el-form-item>
-            <el-input v-model="filters.name" placeholder="请输入企业名称" auto-complete="off" @keyup.enter.native="fetchData"></el-input>
+            <el-input v-model="filters.name" placeholder="请输入产品编号" auto-complete="off" @keyup.enter.native="fetchData"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" size="medium" v-on:click="fetchData">查询</el-button>
           </el-form-item>
         </el-form>
-        </el-form>
       </el-col>
       <el-table ref="multipleTable" :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="60"></el-table-column>
-        <el-table-column prop="eNumber" label="企业编号" width="180" sortable></el-table-column>
-        <el-table-column prop="eName" label="企业名称" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="eIndustry" label="所属行业" width="180"></el-table-column>
-        <el-table-column prop="eRange" label="经营范围" width="180"></el-table-column>
-        <el-table-column prop="eModel" label="经营模式" width="180"></el-table-column>
-        <el-table-column prop="createTime" label="创建日期" width="180"></el-table-column>
-        <el-table-column prop="updateTime" label="更新日期" width="180"></el-table-column>
-        <el-table-column prop="recordStatus" label="企业状态" width="180"></el-table-column>
+        <el-table-column prop="eNumber" label="产品编号" width="180" sortable></el-table-column>
+        <el-table-column prop="eName" label="产品名称" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="eIndustry" label="产品类型" width="180"></el-table-column>
+        <el-table-column prop="eRange" label="利率" width="180"></el-table-column>
+        <el-table-column prop="eModel" label="时长/天" width="180"></el-table-column>
+        <el-table-column label="购买">
+          <template slot-scope="scope">
+            <el-button size="mini" @click.native="open" type="danger">购买</el-button>
+          </template>
+        </el-table-column>
       </el-table>
       <!--<div style="margin-top: 20px">
         <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">切换第二、第三行的选中状态</el-button>
@@ -44,6 +45,20 @@
 <script>
   import API from '../../api/api_enterprise'
   export default {
+    methods: {
+      open() {
+        this.$alert('这是一段内容', '标题名称', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });
+          }
+        });
+      }
+    },
+
     data() {
       return {
         loading: false,
@@ -53,14 +68,18 @@
         pageSize: 10,
         tableData: [{
           eNumber: 'A10001',
-          eName: 'YE集团',
-          eIndustry: '金融业',
-          eRange: '商业',
-          eModel: '国有企业',
-          createTime: '2017-03-27',
-          updateTime: '2016-03-27',
-          recordStatus: '1'
-        }],
+          eName: '软酷网1',
+          eIndustry: '基金',
+          eRange: '4.68%',
+          eModel: '60',
+        },
+          {
+            eNumber: 'A10002',
+            eName: '软酷网2',
+            eIndustry: '基金',
+            eRange: '4.54%',
+            eModel: '30',
+          }],
         multipleSelection: [],
         filters: {
           name: ''

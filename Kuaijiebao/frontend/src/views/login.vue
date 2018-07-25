@@ -95,7 +95,11 @@
         };
         this.loading = true;
         let status = API.login(result);
-        if(status == 'success'){
+        console.log("LOGIN "+status);
+        //API.getUserByUserId(5);
+        //API.registerUserInfoModification(1);
+        API.validateUserInfoModification(1);
+        if(status === 'success'){
           localStorage.setItem('access-user', JSON.stringify(result));
           window.localStorage.removeItem('register-user');
           that.$router.push({path: '/'});

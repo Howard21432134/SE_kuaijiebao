@@ -30,7 +30,6 @@
 		<module>backend</module>
 	</modules>
 
-
 	<build>
 		<plugins>
 			<plugin>

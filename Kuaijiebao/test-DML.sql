@@ -1,6 +1,10 @@
 use kuaijiebao;
 #INSERT INTO kuaijiebao.debt (user_id,sum,rate,valid_time,expect_discharge_time,content) VALUES (1, 1.2 ,2000,"2016-03-27","2016-05-27" ,"ImExplanaion.");
 select * from user;
-INSERT INTO kuaijiebao.debt (user_id,sum,rate,valid_time,expect_discharge_time,succeed_time,content) VALUES (3, 1200 ,1.2,"2018-07-01","2018-07-10","2018-08-27" ,"ImExplanaion.");
+#INSERT INTO kuaijiebao.debt (user_id,sum,rate,valid_time,expect_discharge_time,succeed_time,content) VALUES (3, 1200 ,1.3,"2018-01-01","2018-02-10","2018-02-20" ,"I need to buy car.");
 #INSERT INTO kuaijiebao.debt (user_id,sum,rate,valid_time,expect_discharge_time,succeed_time,content) VALUES (3, 800 ,1.4,"2018-05-01","2018-05-20","2018-08-20" ,"ImNeedingMoney.");
-select * from debt;
+#delete from debt where debt_id=12;
+#select * from debt;
+#select * from user_pending_validation;
+select * from bankcard;
+#select * from user;

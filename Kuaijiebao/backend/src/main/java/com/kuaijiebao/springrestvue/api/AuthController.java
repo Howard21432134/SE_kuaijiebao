@@ -56,6 +56,7 @@ public class AuthController {
     //@Autowired
     //JwtTokenProvider tokenProvider;
 
+    @CrossOrigin
     @PostMapping("/v1/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 

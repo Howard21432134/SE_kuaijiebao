@@ -20,6 +20,6 @@ public interface DebtRepository extends JpaRepository<Debt, Long>{
     public List<Debt> findAllUnsucceed();
     @Query("select debt from Debt debt where debt.type=true and debt.state=2")
     public List<Debt> findAllOnsale();
-    @Query("select debt from Debt debt where debt.userId=?1 AND debt.succeedTime BETWEEN ?2 And ?3 Order By debt.succeedTime")
+    @Query("select debt from Debt debt where debt.userId=?1 AND debt.expectDischargeTime BETWEEN ?2 And ?3 Order By debt.succeedTime")
     public List<Debt> findByTimeAtBetweenOrderByTimeAndIdIs(Long id, Date since, Date until);
 }

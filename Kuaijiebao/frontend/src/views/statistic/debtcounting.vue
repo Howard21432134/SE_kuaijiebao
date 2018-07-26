@@ -20,8 +20,10 @@
       </el-col>
       <el-table ref="multipleTable" :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
         <el-table-column prop="id" label="交易编号" width="180" sortable></el-table-column>
+        <!--
         <el-table-column prop="type" label="交易情况" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="succeedTime" label="交易时间" width="180"></el-table-column>
+        -->
+        <el-table-column prop="expectDischargeTime" label="交易时间" width="180"></el-table-column>
         <el-table-column prop="sum" label="交易金额" width="180"></el-table-column>
         <el-table-column prop="rate" label="利率" width="180"></el-table-column>
 

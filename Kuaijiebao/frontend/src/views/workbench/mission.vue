@@ -22,7 +22,6 @@
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column prop="bankcardId" v-if="idShow" label="银行卡号"></el-table-column>
         <el-table-column prop="cardNum" label="银行卡号" width="180" sortable></el-table-column>
-        <el-table-column prop="mType" label="开卡银行" width="180"></el-table-column>
         <el-table-column prop="mContent" label="持卡人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="eRemark" label="余额" width="180"></el-table-column>
         <el-table-column prop="createTime" label="开通日期" width="180"></el-table-column>
@@ -51,7 +50,7 @@
           <el-input v-model="form.number" placeholder="请填写银行卡号" auto-complete="off"></el-input>
           <p>邮箱验证</p>
           <el-input  placeholder="请输入邮箱"  v-model="form.email" clearable></el-input>
-          <el-button @click.native.prevent="handleRegister">验证</el-button>
+          <el-button @click.native.prevent="handleRegister">获得验证码</el-button>
           <el-input  placeholder="请输入验证码"  v-model="form.code" clearable></el-input>
         </el-form-item>
 
@@ -96,6 +95,7 @@
         total: 2,
         currentPage: 1,
         pageSize: 10,
+        authenticated:false,
         tableData: [
 
           {}
@@ -143,7 +143,13 @@
     },
     methods: {
       loadData() {
-        API.getBankCardsByUserId(1, (response) => {
+        let user = window.localStorage.getItem('access-user');
+        let userId;
+        if (user) {
+          user = JSON.parse(user);
+          userId = user.userId || '';
+        }
+        API.getBankCardsByUserId(userId, (response) => {
           console.log(response);
           this.tableData=response;
         });
@@ -200,8 +206,9 @@
           username:username,
           code:this.form.code,
         };
-        API.validateUserInfoModification(request,(response)=>{console.log(response)});
+        API.validateUserInfoModification(request,(response)=>{console.log(response);});
         this.loadData();
+        this.dialogAddVisible=false;
       }
     }
   }

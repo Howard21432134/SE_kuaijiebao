@@ -19,15 +19,19 @@
         </el-form>
       </el-col>
       <el-table ref="multipleTable" :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
-        <el-table-column prop="eNumber" label="交易编号" width="180" sortable></el-table-column>
-        <el-table-column prop="eName" label="交易类型" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="eIndustry" label="交易时间" width="180"></el-table-column>
-        <el-table-column prop="eRange" label="交易金额" width="180"></el-table-column>
-        <el-table-column prop="eModel" label="利率" width="180"></el-table-column>
+        <el-table-column prop="id" label="交易编号" width="180" sortable></el-table-column>
+        <el-table-column prop="type" label="交易情况" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="succeedTime" label="交易时间" width="180"></el-table-column>
+        <el-table-column prop="sum" label="交易金额" width="180"></el-table-column>
+        <el-table-column prop="rate" label="利率" width="180"></el-table-column>
+
+        <!--
         <el-table-column prop="amount" label="交易对象ID" width="180"></el-table-column>
         <el-table-column prop="name" label="交易对象姓名" width="180"></el-table-column>
+        -->
       </el-table>
-      <!--<div style="margin-top: 20px">
+      <!--
+      <div style="margin-top: 20px">
         <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">切换第二、第三行的选中状态</el-button>
         <el-button @click="toggleSelection()">取消选择</el-button>
       </div>-->

@@ -12,10 +12,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Debt.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Debt.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/kuaijiebao/springrestvue/domain/Debt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
+            <state relative-caret-position="239">
               <caret line="41" column="37" lean-forward="true" selection-start-line="41" selection-start-column="37" selection-end-line="41" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -24,7 +24,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DebtRepository.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StatisticsController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/kuaijiebao/springrestvue/api/StatisticsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="72" column="41" lean-forward="true" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DebtRepository.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/kuaijiebao/springrestvue/repository/DebtRepository.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
@@ -213,6 +225,7 @@
       <recent name="com.kuaijiebao.springrestvue.payload" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/kuaijiebao/springrestvue/api" />
       <recent name="$PROJECT_DIR$/src/main/java/com/kuaijiebao/springrestvue/payload" />
     </key>
   </component>
@@ -285,16 +298,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1532502628957</updated>
-      <workItem from="1532502630817" duration="16079000" />
+      <workItem from="1532502630817" duration="16643000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16079000" />
+    <option name="totallyTimeSpent" value="16643000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="118" y="22" width="1150" height="778" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
@@ -486,16 +498,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kuaijiebao/springrestvue/api/StatisticsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="72" column="57" lean-forward="true" selection-start-line="72" selection-start-column="24" selection-end-line="72" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/kuaijiebao/springrestvue/payload/SignUpRequest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -510,20 +512,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kuaijiebao/springrestvue/domain/Debt.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kuaijiebao/springrestvue/repository/DebtRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="41" column="37" lean-forward="true" selection-start-line="41" selection-start-column="37" selection-end-line="41" selection-end-column="37" />
+        <state relative-caret-position="210">
+          <caret line="21" column="38" lean-forward="true" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kuaijiebao/springrestvue/api/StatisticsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="72" column="41" lean-forward="true" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kuaijiebao/springrestvue/repository/DebtRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kuaijiebao/springrestvue/domain/Debt.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="21" column="38" lean-forward="true" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+        <state relative-caret-position="239">
+          <caret line="41" column="37" lean-forward="true" selection-start-line="41" selection-start-column="37" selection-end-line="41" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -19,14 +19,24 @@ public class FPDeal {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)//For Long
     @Column(name="deal_id")
-    private Long id;
+    private Long dealId;
     @Column(name="product_id")
     private Long productId;
     @Column(name="user_id")
     private Long userId;
     private Long num;
+    private Date starttime;
+    private Date endtime;
     private Boolean type;
 
+    public void FPDeal(Long productId,Long userId,Long num,Date starttime,Date endtime,Boolean type){
+        this.productId = productId;
+        this.userId = userId;
+        this.num = num;
+        this.starttime = starttime;
+        this.endtime = endtime;
+        this.type = type;
+    }
 
     /*
     public FPDeal(){}

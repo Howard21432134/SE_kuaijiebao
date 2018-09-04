@@ -153,8 +153,9 @@ create table financial_product_deal
    product_id           bigint(10) not null,
    user_id               bigint(10) not null,
    num                  int not null,
-   #starttime                 datetime,
-   #endtime                 datetime,
+   starttime                 datetime,
+   endtime                 datetime,
+   type               boolean,
    primary key (deal_id)
 );
 
@@ -167,9 +168,7 @@ create table financial_product_deal_record
    product_id           bigint(10) not null,
    user_id               bigint(10) not null,
    deal_id				  bigint(10)not null,
-   num                  int not null,
    time                 datetime not null,
-   price                float not null,
    type                 int not null,  #1 buy 2sell 3cancel
    primary key (dealrecord_id)
 );

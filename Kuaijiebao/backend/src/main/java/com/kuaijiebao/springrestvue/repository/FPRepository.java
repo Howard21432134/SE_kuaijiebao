@@ -11,6 +11,7 @@ public interface FPRepository extends JpaRepository<FP, Long>{
 
     public List<FP> findAll();
 
-    public FP findOneById(Long id);
+    public FP findByProductId(Long id);
 
+    public void deleteByProductId(Long id);
 }

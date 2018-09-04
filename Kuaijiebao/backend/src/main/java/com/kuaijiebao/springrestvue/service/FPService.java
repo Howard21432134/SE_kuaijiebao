@@ -13,10 +13,14 @@ public class FPService {
     @Autowired
     FPRepository fpRepository;
 
-    public List<FP> ShowFPActivity() { return fpRepository.findAll();}
+    public List<FP> findAll() { return fpRepository.findAll();}
 
-    public FP FPDetailActivity(Long id){ return fpRepository.findOneById(id);}
+    public FP findByFpId(Long id){ return fpRepository.findByProductId(id);}
 
-    public FP AddFPActivity(FP fp){ return fpRepository.save(fp);}
+    public FP save(FP fp){ return fpRepository.save(fp);}
+
+    public FP update(FP fp){return fpRepository.save(fp);}
+
+    public void delete(Long id){ fpRepository.deleteByProductId(id);}
 
 }

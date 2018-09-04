@@ -12,5 +12,7 @@ public interface FPDealRepository extends JpaRepository<FPDeal,Long>{
 
     public List<FPDeal> findAllByUserId(Long id);
 
-    public FPDeal findOneById(Long id);
+    public FPDeal findByDealId(Long id);
+
+    public void deleteByDealId(Long id);
 }

@@ -18,7 +18,7 @@ public class FP {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)//For Long
     @Column(name="product_id")
-    private Long id;
+    private Long productId;
     private Long sum;
     @Column(name="product_name")
     private String name;

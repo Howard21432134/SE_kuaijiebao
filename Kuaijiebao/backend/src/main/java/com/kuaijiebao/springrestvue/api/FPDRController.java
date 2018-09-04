@@ -18,16 +18,14 @@ public class FPDRController {
     FPDRService fpdrService;
 
     @PostMapping(path="/AddFPDRActivity")
-    public FPDR AddFPDRActivity(@RequestBody FPDR fpdr){
-        return fpdrService.AddFPDRActivity(fpdr);
+    public FPDR createFPDR(@RequestBody FPDR fpdr){
+        return fpdrService.save(fpdr);
     }
 
     @GetMapping(path="/ShowFPDRActivity/User={id}")
-    public List<FPDR> ShowFPDRByUserActivity(@PathVariable Long id){ return fpdrService.ShowFPDRByUserActivity(id);}
-
-    @GetMapping(path="/ShowFPDRActivity/Product={id}")
-    public List<FPDR> ShowFPDRByProductActivity(@PathVariable Long id){ return fpdrService.ShowFPDRByProductActivity(id);}
+    public List<FPDR> getByUserId(@PathVariable Long id){ return fpdrService.findAllByUserId(id);}
 
     @GetMapping(path="/FPDRDetailActivity/FPDR={id}")
-    public FPDR FPDRDetailActivity(@PathVariable Long id){ return fpdrService.FPDRDetailActivity(id);}
+    public FPDR getByRecordId(@PathVariable Long id){ return fpdrService.findByRecordId(id);}
+
 }

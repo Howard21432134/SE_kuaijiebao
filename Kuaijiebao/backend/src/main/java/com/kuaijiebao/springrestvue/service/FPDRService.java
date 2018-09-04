@@ -18,9 +18,11 @@ public class FPDRService {
     @Autowired
     FPDRRepository fpdrRepository;
 
-    public FPDR AddFPDRActivity(FPDR fpdr){ return fpdrRepository.save(fpdr);}
+    public FPDR save(FPDR fpdr){ return fpdrRepository.save(fpdr);}
 
-    public List<FPDR> ShowFPDRByUserActivity(Long id){ return fpdrRepository.findAllByUserId(id);}
+    public FPDR update(FPDR fpdr){ return fpdrRepository.save(fpdr);}
+
+    public List<FPDR> findAllByUserId(Long id){ return fpdrRepository.findAllByUserId(id);}
 
     public List<FPDR> showFPDRByUserBetween(Long id, Date since, Date until){
         if(since==null)since=new Date(1000000);
@@ -28,7 +30,5 @@ public class FPDRService {
         return fpdrRepository.findByTimeAtBetweenOrderByTimeAndIdIs(id, since, until);
     }
 
-    public List<FPDR> ShowFPDRByProductActivity(Long id){ return fpdrRepository.findAllByProductId(id);}
-
-    public FPDR FPDRDetailActivity(Long id){ return fpdrRepository.findOneById(id);}
+    public FPDR findByRecordId(Long id){ return fpdrRepository.findByProductId(id);}
 }

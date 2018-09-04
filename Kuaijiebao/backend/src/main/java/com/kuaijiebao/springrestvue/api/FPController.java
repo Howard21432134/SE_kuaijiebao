@@ -19,13 +19,16 @@ public class FPController {
     FPService fpService;
 
     @GetMapping(path="/ShowFPActivity")
-    public List<FP> ShowFPActivity(){ return fpService.ShowFPActivity();}
+    public List<FP> getAllFPs(){ return fpService.findAll();}
 
     @GetMapping(path="/FPDetailActivity/{FP_id}")
-    public FP FPDetailActivity(@PathVariable Long FP_id){ return fpService.FPDetailActivity(FP_id);}
+    public FP getByFpId(@PathVariable Long FP_id){ return fpService.findByFpId(FP_id);}
 
     @PostMapping(path="/AddFPActivity")
-    public FP AddFPActivity(@RequestBody FP fp){
-        return fpService.AddFPActivity(fp);
+    public FP create(@RequestBody FP fp){
+        return fpService.save(fp);
     }
+
+    @PutMapping(path="/EditFPActivity")
+    public FP update(@RequestBody FP fp){ return fpService.save(fp);}
 }

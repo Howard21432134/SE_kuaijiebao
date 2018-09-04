@@ -26,19 +26,16 @@ public class FPDR {
     private Long userId;
     @Column(name="deal_id")
     private Long dealId;
-    private Long num;
     private Date time;
-    private Float price;
     private int type;
 
-    public FPDR(Long productId, Long userId, Long dealId, Long num, Date time, Float price, int type){
+
+    public FPDR(Long productId, Long userId, Long dealId, Date time, int type){
 
         this.productId = productId;
         this.userId = userId;
         this.dealId = dealId;
-        this.num = num;
         this.time = time;
-        this.price = price;
         this.type = type;
     }
 

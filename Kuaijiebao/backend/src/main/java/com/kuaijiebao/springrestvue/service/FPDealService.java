@@ -17,12 +17,14 @@ public class FPDealService {
     @Autowired
     FPDealRepository fpDealRepository;
 
-    public List<FPDeal> ShowFPDealActivity(Long id){ return fpDealRepository.findAllByUserId(id);}
+    public List<FPDeal> findAllByUserId(Long id){ return fpDealRepository.findAllByUserId(id);}
 
-    public FPDeal FPDealActivity(Long id){ return fpDealRepository.findOneById(id);}
+    public FPDeal findByDealId(Long id){ return fpDealRepository.findByDealId(id);}
 
-    public void AddFPDealActivity(FPDeal fp){ fpDealRepository.save(fp);}
+    public void save(FPDeal fpDeal){ fpDealRepository.save(fpDeal);}
 
-    public void DeleteFPDealActivity(FPDeal fp){ fpDealRepository.delete(fp);}
+    public void update(FPDeal fpDeal){ fpDealRepository.save(fpDeal);}
+
+    public void delete(Long id){ fpDealRepository.deleteByDealId(id);}
 
 }

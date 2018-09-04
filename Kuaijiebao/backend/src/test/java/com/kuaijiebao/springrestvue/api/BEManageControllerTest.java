@@ -153,7 +153,7 @@ public class BEManageControllerTest {
 
         FP fpOne=new FP(100l,"JapaneseSomeCosmetics",300f,"Shiseido");
         fpRepository.saveAndFlush(fpOne);
-        mvc.perform(delete("/api/v2/fp-management/fps/"+fpOne.getId()).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(delete("/api/v2/fp-management/fps/"+fpOne.getProductId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }

@@ -1,6 +1,7 @@
 package com.kuaijiebao.springrestvue.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
@@ -25,45 +26,36 @@ public class FPDealController {
     FPService fpService;
 
     @PostMapping(path="/AddFPDealActivity")
-    public Boolean BuyFPActivity(@RequestBody FPDR fpdr){
-        FPDeal fpDeal = new FPDeal();
-        fpDeal.setProductId(fpdr.getProductId());
-        fpDeal.setUserId(fpdr.getUserId());
-        fpDeal.setNum(fpdr.getNum());
-        FP fp=fpService.FPDetailActivity(fpDeal.getProductId());
+    public Boolean createFPDeal(@RequestBody  FPDeal fpDeal){
+        FP fp = fpService.findByFpId(fpDeal.getProductId());
         if(fp.getSum()<fpDeal.getNum()){ return false;}
-        fpDeal.setType(true);
-        fpDealService.AddFPDealActivity(fpDeal);
         fp.setSum(fp.getSum()-fpDeal.getNum());
-        fpService.AddFPActivity(fp);
-        fpdr.setDealId(fpDeal.getId());
+        fpDeal.setType(true);
+        fpService.update(fp);
+        fpDealService.save(fpDeal);
+        FPDR fpdr = new FPDR();
+        fpdr.setDealId(fpDeal.getDealId());
+        fpdr.setUserId(fpDeal.getUserId());
+        fpdr.setProductId(fpDeal.getProductId());
+        fpdr.setTime(fpDeal.getStarttime());
         fpdr.setType(1);
-        fpdr.setPrice(fp.getPrice());
-        fpdrService.AddFPDRActivity(fpdr);
+        fpdrService.save(fpdr);
         return true;
     }
 
-    @PutMapping("/CancelFPDealActivity")
-    public Boolean CancelFPDealActivity(@RequestBody FPDR fpdr){
-        FPDeal fpDeal = fpDealService.FPDealActivity(fpdr.getDealId());
-        if(fpDeal.getType()!=true){ return false;}
+    @PostMapping("/EditFPDealActivity")
+    public FPDeal update(@RequestBody FPDR fpdr){
+        FPDeal fpDeal = fpDealService.findByDealId(fpdr.getDealId());
+        if(fpDeal.getType()==false){return fpDeal;}
         fpDeal.setType(false);
-        fpDealService.AddFPDealActivity(fpDeal);
-        FP fp = fpService.FPDetailActivity(fpDeal.getProductId());
-        fp.setSum(fp.getSum()+fpDeal.getNum());
-        fpService.AddFPActivity(fp);
-        fpdr.setType(3);
-        fpdr.setPrice(fp.getPrice());
-        fpdr.setProductId(fpDeal.getProductId());
-        fpdr.setUserId(fpDeal.getUserId());
-        fpdr.setNum(fpDeal.getNum());
-        fpdrService.AddFPDRActivity(fpdr);
-        return true;
+        fpDealService.update(fpDeal);
+        fpdrService.save(fpdr);
+        return fpDeal;
     }
 
     @GetMapping("/ShowFPDealActivity/User={id}")
-    public List<FPDeal> ShowFPDealActivity(@PathVariable Long id){ return fpDealService.ShowFPDealActivity(id);}
+    public List<FPDeal> getByUserId(@PathVariable Long id){ return fpDealService.findAllByUserId(id);}
 
     @GetMapping("/FPDealDetailActivity/FPDeal={id}")
-    public FPDeal FPDealDetailActivity(@PathVariable Long id){ return fpDealService.FPDealActivity(id);}
+    public FPDeal getByDealId(@PathVariable Long id){ return fpDealService.findByDealId(id);}
 }

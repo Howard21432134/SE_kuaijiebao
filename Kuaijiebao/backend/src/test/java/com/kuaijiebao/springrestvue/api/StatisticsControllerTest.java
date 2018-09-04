@@ -88,8 +88,8 @@ public class StatisticsControllerTest {
         Date dateOne=new Date();
         Date dateTwo=new Date();
 
-        FPDR FPDROne=new FPDR(1l,1l,1l,1l,dateOne,1f,1);
-        FPDR FPDRTwo=new FPDR(1l,1l,1l,1l,dateTwo,1f,1);
+        FPDR FPDROne=new FPDR(1l,1l,1l,dateOne,1);
+        FPDR FPDRTwo=new FPDR(1l,1l,1l,dateTwo,1);
 
         fpdrRepository.saveAndFlush(FPDROne);
         fpdrRepository.saveAndFlush(FPDRTwo);

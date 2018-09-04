@@ -12,11 +12,11 @@ import com.kuaijiebao.springrestvue.domain.FPDR;
 @Repository
 public interface FPDRRepository extends JpaRepository<FPDR, Long>{
 
-    public FPDR findOneById(Long id);
+    //
+    //I changed...
+    public FPDR findByProductId(Long id);
 
     public List<FPDR> findAllByUserId(Long id);
-
-    public List<FPDR> findAllByProductId(Long id);
 
     @Query("select fpdr from FPDR fpdr where fpdr.userId=?1 AND fpdr.time BETWEEN ?2 And ?3 Order By fpdr.time")
     public List<FPDR> findByTimeAtBetweenOrderByTimeAndIdIs(Long id, Date since, Date until);

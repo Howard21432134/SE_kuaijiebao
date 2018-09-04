@@ -126,10 +126,6 @@ user ninshou
 http://teachingprogramming.net/archives/718
 https://github.com/teachingprogramming/lecture2018java2/blob/master/src/main/java/d00000/webapp/AuthController.java
 
-spring cloud
-https://www.packtpub.com/application-development/spring-microservices-spring-boot
-should download to!!
-
 hateoas
 http://www.baeldung.com/spring-hateoas-tutorial
 https://tech.io/playgrounds/6723/applying-hateoas-to-a-rest-api-with-spring-boot
@@ -142,6 +138,23 @@ https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-a
 
 springboot + vuejs
 https://blog.codecentric.de/en/2018/04/spring-boot-vuejs/
+pomfile basedir
+https://stackoverflow.com/questions/1012402/maven2-property-that-indicates-the-parent-directory
 
 cool project username
 https://brandongaille.com/115-cool-catchy-project-names-that-are-great/
+
+spring cloud
+http://www.baeldung.com/spring-cloud-bootstrapping
+https://github.com/eugenp/tutorials/tree/master/spring-cloud/spring-cloud-bootstrap
+
+
+vuejs+ restfulapi
+https://www.webprofessional.jp/fetching-data-third-party-api-vue-axios/
+https://qiita.com/567000/items/dde495d6a8ad1c25fa43
+https://router.vuejs.org/ja/guide/essentials/nested-routes.html
+https://qiita.com/po3rin/items/3968f825f3c86f9c4e21
+https://www.cnblogs.com/yeqrblog/p/8991587.html
+
+https://github.com/sitepoint-editors/vuejs-news/blob/master/app.js
+http://vuejs-news.herokuapp.com/

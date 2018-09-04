@@ -117,12 +117,13 @@ create table debt
    debt_id              bigint(10) not null AUTO_INCREMENT,
    user_id               bigint(10),
    owner_id             bigint(10),
-   sum                  int not null,
-   expect_discharge_time date not null,
-   content              text not null,
-   whether_succeed      bool not null,
+   sum                  int,
+   valid_time			date,
+   expect_discharge_time date,
+   content              text,
+   whether_succeed      bool,
    succeed_time         datetime,
-   whether_discharge    bool not null,
+   whether_discharge    bool,
    discharge_time       datetime,
    type                 bool,
    rate                 float,
@@ -152,6 +153,9 @@ create table financial_product_deal
    product_id           bigint(10) not null,
    user_id               bigint(10) not null,
    num                  int not null,
+   starttime                 datetime,
+   endtime                 datetime,
+   type               boolean,
    primary key (deal_id)
 );
 
@@ -164,9 +168,7 @@ create table financial_product_deal_record
    product_id           bigint(10) not null,
    user_id               bigint(10) not null,
    deal_id				  bigint(10)not null,
-   num                  int not null,
    time                 datetime not null,
-   price                float not null,
    type                 int not null,  #1 buy 2sell 3cancel
    primary key (dealrecord_id)
 );

@@ -3,13 +3,23 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import ElementUI from 'element-ui'
+
+import store from './store.js'
+import 'element-ui/lib/theme-chalk/index.css'
+import '@/assets/iconfont.css'
+import '@/assets/css/style.css'
 
 Vue.config.productionTip = false
+Vue.use(ElementUI)
 
-/* eslint-disable no-new */
+Vue.component('footer-copyright', {
+  template: '<p class="footer-msg">©CopyRight 2016-2018 软酷网有限公司 版权所有 <a href="http://www.miibeian.gov.cn" target="_blank">沪ICP备******号</a></p>'
+});
+
 new Vue({
-  el: '#app',
   router,
-  components: { App },
-  template: '<App/>'
+  store,
+  el: '#app',
+  render: h => h(App)
 })
